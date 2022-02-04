@@ -1,0 +1,18 @@
+.heading {
+  color: black;
+}
+
+.heading,
+.subheading {
+  text-align: center;
+}
+
+.subheading {
+  font-weight: normal;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

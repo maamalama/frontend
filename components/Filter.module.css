@@ -1,0 +1,39 @@
+.collectionIcon {
+  border-radius: 999px;
+  margin-right: 10px;
+}
+
+.networkIcon {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.collectionContainer {
+  position: relative;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gap {
+  gap: 15px;
+}
+
+.input {
+  font-size: medium;
+  height: 38px;
+  box-sizing: border-box;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.input:focus {
+  outline: none;
+  border-width: 1px;
+  border-color: #2684ff;
+  box-shadow: 0 0 0 1px #2684ff;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "hackathon",
+  "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build"
+  },
+  "dependencies": {
+    "moralis": "^1.2.4",
+    "next": "^12.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-select": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.14",
+    "@types/react": "^17.0.38",
+    "typescript": "^4.5.5",
+    "typescript-plugin-css-modules": "^3.4.0"
+  }
+}
