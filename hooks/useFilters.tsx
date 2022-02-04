@@ -1,25 +1,26 @@
 import create from 'zustand'
+import { ChainId } from '../data/networks'
 
-export type FilterType = {
-  type: 'erc20' | 'nft'
-  amount: number
-  address: string
-  network: 'eth' | 'matic'
+export type FilterType = 'erc20' | 'nft' | 'opensea'
+
+export type Filter = {
+  type: FilterType
+  amount?: string
+  address?: string
+  chainId?: ChainId
   id?: number
   label: string
 }
 
 export type State = {
-  filters: FilterType[]
-  addFilter: (filter: FilterType) => void
-  removeFilter: (filter: FilterType) => void
-  editFilter: (filter: FilterType) => void
+  filters: Filter[]
+  addFilter: (filter: Filter) => void
+  removeFilter: (filterId: number) => void
+  editFilter: (filter: Filter) => void
   counter: number
 }
 
-const objHash = (x: FilterType) => `${x.type}${x.address}${x.network}${x.amount}`
-
-const replaceBlock = (filters: FilterType[], newFilter: FilterType): FilterType[] => {
+const replaceBlock = (filters: Filter[], newFilter: Filter): Filter[] => {
   const oldBlockIdx = filters.findIndex((item) => item.id === newFilter.id)
 
   if (oldBlockIdx !== -1) {
@@ -46,10 +47,10 @@ export const useFilters = create<State>((set) => ({
         filters: [...state.filters, { ...filter, id }]
       }
     }),
-  removeFilter: (filter) =>
+  removeFilter: (filterId) =>
     set((state) => ({
       ...state,
-      filters: state.filters.filter((x) => objHash(x) !== objHash(filter))
+      filters: state.filters.filter((x) => x.id !== filterId)
     })),
   editFilter: (newFilter) =>
     set((state) => {

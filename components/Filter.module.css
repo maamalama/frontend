@@ -23,7 +23,8 @@
 }
 
 .input,
-.plusButton {
+.plusButton,
+.deleteButton {
   height: 38px;
   box-sizing: border-box;
   border: 1px solid hsl(0, 0%, 80%);
@@ -41,13 +42,21 @@
   box-shadow: 0 0 0 1px #2684ff;
 }
 
-.plusButton {
-  font-size: 1.5rem;
+.plusButton,
+.deleteButton {
   width: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
   background-color: white;
   cursor: pointer;
+}
+
+.plusButton {
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.deleteButton {
+  font-size: 0.8rem;
 }

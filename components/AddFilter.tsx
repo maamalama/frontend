@@ -2,15 +2,15 @@ import { useState } from 'react'
 import Select from 'react-select'
 import { collections } from '../data/collections'
 import { tokens } from '../data/tokens'
-import { useFilters } from '../hooks/useFilters'
+import { FilterType, useFilters } from '../hooks/useFilters'
 import styles from './Filter.module.css'
 
-type Options = { label: string; value: 'holds-nft' | 'owns-erc20' | 'sold-os' }
+type Options = { label: string; value: FilterType }
 
 const options: Options[] = [
-  { label: 'Holds NFTs', value: 'holds-nft' },
-  { label: 'Owns ERC-20 tokens', value: 'owns-erc20' },
-  { label: 'Sold on OpenSea', value: 'sold-os' }
+  { label: 'Holds NFTs', value: 'nft' },
+  { label: 'Owns ERC-20 tokens', value: 'erc20' },
+  { label: 'Sold on OpenSea', value: 'opensea' }
 ]
 
 export const AddFilter = () => {
@@ -29,18 +29,20 @@ export const AddFilter = () => {
       <button
         className={styles.plusButton}
         onClick={() => {
-          if (currentOption.value === 'holds-nft') {
+          if (currentOption.value === 'nft') {
             addFilter({
               ...collections[0],
-              amount: 0,
+              amount: '0',
               type: 'nft'
             })
-          } else if (currentOption.value === 'owns-erc20') {
+          } else if (currentOption.value === 'erc20') {
             addFilter({
               ...tokens[0],
-              amount: 0,
+              amount: '0',
               type: 'erc20'
             })
+          } else if (currentOption.value === 'opensea') {
+            addFilter({ type: 'opensea', label: 'Traded on OpenSea' })
           }
         }}
       >

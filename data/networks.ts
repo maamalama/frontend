@@ -1,11 +1,16 @@
+export enum ChainId {
+  ETH = 1,
+  MATIC = 137
+}
+
 export const networks = [
   {
-    value: 'eth',
+    value: ChainId.ETH,
     label: 'ETH',
     logo: '/cryptos/eth.svg'
   },
   {
-    value: 'matic',
+    value: ChainId.ETH,
     label: 'MATIC',
     logo: '/cryptos/matic.png'
   }

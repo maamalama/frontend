@@ -2,11 +2,11 @@ import Select, { OptionProps, SingleValueProps, components, Props as SelectProps
 
 import styles from './Filter.module.css'
 import { CSSProperties, ReactNode, useState } from 'react'
-import { networks } from '../data/networks'
+import { ChainId, networks } from '../data/networks'
 
 const { Option: OptionComponent, SingleValue } = components
 
-type Option = { logo: string; label: string; symbol?: string; address: string; network?: string }
+type Option = { logo: string; label: string; symbol?: string; address: string; network?: ChainId }
 
 const CollectionOption = (props: OptionProps<Option>) => {
   return (
@@ -101,11 +101,11 @@ const CurrentValue = (props: SingleValueProps<Option>) => {
 //   }
 // }
 
-export const Filter = ({
+export const FilterUI = ({
   options,
   children,
   containerStyles,
-  childrenAfter = 'and',
+  childrenAfter = '',
   ...props
 }: {
   options: any[]
@@ -123,7 +123,7 @@ export const Filter = ({
         options={options}
         {...props}
       />
-      <div>{childrenAfter}</div>
+      {childrenAfter}
     </div>
   )
 }
