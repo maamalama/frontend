@@ -16,38 +16,40 @@ const options: Options[] = [
 export const AddFilter = () => {
   const addFilter = useFilters((state) => state.addFilter)
 
-  const [currentOption, setCurrentOption] = useState<Options>(options[0])
+  const [isExpanded, setExpanded] = useState(false)
 
   return (
-    <div className={styles.row} style={{ width: '100%', maxWidth: '530px' }}>
-      <Select
-        onChange={(v) => setCurrentOption(v)}
-        defaultValue={options[0]}
-        styles={{ container: (style) => ({ ...style, width: '100%' }) }}
-        options={options}
-      />
-      <button
-        className={styles.plusButton}
-        onClick={() => {
-          if (currentOption.value === 'nft') {
-            addFilter({
-              ...collections[0],
-              amount: '0',
-              type: 'nft'
-            })
-          } else if (currentOption.value === 'erc20') {
-            addFilter({
-              ...tokens[0],
-              amount: '0',
-              type: 'erc20'
-            })
-          } else if (currentOption.value === 'opensea') {
-            addFilter({ type: 'opensea', label: 'Traded on OpenSea' })
-          }
-        }}
-      >
-        +
+    <div className={`${styles.row} ${styles.container}`} style={{ width: '100%', maxWidth: '530px' }}>
+      <button className={styles.addFilterButton} onClick={() => setExpanded((x) => !x)}>
+        Add filter
       </button>
+      <div style={{ display: isExpanded ? 'flex' : 'none' }} className={styles.filterList}>
+        {options.map((option) => (
+          <button
+            className={styles.filterButton}
+            onClick={() => {
+              if (option.value === 'nft') {
+                addFilter({
+                  ...collections[0],
+                  amount: '0',
+                  type: 'nft'
+                })
+              } else if (option.value === 'erc20') {
+                addFilter({
+                  ...tokens[0],
+                  amount: '0',
+                  type: 'erc20'
+                })
+              } else if (option.value === 'opensea') {
+                addFilter({ type: 'opensea', label: 'Traded on OpenSea' })
+              }
+              setExpanded(false)
+            }}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
