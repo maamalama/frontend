@@ -1,12 +1,12 @@
-import Select, { OptionProps, SingleValueProps, components } from 'react-select'
+import Select, { OptionProps, SingleValueProps, components, Props as SelectProps } from 'react-select'
 
 import styles from './Filter.module.css'
 import { CSSProperties, ReactNode, useState } from 'react'
-import { networks } from './OwnsCrypto'
+import { networks } from '../data/networks'
 
 const { Option: OptionComponent, SingleValue } = components
 
-type Option = { logo: string; label: string; symbol?: string; value: string; network?: string }
+type Option = { logo: string; label: string; symbol?: string; address: string; network?: string }
 
 const CollectionOption = (props: OptionProps<Option>) => {
   return (
@@ -105,13 +105,14 @@ export const Filter = ({
   options,
   children,
   containerStyles,
-  childrenAfter = 'and'
+  childrenAfter = 'and',
+  ...props
 }: {
   options: any[]
   children: ReactNode
   containerStyles?: CSSProperties
   childrenAfter?: ReactNode
-}) => {
+} & SelectProps<typeof options[0], false>) => {
   return (
     <div className={`${styles.row} ${styles.gap}`}>
       {children}
@@ -120,6 +121,7 @@ export const Filter = ({
         styles={{ container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }) }}
         components={{ Option: CollectionOption, SingleValue: CurrentValue }}
         options={options}
+        {...props}
       />
       <div>{childrenAfter}</div>
     </div>

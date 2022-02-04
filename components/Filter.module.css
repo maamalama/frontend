@@ -22,18 +22,32 @@
   gap: 15px;
 }
 
-.input {
-  font-size: medium;
+.input,
+.plusButton {
   height: 38px;
   box-sizing: border-box;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 4px;
   padding: 10px;
+
+  font-size: medium;
 }
 
-.input:focus {
+.input:focus,
+.plusButton:focus {
   outline: none;
   border-width: 1px;
   border-color: #2684ff;
   box-shadow: 0 0 0 1px #2684ff;
+}
+
+.plusButton {
+  font-size: 1.5rem;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  background-color: white;
+  cursor: pointer;
 }
