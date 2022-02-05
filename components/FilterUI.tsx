@@ -114,7 +114,7 @@ export const FilterUI = ({
   childrenAfter?: ReactNode
 } & SelectProps<typeof options[0], false>) => {
   return (
-    <div className={`${styles.row} ${styles.gap}`}>
+    <div className={`${styles.container} ${styles.row} ${styles.gap}`}>
       {children}
       <Select
         // formatCreateLabel={(option) => <span>Create {option}</span>}

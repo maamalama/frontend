@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import Select from 'react-select'
 import { collections } from '../data/collections'
 import { tokens } from '../data/tokens'
 import { FilterType, useFilters } from '../hooks/useFilters'
-import styles from './Filter.module.css'
+import styles1 from './Filter.module.css'
+import styles2 from './AddFilter.module.css'
+
+const styles = { ...styles1, ...styles2 }
 
 type Options = { label: string; value: FilterType }
 
