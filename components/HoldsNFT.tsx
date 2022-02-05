@@ -49,7 +49,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
         </>
       }
     >
-      holds{' '}
+      hold{' '}
     </FilterUI>
   )
 }

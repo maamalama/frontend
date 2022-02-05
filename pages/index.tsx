@@ -28,7 +28,7 @@ const Index = () => {
         <h2 className={styles.subheading}>Query Ethereum users by condition</h2>
       </header>
       <main className={`${styles.column}`} style={{ gap: '20px' }}>
-        <h3 style={{ margin: 0 }}>Filter users</h3>
+        <h3 style={{ margin: 0 }}>Filter users, who</h3>
         <div className={styles.list}>
           {filters.map((filter) => {
             switch (filter.type) {

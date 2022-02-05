@@ -33,20 +33,23 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       }}
       containerStyles={{ maxWidth: '293px' }}
       childrenAfter={
-        <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-          <img src="/minus.svg" alt="close" />
-        </button>
+        <>
+          {' '}
+          <input
+            value={amount}
+            minLength={1}
+            min={0}
+            onChange={(e) => setAmount(e.currentTarget.value)}
+            style={{ width: '6rem' }}
+            className={styles.input}
+          />
+          <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
+            <img src="/minus.svg" alt="close" />
+          </button>
+        </>
       }
     >
-      owns at least{' '}
-      <input
-        value={amount}
-        minLength={1}
-        min={0}
-        onChange={(e) => setAmount(e.currentTarget.value)}
-        style={{ width: '6rem' }}
-        className={styles.input}
-      />
+      own at least{' '}
     </FilterUI>
   )
 }

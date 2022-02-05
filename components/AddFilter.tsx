@@ -12,8 +12,8 @@ const styles = { ...styles1, ...styles2, ...sharedStyles }
 type Options = { label: string; value: FilterType; caption: string }
 
 const options: Options[] = [
-  { label: 'Holds NFTs', value: 'nft', caption: 'Users who have NFT(s) in their wallet' },
-  { label: 'Owns ERC-20 tokens', value: 'erc20', caption: 'Users who own ERC-20 tokens' },
+  { label: 'Hold NFTs', value: 'nft', caption: 'Users who have NFT(s) in their wallet' },
+  { label: 'Own ERC-20 tokens', value: 'erc20', caption: 'Users who own ERC-20 tokens' },
   { label: 'Sold on OpenSea', value: 'opensea', caption: 'Users who have traded on OpenSea' }
 ]
 
