@@ -27,51 +27,54 @@ const Index = () => {
         <h1 className={styles.heading}>On-chain user analytics</h1>
         <h2 className={styles.subheading}>Query Ethereum users by condition</h2>
       </header>
-      <main className={`${styles.column}`} style={{ gap: '20px' }}>
-        <h3 style={{ margin: 0 }}>Filter users, who</h3>
-        <div className={styles.list}>
-          {filters.map((filter) => {
-            switch (filter.type) {
-              case 'erc20':
-                return <OwnsCrypto filter={filter} />
-              case 'nft':
-                return <HoldsNFT filter={filter} />
-              case 'opensea':
-                return <TradedOpenSea filter={filter} />
-            }
-          })}
-        </div>
-        <div className={shared.row} style={{ justifyContent: 'space-between' }}>
-          <AddFilter />
-          <button
-            className={indexStyles.queryButton}
-            onClick={() => {
-              setLoading(true)
-              const amounts = filters
-                .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
-                .join(',')
+      <main className={`${styles.column}`} style={{ gap: '60px' }}>
+        <div className={styles.column} style={{ gap: '20px' }}>
+          <h3 className={styles.h3}>Filter users, who</h3>
+          <div className={styles.list}>
+            {filters.map((filter) => {
+              switch (filter.type) {
+                case 'erc20':
+                  return <OwnsCrypto filter={filter} />
+                case 'nft':
+                  return <HoldsNFT filter={filter} />
+                case 'opensea':
+                  return <TradedOpenSea filter={filter} />
+              }
+            })}
+          </div>
+          <div className={shared.row} style={{ justifyContent: 'space-between' }}>
+            <AddFilter />
+            <button
+              className={indexStyles.queryButton}
+              onClick={() => {
+                setLoading(true)
+                const amounts = filters
+                  .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
+                  .join(',')
 
-              const addresses = filters.map((x) => x.address).join(',')
-              const networks = filters.map((x) => x.chainId).join(',')
+                const addresses = filters.map((x) => x.address).join(',')
+                const networks = filters.map((x) => x.chainId).join(',')
 
-              fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
-                .then((res) => {
-                  if (res.status !== 200) {
-                    return setError(res.statusText)
-                  } else return res.json()
-                })
-                .then((json) => {
-                  setLoading(false)
-                  if (json) {
-                    setChartData(json)
-                  }
-                })
-                .catch((err) => setError(err.message))
-            }}
-          >
-            Query
-          </button>
+                fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
+                  .then((res) => {
+                    if (res.status !== 200) {
+                      return setError(res.statusText)
+                    } else return res.json()
+                  })
+                  .then((json) => {
+                    setLoading(false)
+                    if (json) {
+                      setChartData(json)
+                    }
+                  })
+                  .catch((err) => setError(err.message))
+              }}
+            >
+              Query
+            </button>
+          </div>
         </div>
+
         <Chart isLoading={isLoading} entries={chartData} error={error} />
       </main>
     </>

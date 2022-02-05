@@ -10,6 +10,7 @@
 
 .subheading {
   font-size: 20px;
+  margin-top: 12px;
   color: #635858;
   font-weight: normal;
 }
@@ -23,11 +24,13 @@
 .queryButton {
   background-color: black;
   color: white;
-  padding: 10px;
+  padding: 0 16px;
+  height: 40px;
+  box-sizing: border-box;
   font-weight: 500;
   border-radius: var(--radius);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .queryButton:hover {
@@ -36,4 +39,11 @@
 
 .header {
   padding: 60px 0;
+}
+
+.h3 {
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
 }

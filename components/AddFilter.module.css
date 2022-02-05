@@ -1,9 +1,15 @@
 .addFilterButton {
-  padding: 10px;
   border-radius: var(--radius);
-  font-size: 16px;
+  font-size: 14px;
   background-color: white;
   border: var(--border);
+  padding: 0 16px;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.addFilterButton:hover {
+  background-color: #eaeaea;
 }
 
 .container {

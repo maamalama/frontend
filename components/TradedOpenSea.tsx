@@ -8,7 +8,7 @@ export const TradedOpenSea = ({ filter }: { filter: Filter }) => {
     <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
       Traded on OpenSea{' '}
       <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-        ✖
+        <img src="/minus.svg" height={24} width={24} alt="close" />
       </button>
     </div>
   )

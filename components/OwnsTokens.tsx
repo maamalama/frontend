@@ -44,7 +44,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
             className={styles.input}
           />
           <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-            <img src="/minus.svg" alt="close" />
+            <img src="/minus.svg" height={24} width={24} alt="close" />
           </button>
         </>
       }

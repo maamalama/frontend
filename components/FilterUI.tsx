@@ -118,15 +118,19 @@ export const FilterUI = ({
     <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
       {children}
       <Select
+        // menuIsOpen={true}
         // formatCreateLabel={(option) => <span>Create {option}</span>}
         styles={{
           container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }),
+          control: (styles) => ({ ...styles, borderRadius: '8px' }),
           option: (styles, state) => ({
             ...styles,
             backgroundColor: state.isFocused ? '#2684FF' : 'white',
             color: state.isFocused ? 'white' : 'black'
           }),
-          menu: (styles) => ({ ...styles, zIndex: 99 })
+          menu: (styles) => ({ ...styles, zIndex: 99, borderRadius: '8px' }),
+          menuList: (styles) => ({ ...styles, paddingTop: 0, paddingBottom: 0, borderRadius: '8px' }),
+          input: (styles) => ({ ...styles, color: 'transparent' })
         }}
         components={{ Option: CollectionOption, SingleValue: CurrentValue }}
         options={options}
