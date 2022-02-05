@@ -46,15 +46,15 @@ const Index = () => {
         <button
           className={indexStyles.queryButton}
           onClick={() => {
-            const tokenFilters = filters.filter((x) => x.address)
-
-            const amounts = tokenFilters
+            const amounts = filters
               .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
               .join(',')
 
-            const addresses = tokenFilters.map((x) => x.address).join(',')
-            const networks = tokenFilters.map((x) => x.chainId).join(',')
-            console.log('click')
+            const addresses = filters.map((x) => x.address).join(',')
+            const networks = filters.map((x) => x.chainId).join(',')
+
+            console.log(filters)
+            console.log(networks)
 
             fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
               .then((res) => {
