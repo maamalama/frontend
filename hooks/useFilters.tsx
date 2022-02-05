@@ -8,6 +8,7 @@ export type Filter = {
   amount?: string
   address?: string
   chainId?: ChainId
+  decimals?: number
   id?: number
   label: string
 }
@@ -43,7 +44,13 @@ export const useFilters = create<State>((set) => ({
 
       return {
         counter: id,
-        filters: [...filters, { ...filter, id }]
+        filters: [
+          ...filters,
+          {
+            ...filter,
+            id
+          }
+        ]
       }
     }),
   removeFilter: (filterId) =>

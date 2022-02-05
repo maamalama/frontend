@@ -11,7 +11,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
   const removeFilter = useFilters((state) => state.removeFilter)
 
   const defaultCollection = collections.find((collection) => collection.address === filter.address)
-  const [amount, setAmount] = useState('0')
+  const [amount, setAmount] = useState('1')
   const [collection, setCollection] = useState<Collection>(defaultCollection)
 
   useLazyEffect(() => {
@@ -44,7 +44,6 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
     >
       holds{' '}
       <input
-        defaultValue={'0'}
         value={amount}
         minLength={1}
         onChange={(e) => setAmount(e.currentTarget.value)}

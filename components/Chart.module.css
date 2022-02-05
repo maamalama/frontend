@@ -1,9 +1,9 @@
 .chart {
-  width: 540px;
+  width: 800px;
   height: auto;
   padding: 16px;
   margin: 0px;
-
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -21,8 +21,7 @@
 }
 
 .body {
-  width: 508px;
-  height: 300px;
+  width: 768px;
 
   display: flex;
   justify-content: center;

@@ -1,11 +1,11 @@
 import { createChart } from 'lightweight-charts'
-import type { ChartOptions, DeepPartial, LineStyleOptions, SeriesOptionsCommon } from 'lightweight-charts'
+import type { ChartOptions, DeepPartial, LineStyleOptions, SeriesOptionsCommon, LineData } from 'lightweight-charts'
 import { useEffect, useState } from 'react'
 import styles from './Chart.module.css'
 import { ProgressBar } from './ProgressBar'
 
 const chartOptions: DeepPartial<ChartOptions> = {
-  width: 508,
+  width: 752,
   height: 300,
   layout: {
     background: { color: 'transparent' },
@@ -66,7 +66,7 @@ const lineOptions: DeepPartial<LineStyleOptions & SeriesOptionsCommon> = {
 
 interface ChartProps {
   isLoading: boolean
-  entries: { time: string; amount: string }[]
+  entries: { time: string; amount: number }[]
   error?: unknown
 }
 
@@ -79,7 +79,7 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
   useEffect(() => {
     if (!entries) return
 
-    const data = entries.map((e) => ({ time: e.time, value: e.amount }))
+    const data: LineData[] = entries.map((e) => ({ time: e.time, value: e.amount }))
     if (!lineSeries) {
       // init data
       const chart = createChart(document.getElementById('chart'), chartOptions)

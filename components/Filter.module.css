@@ -12,16 +12,6 @@
   position: relative;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.gap {
-  gap: 15px;
-}
-
 .input,
 .deleteButton {
   height: 38px;

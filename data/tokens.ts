@@ -6,6 +6,7 @@ export type ERC20Token = {
   symbol: string
   logo: string
   chainId: ChainId
+  decimals: number
 }
 
 export const tokens: ERC20Token[] = [
@@ -14,13 +15,15 @@ export const tokens: ERC20Token[] = [
     chainId: 1,
     symbol: 'FWB',
     label: 'Friends With Benefits Pro',
-    logo: 'https://etherscan.io/token/images/friendswithbenefits_32.png'
+    logo: 'https://etherscan.io/token/images/friendswithbenefits_32.png',
+    decimals: 18
   },
   {
     address: '0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5',
     chainId: 1,
     symbol: 'OHM',
     label: 'Olympus',
-    logo: 'https://etherscan.io/token/images/olympusdao2_32.png'
+    logo: 'https://etherscan.io/token/images/olympusdao2_32.png',
+    decimals: 9
   }
 ]

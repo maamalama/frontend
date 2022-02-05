@@ -10,7 +10,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
   const removeFilter = useFilters((state) => state.removeFilter)
 
   const defaultToken = tokens.find((token) => token.address === filter.address)
-  const [amount, setAmount] = useState('0')
+  const [amount, setAmount] = useState('1')
   const [erc20Token, setErc20Token] = useState<ERC20Token>(defaultToken)
 
   useLazyEffect(() => {
@@ -40,7 +40,6 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
     >
       owns at least{' '}
       <input
-        defaultValue={'0'}
         value={amount}
         minLength={1}
         min={0}

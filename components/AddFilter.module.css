@@ -7,7 +7,7 @@
 }
 .filterList {
   flex-direction: column;
-
+  z-index: 999;
   gap: 10px;
   position: absolute;
   top: 50px;

@@ -1,9 +1,10 @@
 body {
   margin: 0 auto;
   margin-top: 40px;
-  width: 50vw;
+  width: 40vw;
   min-width: 800px;
   background-color: white;
+  padding-bottom: 8rem;
 }
 
 body,

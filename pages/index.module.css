@@ -17,3 +17,14 @@
   gap: 20px;
   margin-top: 40px;
 }
+
+.queryButton {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.queryButton:hover {
+  background-color: #303030;
+}

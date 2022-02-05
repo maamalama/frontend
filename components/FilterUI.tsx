@@ -3,6 +3,7 @@ import Select, { OptionProps, SingleValueProps, components, Props as SelectProps
 import styles from './Filter.module.css'
 import { CSSProperties, ReactNode, useState } from 'react'
 import { ChainId, networks } from '../data/networks'
+import sharedStyles from '../shared.module.css'
 
 const { Option: OptionComponent, SingleValue } = components
 
@@ -11,7 +12,7 @@ type Option = { logo: string; label: string; symbol?: string; address: string; c
 const CollectionOption = (props: OptionProps<Option>) => {
   return (
     <OptionComponent {...props}>
-      <span className={`${styles.row}`}>
+      <span className={`${sharedStyles.row}`}>
         <span className={`${styles.collectionContainer}`}>
           {props.data.logo && (
             <img
@@ -44,7 +45,7 @@ const CollectionOption = (props: OptionProps<Option>) => {
 const CurrentValue = (props: SingleValueProps<Option>) => {
   return (
     <SingleValue {...props}>
-      <span className={`${styles.row}`}>
+      <span className={`${sharedStyles.row}`}>
         <span className={`${styles.collectionContainer}`}>
           {props.data.logo && (
             <img
@@ -114,7 +115,7 @@ export const FilterUI = ({
   childrenAfter?: ReactNode
 } & SelectProps<typeof options[0], false>) => {
   return (
-    <div className={`${styles.container} ${styles.row} ${styles.gap}`}>
+    <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
       {children}
       <Select
         // formatCreateLabel={(option) => <span>Create {option}</span>}

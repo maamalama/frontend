@@ -4,8 +4,9 @@ import { tokens } from '../data/tokens'
 import { FilterType, useFilters } from '../hooks/useFilters'
 import styles1 from './Filter.module.css'
 import styles2 from './AddFilter.module.css'
+import sharedStyles from '../shared.module.css'
 
-const styles = { ...styles1, ...styles2 }
+const styles = { ...styles1, ...styles2, ...sharedStyles }
 
 type Options = { label: string; value: FilterType }
 
