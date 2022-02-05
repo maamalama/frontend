@@ -23,8 +23,7 @@ const Index = () => {
 
   return (
     <main className={`${styles.column} ${styles.gap}`}>
-      <h1 className={styles.heading}>On-chain user analytics</h1>
-      <h2 className={styles.subheading}>Some cool slogan</h2>
+      <h1 className={styles.heading}>Awake</h1>
       <h3>Filter</h3>
       <div className={styles.list}>
         {filters.map((filter) => {

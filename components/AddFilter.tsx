@@ -8,12 +8,12 @@ import sharedStyles from '../shared.module.css'
 
 const styles = { ...styles1, ...styles2, ...sharedStyles }
 
-type Options = { label: string; value: FilterType }
+type Options = { label: string; value: FilterType; caption: string }
 
 const options: Options[] = [
-  { label: 'Holds NFTs', value: 'nft' },
-  { label: 'Owns ERC-20 tokens', value: 'erc20' },
-  { label: 'Sold on OpenSea', value: 'opensea' }
+  { label: 'Holds NFTs', value: 'nft', caption: 'Users who have NFT(s) in their wallet' },
+  { label: 'Owns ERC-20 tokens', value: 'erc20', caption: 'Users who own ERC-20 tokens' },
+  { label: 'Sold on OpenSea', value: 'opensea', caption: 'Users who have traded on OpenSea' }
 ]
 
 export const AddFilter = () => {
@@ -26,10 +26,13 @@ export const AddFilter = () => {
       <button className={styles.addFilterButton} onClick={() => setExpanded((x) => !x)}>
         Add filter
       </button>
-      <div style={{ display: isExpanded ? 'flex' : 'none' }} className={styles.filterList}>
-        <div style={{ fontSize: '0.8rem', color: 'gray', fontWeight: 'bold', padding: '10px' }}>Filters</div>
+      <div role="listbox" style={{ display: isExpanded ? 'flex' : 'none' }} className={styles.filterList}>
+        <div style={{ fontSize: '0.8rem', color: 'gray', fontWeight: 'bold', paddingLeft: '16px', paddingTop: '12px' }}>
+          Filters
+        </div>
         {options.map((option) => (
           <button
+            role="listitem"
             className={styles.filterButton}
             onClick={() => {
               if (option.value === 'nft') {
@@ -50,7 +53,7 @@ export const AddFilter = () => {
               setExpanded(false)
             }}
           >
-            {option.label}
+            {option.label} <div className={styles.caption}>{option.caption}</div>
           </button>
         ))}
       </div>
