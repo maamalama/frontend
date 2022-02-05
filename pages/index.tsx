@@ -29,7 +29,6 @@ const Index = () => {
       <h1 className={styles.heading}>On-chain user analytics</h1>
       <h2 className={styles.subheading}>Some cool slogan</h2>
       <h3>Filter</h3>
-      {JSON.stringify(filters)}
       <div className={styles.list}>
         {filters.map((filter) => {
           switch (filter.type) {

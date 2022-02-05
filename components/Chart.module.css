@@ -1,6 +1,5 @@
 .chart {
   width: 800px;
-  height: auto;
   padding: 16px;
   margin: 0px;
   box-sizing: border-box;
@@ -12,6 +11,7 @@
   /* background: rgba(0, 0, 0, 0.015); */
   border-radius: 3px;
   box-shadow: rgba(55, 53, 47, 0.15) 0px 0px 0px 1px;
+  margin-bottom: 4rem;
 }
 
 .header {

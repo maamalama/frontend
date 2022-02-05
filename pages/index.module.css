@@ -1,4 +1,5 @@
 .heading {
+  margin-top: 40px;
   color: black;
 }
 
@@ -15,7 +16,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 40px;
 }
 
 .queryButton {
