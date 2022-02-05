@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { collections } from '../data/collections'
 import { tokens } from '../data/tokens'
 import { FilterType, useFilters } from '../hooks/useFilters'
 import styles1 from './Filter.module.css'
 import styles2 from './AddFilter.module.css'
 import sharedStyles from '../shared.module.css'
+import { useOnClickOutside } from '../hooks/useOnClickOutside'
 
 const styles = { ...styles1, ...styles2, ...sharedStyles }
 
@@ -21,8 +22,12 @@ export const AddFilter = () => {
 
   const [isExpanded, setExpanded] = useState(false)
 
+  const ref = useRef<HTMLDivElement>()
+
+  useOnClickOutside(ref, () => setExpanded(false))
+
   return (
-    <div className={`${styles.row} ${styles.container}`} style={{ width: '100%', maxWidth: '530px' }}>
+    <div ref={ref} className={`${styles.row} ${styles.container}`} style={{ width: '100%', maxWidth: '530px' }}>
       <button className={styles.addFilterButton} onClick={() => setExpanded((x) => !x)}>
         Add filter
       </button>
