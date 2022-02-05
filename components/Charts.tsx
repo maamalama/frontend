@@ -84,7 +84,6 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
       // init data
       const chart = createChart(document.getElementById('chart'), chartOptions)
       const lineSeries = chart.addLineSeries(lineOptions)
-      // console.log('options =', lineSeries.options())
       lineSeries.setData(data)
       chart.timeScale().fitContent()
       setChart(chart)
@@ -94,6 +93,8 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
       chart.timeScale().fitContent()
     }
   }, [entries])
+
+  console.log(isLoading)
 
   return (
     <div className={styles.chart}>

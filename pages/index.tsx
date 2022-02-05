@@ -19,10 +19,7 @@ const Index = () => {
   const filters = useFilters((state) => state.filters)
   const [chartData, setChartData] = useState<{ amount: number; time: string }[]>([])
   const [error, setError] = useState<string>()
-
-  const isLoading = useMemo(() => {
-    return !(error || chartData)
-  }, [error, chartData])
+  const [isLoading, setLoading] = useState(false)
 
   return (
     <main className={`${styles.column} ${styles.gap}`}>
@@ -46,15 +43,13 @@ const Index = () => {
         <button
           className={indexStyles.queryButton}
           onClick={() => {
+            setLoading(true)
             const amounts = filters
               .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
               .join(',')
 
             const addresses = filters.map((x) => x.address).join(',')
             const networks = filters.map((x) => x.chainId).join(',')
-
-            console.log(filters)
-            console.log(networks)
 
             fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
               .then((res) => {
@@ -63,6 +58,7 @@ const Index = () => {
                 } else return res.json()
               })
               .then((json) => {
+                setLoading(false)
                 if (json) {
                   setChartData(json)
                 }
