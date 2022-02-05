@@ -4,7 +4,7 @@ import styles from './Filter.module.css'
 export const TradedOpenSea = ({ filter }: { filter: Filter }) => {
   const removeFilter = useFilters((state) => state.removeFilter)
   return (
-    <div className={`${styles.container} ${styles.row} ${styles.gap}`} style={{ justifyContent: 'space-between' }}>
+    <div className={`${styles.container} ${styles.row} ${styles.gap}`}>
       Traded on OpenSea{' '}
       <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
         ✖
