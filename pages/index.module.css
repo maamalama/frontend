@@ -25,8 +25,9 @@
   color: white;
   padding: 10px;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: var(--radius);
   cursor: pointer;
+  box-shadow: var(--shadow);
   font-size: 16px;
 }
 
