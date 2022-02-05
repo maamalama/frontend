@@ -15,12 +15,15 @@
 .input,
 .deleteButton {
   height: 38px;
-  box-sizing: border-box;
-  border: 1px solid hsl(0, 0%, 80%);
   border-radius: 4px;
   padding: 10px;
 
+  box-sizing: border-box;
   font-size: medium;
+}
+
+.input {
+  border: 1px solid hsl(0, 0%, 80%);
 }
 
 .input:focus,
@@ -33,14 +36,18 @@
 
 .deleteButton {
   position: absolute;
-  right: 16px;
+  right: -48px;
   width: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
   cursor: pointer;
+  background: transparent;
   font-size: 0.8rem;
+}
+
+.deleteButton:hover {
+  background-color: hsl(0, 0%, 90%);
 }
 
 .container {

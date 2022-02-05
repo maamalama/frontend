@@ -37,7 +37,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
         <>
           <div>NFTs</div>
           <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-            ✖
+            <img src="/minus.svg" alt="close" />
           </button>
         </>
       }

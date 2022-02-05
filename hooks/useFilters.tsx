@@ -36,7 +36,18 @@ const replaceBlock = (filters: Filter[], newFilter: Filter): Filter[] => {
 }
 
 export const useFilters = create<State>((set) => ({
-  filters: [],
+  filters: [
+    {
+      address: '0x026224a2940bfe258d0dbe947919b62fe321f042',
+      label: 'lobsterdao',
+      symbol: 'LOBS',
+      logo: 'https://etherscan.io/token/images/lobsterdao_32.png',
+      chainId: 1,
+      amount: '0',
+      type: 'nft',
+      id: 1
+    }
+  ],
   counter: 0,
   addFilter: (filter) =>
     set(({ filters, counter }) => {

@@ -34,7 +34,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       containerStyles={{ maxWidth: '293px' }}
       childrenAfter={
         <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-          ✖
+          <img src="/minus.svg" alt="close" />
         </button>
       }
     >
