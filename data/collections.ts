@@ -14,7 +14,7 @@ export const collections: Collection[] = [
     label: 'lobsterdao',
     symbol: 'LOBS',
 
-    logo: '/nfts/lobs.jpg',
+    logo: 'https://etherscan.io/token/images/lobsterdao_32.png',
     chainId: ChainId.ETH
   },
   {
@@ -22,31 +22,43 @@ export const collections: Collection[] = [
     label: 'BoredApeYachtClub',
     symbol: 'BAYC',
 
-    logo: '/nfts/bayc.png',
+    logo: 'https://etherscan.io/token/images/boredapeyc_32.png',
+    chainId: ChainId.ETH
+  },
+  // {
+  //   address: '0x86935F11C86623deC8a25696E1C19a8659CbF95d',
+  //   label: 'Aavegotchi',
+  //   symbol: 'GOTCHI',
+
+  //   logo: 'https://polygonscan.com/token/images/aavegotchighst_32.png',
+  //   chainId: ChainId.MATIC
+  // },
+  {
+    address: '0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b',
+    label: 'CloneX',
+    symbol: 'CloneX',
+    logo: 'https://etherscan.io/token/images/clonexrtfkt_32.png',
     chainId: ChainId.ETH
   },
   {
-    address: '0x86935F11C86623deC8a25696E1C19a8659CbF95d',
-    label: 'Aavegotchi',
-    symbol: 'GOTCHI',
-
-    logo: 'https://polygonscan.com/token/images/aavegotchighst_32.png',
-    chainId: ChainId.MATIC
+    address: '0x5180db8f5c931aae63c74266b211f580155ecac8',
+    label: 'Crypto Coven',
+    symbol: 'WITCH',
+    logo: 'https://storage.googleapis.com/nftimagebucket/tokensinfo/6586d76e26bd53e50fa9f64cd600c8a2.png',
+    chainId: ChainId.ETH
   },
   {
-    address: '0x7227e371540cf7b8e512544ba6871472031f3335',
-    label: 'Neon District Season One Item',
-    symbol: 'NDITEM1',
-
-    logo: 'https://polygonscan.com/token/images/neondistrict_32.png',
-    chainId: ChainId.MATIC
+    address: '0x1A92f7381B9F03921564a437210bB9396471050C',
+    label: 'Cool Cats',
+    symbol: 'COOL',
+    logo: 'https://etherscan.io/token/images/coolcatsnft_32.png',
+    chainId: ChainId.ETH
   },
   {
-    address: '0x1a7a1f6f6f310dd8d2b80245f82fdcfa267dfa11',
-    label: 'PolygotchiUniverse',
-    symbol: 'PCHI',
-
-    logo: 'https://polygonscan.com/token/images/polygotchiuniverse2_32.png',
-    chainId: ChainId.MATIC
+    address: '0xa5f1ea7df861952863df2e8d1312f7305dabf215',
+    label: 'ZED Horse',
+    symbol: 'ZED',
+    chainId: ChainId.MATIC,
+    logo: 'https://etherscan.io/token/images/zedrun_128b.png'
   }
 ]

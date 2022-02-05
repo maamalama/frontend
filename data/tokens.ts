@@ -12,18 +12,26 @@ export type ERC20Token = {
 export const tokens: ERC20Token[] = [
   {
     address: '0x35bd01fc9d6d5d81ca9e055db88dc49aa2c699a8',
-    chainId: 1,
+    chainId: ChainId.ETH,
     symbol: 'FWB',
     label: 'Friends With Benefits Pro',
     logo: 'https://etherscan.io/token/images/friendswithbenefits_32.png',
     decimals: 18
   },
+  // {
+  //   address: '0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5',
+  //   chainId: 1,
+  //   symbol: 'OHM',
+  //   label: 'Olympus',
+  //   logo: 'https://etherscan.io/token/images/olympusdao2_32.png',
+  //   decimals: 9
+  // },
   {
-    address: '0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5',
-    chainId: 1,
-    symbol: 'OHM',
-    label: 'Olympus',
-    logo: 'https://etherscan.io/token/images/olympusdao2_32.png',
-    decimals: 9
+    address: '0x5a98fcbea516cf06857215779fd812ca3bef1b32',
+    chainId: ChainId.ETH,
+    symbol: 'LDO',
+    label: 'Lido DAO Token',
+    logo: 'https://etherscan.io/token/images/lido-dao_32.png',
+    decimals: 18
   }
 ]

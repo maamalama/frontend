@@ -125,7 +125,8 @@ export const FilterUI = ({
             ...styles,
             backgroundColor: state.isFocused ? '#2684FF' : 'white',
             color: state.isFocused ? 'white' : 'black'
-          })
+          }),
+          menu: (styles) => ({ ...styles, zIndex: 99 })
         }}
         components={{ Option: CollectionOption, SingleValue: CurrentValue }}
         options={options}
