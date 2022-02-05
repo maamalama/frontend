@@ -118,7 +118,14 @@ export const FilterUI = ({
       {children}
       <Select
         // formatCreateLabel={(option) => <span>Create {option}</span>}
-        styles={{ container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }) }}
+        styles={{
+          container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }),
+          option: (styles, state) => ({
+            ...styles,
+            backgroundColor: state.isFocused ? '#2684FF' : 'white',
+            color: state.isFocused ? 'white' : 'black'
+          })
+        }}
         components={{ Option: CollectionOption, SingleValue: CurrentValue }}
         options={options}
         {...props}

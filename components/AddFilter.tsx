@@ -24,6 +24,7 @@ export const AddFilter = () => {
         Add filter
       </button>
       <div style={{ display: isExpanded ? 'flex' : 'none' }} className={styles.filterList}>
+        <div style={{ fontSize: '0.8rem', color: 'gray', fontWeight: 'bold', padding: '10px' }}>Filters</div>
         {options.map((option) => (
           <button
             className={styles.filterButton}
