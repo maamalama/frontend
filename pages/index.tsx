@@ -27,7 +27,7 @@ const Index = () => {
         <h1 className={styles.heading}>On-chain user analytics</h1>
         <h2 className={styles.subheading}>Query Ethereum users by condition</h2>
       </header>
-      <main className={`${styles.column} ${styles.gap}`}>
+      <main className={`${styles.column}`} style={{ gap: '20px' }}>
         <h3 style={{ margin: 0 }}>Filter users</h3>
         <div className={styles.list}>
           {filters.map((filter) => {

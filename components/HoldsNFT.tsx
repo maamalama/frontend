@@ -35,6 +35,13 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
       }}
       childrenAfter={
         <>
+          <input
+            value={amount}
+            minLength={1}
+            onChange={(e) => setAmount(e.currentTarget.value)}
+            style={{ width: '6rem' }}
+            className={styles.input}
+          />
           <div>NFTs</div>
           <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
             <img src="/minus.svg" alt="close" />
@@ -43,13 +50,6 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
       }
     >
       holds{' '}
-      <input
-        value={amount}
-        minLength={1}
-        onChange={(e) => setAmount(e.currentTarget.value)}
-        style={{ width: '6rem' }}
-        className={styles.input}
-      />
     </FilterUI>
   )
 }
