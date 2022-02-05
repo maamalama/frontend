@@ -38,22 +38,29 @@ export const useFilters = create<State>((set) => ({
   filters: [],
   counter: 0,
   addFilter: (filter) =>
-    set((state) => {
-      const id = state.counter + 1
+    set(({ filters, counter }) => {
+      const id = counter + 1
 
       return {
-        ...state,
         counter: id,
-        filters: [...state.filters, { ...filter, id }]
+        filters: [...filters, { ...filter, id }]
       }
     }),
   removeFilter: (filterId) =>
-    set((state) => ({
-      ...state,
-      filters: state.filters.filter((x) => x.id !== filterId)
+    set(({ filters, counter }) => ({
+      counter,
+      filters: filters.filter((x) => x.id !== filterId)
     })),
   editFilter: (newFilter) =>
-    set((state) => {
-      return { ...state, filters: replaceBlock(state.filters, newFilter) }
+    set(({ filters, counter }) => {
+      return {
+        counter,
+        filters: filters.map((filter) => {
+          if (newFilter.id === filter.id) {
+            return newFilter
+          }
+          return filter
+        })
+      }
     })
 }))

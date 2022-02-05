@@ -10,7 +10,7 @@ export const networks = [
     logo: '/cryptos/eth.svg'
   },
   {
-    value: ChainId.ETH,
+    value: ChainId.MATIC,
     label: 'MATIC',
     logo: '/cryptos/matic.png'
   }

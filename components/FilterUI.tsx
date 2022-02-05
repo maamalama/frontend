@@ -6,13 +6,13 @@ import { ChainId, networks } from '../data/networks'
 
 const { Option: OptionComponent, SingleValue } = components
 
-type Option = { logo: string; label: string; symbol?: string; address: string; network?: ChainId }
+type Option = { logo: string; label: string; symbol?: string; address: string; chainId?: ChainId }
 
 const CollectionOption = (props: OptionProps<Option>) => {
   return (
     <OptionComponent {...props}>
       <span className={`${styles.row}`}>
-        <span className={`${styles.row} ${styles.collectionContainer}`}>
+        <span className={`${styles.collectionContainer}`}>
           {props.data.logo && (
             <img
               className={styles.collectionIcon}
@@ -22,16 +22,16 @@ const CollectionOption = (props: OptionProps<Option>) => {
               alt={props.data.symbol}
             />
           )}
-          {props.data.network && (
+          {props.data.chainId && (
             <img
               height={12}
               width={12}
               style={{
-                bottom: '-2.5px',
+                bottom: '0',
                 right: '7.5px'
               }}
-              className={styles.networkIcon}
-              src={networks.find((network) => network.value === props.data.network).logo}
+              className={styles.chainIdIcon}
+              src={networks.find((chainId) => chainId.value === props.data.chainId)?.logo}
             />
           )}
         </span>
@@ -45,7 +45,7 @@ const CurrentValue = (props: SingleValueProps<Option>) => {
   return (
     <SingleValue {...props}>
       <span className={`${styles.row}`}>
-        <span className={`${styles.row} ${styles.collectionContainer}`}>
+        <span className={`${styles.collectionContainer}`}>
           {props.data.logo && (
             <img
               className={styles.collectionIcon}
@@ -55,16 +55,16 @@ const CurrentValue = (props: SingleValueProps<Option>) => {
               alt={props.data.symbol}
             />
           )}
-          {props.data.network && (
+          {props.data.chainId && (
             <img
               height={12}
               width={12}
               style={{
-                bottom: '0px',
+                bottom: '0',
                 right: '7.5px'
               }}
-              className={styles.networkIcon}
-              src={networks.find((network) => network.value === props.data.network).logo}
+              className={styles.chainIdIcon}
+              src={networks.find((chainId) => chainId.value === props.data.chainId)?.logo}
             />
           )}
         </span>

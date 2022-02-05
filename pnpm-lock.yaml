@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@types/node': ^17.0.14
   '@types/react': ^17.0.38
+  lightweight-charts: ^3.7.0
   next: ^12.0.10
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -12,6 +13,7 @@ specifiers:
   zustand: ^3.6.9
 
 dependencies:
+  lightweight-charts: 3.7.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -406,6 +408,10 @@ packages:
     engines: {node: '>=0.8.0'}
     dev: true
 
+  /fancy-canvas/0.2.2:
+    resolution: {integrity: sha512-50qi8xA0QkHbjmb8h7XQ6k2fvD7y/yMfiUw9YTarJ7rWrq6o5/3CCXPouYk+XSLASvvxtjyiQLRBFt3qkE3oyA==}
+    dev: false
+
   /fastparse/1.1.2:
     resolution: {integrity: sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ==}
     dev: true
@@ -577,6 +583,12 @@ packages:
       needle: 2.9.1
       source-map: 0.6.1
     dev: true
+
+  /lightweight-charts/3.7.0:
+    resolution: {integrity: sha512-OFPdU4kRtgqHrzi+O86MxBPwbbMsdKRiAQm5nM14/iwN7BJRqWmrdT7uCGnP6+pU8rm3sxjZwMyL8dX0eaQnvQ==}
+    dependencies:
+      fancy-canvas: 0.2.2
+    dev: false
 
   /lilconfig/2.0.4:
     resolution: {integrity: sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==}

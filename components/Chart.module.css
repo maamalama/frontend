@@ -1,0 +1,39 @@
+.chart {
+  width: 540px;
+  height: auto;
+  padding: 16px;
+  margin: 0px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  /* background: rgba(0, 0, 0, 0.015); */
+  border-radius: 3px;
+  box-shadow: rgba(55, 53, 47, 0.15) 0px 0px 0px 1px;
+}
+
+.header {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.body {
+  width: 508px;
+  height: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  font-size: 14px;
+  line-height: 1.2;
+  color: #57606a;
+}
+
+.loader {
+  margin-bottom: 40px;
+}

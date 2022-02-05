@@ -43,8 +43,8 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
         defaultValue={'0'}
         value={amount}
         minLength={1}
+        min={0}
         onChange={(e) => setAmount(e.currentTarget.value)}
-        type="number"
         style={{ width: '6rem' }}
         className={styles.input}
       />
