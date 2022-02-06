@@ -7,10 +7,9 @@ import styles from './Filter.module.css'
 
 export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
   const editFilter = useFilters((state) => state.editFilter)
-
-  const defaultToken = tokens.find((token) => token.address === filter.address)
   const [amount, setAmount] = useState('1')
-  const [erc20Token, setErc20Token] = useState<ERC20Token>(defaultToken)
+
+  const [erc20Token, setErc20Token] = useState<ERC20Token>(tokens[0])
 
   useLazyEffect(() => {
     editFilter({
@@ -22,6 +21,12 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       label: erc20Token.label
     })
   }, [erc20Token, amount])
+
+  useLazyEffect(() => {
+    const defaultToken = tokens.find((token) => token.address === filter.address)
+
+    setErc20Token(defaultToken)
+  }, [filter])
 
   return (
     <FilterUI
@@ -43,7 +48,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
             style={{ width: '6rem' }}
             className={styles.input}
           />
-          tokens
+          {erc20Token.symbol}
         </>
       }
     >

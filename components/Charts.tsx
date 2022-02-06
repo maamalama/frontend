@@ -94,8 +94,6 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
     }
   }, [entries])
 
-  console.log(isLoading)
-
   return (
     <div className={styles.chart}>
       <div className={styles.header}>{chartVisible && 'Token holders'}</div>

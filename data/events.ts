@@ -2,10 +2,10 @@ import { ChainId } from './networks'
 
 export type EventInfo = {
   logo: string
-  caption: string
+  caption?: string
   value: string
   label: string
-  chainId: ChainId
+  chainId?: ChainId
 }
 
 export const events: EventInfo[] = [
@@ -36,5 +36,10 @@ export const events: EventInfo[] = [
     caption: 'Trades on LooksRare',
     chainId: ChainId.ETH,
     value: 'looksrare'
+  },
+  {
+    label: 'No event - total amount of users',
+    value: '',
+    logo: '/user.svg'
   }
 ]

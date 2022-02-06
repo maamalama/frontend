@@ -51,10 +51,12 @@ export const useFilters = create<State>((set) => ({
       }
     }),
   removeFilter: (filterId) =>
-    set(({ filters, counter }) => ({
-      counter,
-      filters: filters.length > 1 ? filters.filter((x) => x.id !== filterId) : filters
-    })),
+    set(({ filters, counter }) => {
+      return {
+        counter,
+        filters: filters.length > 1 ? filters.filter((x) => x.id !== filterId) : filters
+      }
+    }),
   editFilter: (newFilter) =>
     set(({ filters, counter }) => {
       return {

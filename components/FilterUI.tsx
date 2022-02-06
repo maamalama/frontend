@@ -35,7 +35,7 @@ export const FilterUI = ({
         options={options}
         {...props}
       />
-      {childrenAfter}{' '}
+      {childrenAfter}
       {filters.length > 1 && (
         <button className={styles.deleteButton} onClick={() => removeFilter(filterId)}>
           <img src="/minus.svg" height={24} width={24} alt="close" />

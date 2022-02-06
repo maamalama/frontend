@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Collection, collections } from '../data/collections'
 import { Filter, useFilters } from '../hooks/useFilters'
 import { useLazyEffect } from '../hooks/useLazyEffect'
@@ -8,9 +8,9 @@ import styles from './Filter.module.css'
 export const HoldsNFT = ({ filter }: { filter: Filter }) => {
   const editFilter = useFilters((state) => state.editFilter)
 
-  const defaultCollection = collections.find((collection) => collection.address === filter.address)
   const [amount, setAmount] = useState('1')
-  const [collection, setCollection] = useState<Collection>(defaultCollection)
+
+  const [collection, setCollection] = useState<Collection>(collections[0])
 
   useLazyEffect(() => {
     editFilter({
@@ -23,9 +23,14 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
     })
   }, [collection, amount])
 
+  useLazyEffect(() => {
+    const defaultCollection = collections.find((token) => token.address === filter.address)
+    setCollection(defaultCollection)
+  }, [filter])
+
   return (
     <FilterUI
-      defaultValue={collections[0]}
+      value={collection}
       options={collections}
       containerStyles={{ maxWidth: '350px' }}
       onChange={(v) => {

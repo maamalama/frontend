@@ -51,8 +51,9 @@ const Index = () => {
         <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
+            isClearable
             onChange={(event: EventInfo) => setEvent(event)}
-            placeholder="Select event"
+            placeholder="Select event (optional)"
             options={events}
             components={{ SingleValue: CurrentValue, Option: SelectOption }}
           />
@@ -63,7 +64,7 @@ const Index = () => {
           onClick={() => {
             setLoading(true)
 
-            const res: Promise<Response> = event ? fetchEvent(filters, event) : fetchChart(filters)
+            const res: Promise<Response> = event?.value ? fetchEvent(filters, event) : fetchChart(filters)
 
             res
               .then((res) => {
@@ -75,6 +76,7 @@ const Index = () => {
                 setLoading(false)
                 if (json) {
                   setChartData(json)
+                  setError(undefined)
                 }
               })
               .catch((err) => setError(err.message))
