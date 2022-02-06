@@ -40,6 +40,6 @@ export const events: EventInfo[] = [
     logo: 'https://etherscan.io/token/images/looksrare_32.png',
     caption: 'Trades on LooksRare',
     chainId: ChainId.ETH,
-    value: false
+    value: 'looksrare_trade_ethereum'
   }
 ]
