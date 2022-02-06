@@ -102,6 +102,7 @@ const Index = () => {
         <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
+            isOptionDisabled={(option) => option.value === false}
             isClearable
             onChange={(event: EventInfo) => {
               setEvent(event)

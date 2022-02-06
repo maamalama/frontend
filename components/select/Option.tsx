@@ -20,6 +20,7 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
               height={24}
               width={24}
               alt={props.data.symbol}
+              style={props.isDisabled ? { filter: 'grayscale(1)' } : {}}
             />
           )}
           {props.data.chainId && (
@@ -28,7 +29,8 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
               width={12}
               style={{
                 bottom: '0',
-                right: '7.5px'
+                right: '7.5px',
+                filter: props.isDisabled ? 'grayscale(1)' : 'unset'
               }}
               className={styles.chainIdIcon}
               src={networks.find((chainId) => chainId.value === props.data.chainId)?.logo}

@@ -45,8 +45,8 @@
   border-bottom-right-radius: var(--radius);
 }
 
-.filterButton:hover,
-.filterButton:hover > .caption {
+.filterButton:not(:disabled):hover,
+.filterButton:not(:disabled):hover > .caption {
   background-color: #2684ff;
   color: white;
 }

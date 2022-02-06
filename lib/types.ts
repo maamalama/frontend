@@ -7,6 +7,7 @@ export type Option = {
   address?: string
   chainId?: ChainId
   caption?: string
+  value?: string | false
 }
 
 export type ChartData = { value: number; time: string }[]

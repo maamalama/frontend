@@ -3,7 +3,7 @@ import { ChainId } from './networks'
 export type EventInfo = {
   logo: string
   caption?: string
-  value: string
+  value: string | false
   label: string
   chainId?: ChainId
 }
@@ -33,13 +33,13 @@ export const events: EventInfo[] = [
     logo: 'https://etherscan.io/token/images/opensea_32.png',
     caption: 'Trades on OpenSea',
     chainId: ChainId.ETH,
-    value: 'opensea'
+    value: false
   },
   {
     label: 'LooksRare trades',
     logo: 'https://etherscan.io/token/images/looksrare_32.png',
     caption: 'Trades on LooksRare',
     chainId: ChainId.ETH,
-    value: 'looksrare'
+    value: false
   }
 ]
