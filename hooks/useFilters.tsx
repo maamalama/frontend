@@ -43,12 +43,12 @@ export const useFilters = create<State>((set) => ({
       symbol: 'LOBS',
       logo: 'https://etherscan.io/token/images/lobsterdao_32.png',
       chainId: 1,
-      amount: '0',
+      amount: '1',
       type: 'nft',
       id: 1
     }
   ],
-  counter: 0,
+  counter: 1,
   addFilter: (filter) =>
     set(({ filters, counter }) => {
       const id = counter + 1
