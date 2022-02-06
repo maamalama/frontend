@@ -69,7 +69,7 @@ const Index = () => {
 
     if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
 
-    return event ? `${strings.join(', ')} who have ${event.label}` : strings.join(', ')
+    return event ? `Total amount of ${event.label} by ${strings.join(', ')}` : strings.join(', ')
   }, [filters, event])
 
   return (
