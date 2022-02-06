@@ -26,6 +26,33 @@ const Index = () => {
   const [isLoading, setLoading] = useState(false)
   const [event, setEvent] = useState<EventInfo>()
 
+  const fetchAllData = () => {
+    setLoading(true)
+
+    const res = event?.value ? fetchEvent(filters, event) : fetchChart(filters)
+
+    res
+      .then((res) => {
+        if (res.status !== 200) {
+          return setError(res.statusText)
+        } else return res.json()
+      })
+      .then((json) => {
+        setLoading(false)
+        if (json) {
+          setChartData(json)
+          setError(undefined)
+        }
+      })
+      .catch((err) => {
+        setError(err.message)
+      })
+  }
+
+  useLazyEffect(() => {
+    fetchAllData()
+  }, [event])
+
   return (
     <>
       <header className={styles.header}>
@@ -46,44 +73,25 @@ const Index = () => {
             })}
           </div>
 
-          <AddFilter />
+          <div className={styles.row} style={{ justifyContent: 'space-between' }}>
+            <AddFilter />{' '}
+            <button className={indexStyles.queryButton} onClick={() => fetchAllData()}>
+              Query
+            </button>
+          </div>
         </div>
         <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
             isClearable
-            onChange={(event: EventInfo) => setEvent(event)}
+            onChange={(event: EventInfo) => {
+              setEvent(event)
+            }}
             placeholder="Select event (optional)"
             options={events}
             components={{ SingleValue: CurrentValue, Option: SelectOption }}
           />
         </div>
-
-        <button
-          className={indexStyles.queryButton}
-          onClick={() => {
-            setLoading(true)
-
-            const res: Promise<Response> = event?.value ? fetchEvent(filters, event) : fetchChart(filters)
-
-            res
-              .then((res) => {
-                if (res.status !== 200) {
-                  return setError(res.statusText)
-                } else return res.json()
-              })
-              .then((json) => {
-                setLoading(false)
-                if (json) {
-                  setChartData(json)
-                  setError(undefined)
-                }
-              })
-              .catch((err) => setError(err.message))
-          }}
-        >
-          Query
-        </button>
 
         <Chart isLoading={isLoading} entries={chartData} error={error} />
       </main>
