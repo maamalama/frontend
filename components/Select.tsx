@@ -1,7 +1,12 @@
+import { CSSProperties } from 'react'
 import SelectComponent, { Props } from 'react-select'
 import { Option } from '../lib/types'
 
-export function Select<T extends Option>({ styles, ...props }: Props<T, false>) {
+export function Select<T extends Option>({
+  styles,
+  controlStyles = {},
+  ...props
+}: Props<T, false> & { controlStyles?: CSSProperties }) {
   return (
     <SelectComponent
       styles={{
@@ -14,7 +19,8 @@ export function Select<T extends Option>({ styles, ...props }: Props<T, false>) 
           fontSize: '14px',
           '&:hover': {
             borderColor: 'var(--blue)'
-          }
+          },
+          ...controlStyles
         }),
         option: (s, state) => ({
           ...s,

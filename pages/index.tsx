@@ -77,11 +77,11 @@ const Index = () => {
   return (
     <>
       <header className={styles.header}>
-        <h1 className={styles.heading}>On-chain user analytics</h1>
+        <h1 className={styles.heading}>hashscan.xyz</h1>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column}`} style={{ gap: '45px' }}>
-        <div className={styles.column} style={{ gap: '16px' }}>
+        <div className={styles.column} style={{ gap: '10px' }}>
           <h3 className={styles.h3}>Filter users</h3>
           <div className={styles.list}>
             {filters.map((filter) => {
@@ -107,9 +107,10 @@ const Index = () => {
             </button>
           </div>
         </div>
-        <div className={styles.column} style={{ gap: '16px' }}>
+        <div className={styles.column} style={{ gap: '10px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
+            controlStyles={{ padding: '4px 0' }}
             isOptionDisabled={(option) => option.value === false}
             isClearable
             onChange={(event: EventInfo) => {
