@@ -28,7 +28,7 @@ const Index = () => {
         <h1 className={styles.heading}>On-chain user analytics</h1>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
-      <main className={`${styles.column}`} style={{ gap: '45px', paddingTop: '35px' }}>
+      <main className={`${styles.column}`} style={{ gap: '45px' }}>
         <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Filter users</h3>
           <div className={styles.list}>
