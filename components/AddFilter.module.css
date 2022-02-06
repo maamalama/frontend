@@ -47,7 +47,7 @@
 
 .filterButton:not(:disabled):hover,
 .filterButton:not(:disabled):hover > .caption {
-  background-color: #2684ff;
+  background-color: var(--blue);
   color: white;
 }
 

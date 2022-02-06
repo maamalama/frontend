@@ -6,10 +6,19 @@ export function Select<T extends Option>({ styles, ...props }: Props<T, false>) 
     <SelectComponent
       styles={{
         container: styles?.container,
-        control: (s) => ({ ...s, borderRadius: '6px', borderColor: '#eaeaea', fontSize: '14px' }),
+        control: (s, state) => ({
+          ...s,
+          borderRadius: '6px',
+          borderColor: state.isFocused ? 'var(--blue)' : '#eaeaea',
+          boxShadow: state.isFocused ? '0 0 0 1px var(--blue)' : 'none',
+          fontSize: '14px',
+          '&:hover': {
+            borderColor: 'var(--blue)'
+          }
+        }),
         option: (s, state) => ({
           ...s,
-          backgroundColor: state.isFocused ? '#2684FF' : 'white',
+          backgroundColor: state.isFocused ? 'var(--blue)' : 'white',
           color: state.isDisabled ? 'gray' : state.isFocused ? 'white' : 'black',
           fontSize: '14px',
           cursor: state.isDisabled ? 'not-allowed' : 'pointer'

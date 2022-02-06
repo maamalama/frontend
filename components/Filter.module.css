@@ -21,8 +21,8 @@
 .deleteButton:focus {
   outline: none;
   border-width: 1px;
-  border-color: #2684ff;
-  box-shadow: 0 0 0 1px #2684ff;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue);
 }
 
 .deleteButton {
