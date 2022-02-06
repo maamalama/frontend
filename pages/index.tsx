@@ -78,6 +78,7 @@ const Index = () => {
     <>
       <header className={styles.header}>
         <h1 className={styles.heading}>Hashscan</h1>
+        <h2 className={styles.subheading}>web3 user analytics</h2>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column}`}>
