@@ -29,17 +29,17 @@ export const events: EventInfo[] = [
     value: 'aave_deposit_polygon'
   },
   {
-    label: 'OpenSea trades',
-    logo: 'https://etherscan.io/token/images/opensea_32.png',
-    caption: 'Trades on OpenSea',
-    chainId: ChainId.ETH,
-    value: false
-  },
-  {
     label: 'LooksRare trades',
     logo: 'https://etherscan.io/token/images/looksrare_32.png',
     caption: 'Trades on LooksRare',
     chainId: ChainId.ETH,
     value: 'looksrare_trade_ethereum'
+  },
+  {
+    label: 'OpenSea trades',
+    logo: 'https://etherscan.io/token/images/opensea_32.png',
+    caption: 'Trades on OpenSea',
+    chainId: ChainId.ETH,
+    value: false
   }
 ]
