@@ -7,7 +7,6 @@ import styles from './Filter.module.css'
 
 export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
   const editFilter = useFilters((state) => state.editFilter)
-  const removeFilter = useFilters((state) => state.removeFilter)
 
   const defaultToken = tokens.find((token) => token.address === filter.address)
   const [amount, setAmount] = useState('1')
@@ -32,6 +31,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
         setErc20Token(v)
       }}
       containerStyles={{ maxWidth: '350px' }}
+      filterId={filter.id}
       childrenAfter={
         <>
           {' '}
@@ -44,9 +44,6 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
             className={styles.input}
           />
           tokens
-          <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-            <img src="/minus.svg" height={24} width={24} alt="close" />
-          </button>
         </>
       }
     >

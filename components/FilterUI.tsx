@@ -5,19 +5,25 @@ import { CSSProperties, ReactNode, useState } from 'react'
 import sharedStyles from '../shared.module.css'
 import { SelectOption } from './select/Option'
 import { CurrentValue } from './select/CurrentValue'
+import { useFilters } from '../hooks/useFilters'
 
 export const FilterUI = ({
   options,
   children,
   containerStyles,
   childrenAfter = '',
+  filterId,
   ...props
 }: {
   options: any[]
   children: ReactNode
   containerStyles?: CSSProperties
   childrenAfter?: ReactNode
-} & SelectProps<typeof options[0], false>) => {
+} & SelectProps<typeof options[0], false> & { filterId?: number }) => {
+  const removeFilter = useFilters((state) => state.removeFilter)
+
+  const filters = useFilters((state) => state.filters)
+
   return (
     <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
       {children}
@@ -29,7 +35,12 @@ export const FilterUI = ({
         options={options}
         {...props}
       />
-      {childrenAfter}
+      {childrenAfter}{' '}
+      {filters.length > 1 && (
+        <button className={styles.deleteButton} onClick={() => removeFilter(filterId)}>
+          <img src="/minus.svg" height={24} width={24} alt="close" />
+        </button>
+      )}
     </div>
   )
 }

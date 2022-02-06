@@ -8,8 +8,6 @@ import styles from './Filter.module.css'
 export const HoldsNFT = ({ filter }: { filter: Filter }) => {
   const editFilter = useFilters((state) => state.editFilter)
 
-  const removeFilter = useFilters((state) => state.removeFilter)
-
   const defaultCollection = collections.find((collection) => collection.address === filter.address)
   const [amount, setAmount] = useState('1')
   const [collection, setCollection] = useState<Collection>(defaultCollection)
@@ -33,6 +31,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
       onChange={(v) => {
         setCollection(v)
       }}
+      filterId={filter.id}
       childrenAfter={
         <>
           <input
@@ -43,9 +42,6 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
             className={styles.input}
           />
           <div>NFTs</div>
-          <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
-            <img src="/minus.svg" height={24} width={24} alt="close" />
-          </button>
         </>
       }
     >

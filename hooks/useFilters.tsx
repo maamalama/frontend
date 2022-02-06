@@ -21,20 +21,6 @@ export type State = {
   counter: number
 }
 
-const replaceBlock = (filters: Filter[], newFilter: Filter): Filter[] => {
-  const oldBlockIdx = filters.findIndex((item) => item.id === newFilter.id)
-
-  if (oldBlockIdx !== -1) {
-    const newBlocks = filters
-
-    newBlocks[oldBlockIdx] = newFilter
-
-    return newBlocks
-  } else {
-    return filters
-  }
-}
-
 export const useFilters = create<State>((set) => ({
   filters: [
     {
@@ -67,7 +53,7 @@ export const useFilters = create<State>((set) => ({
   removeFilter: (filterId) =>
     set(({ filters, counter }) => ({
       counter,
-      filters: filters.filter((x) => x.id !== filterId)
+      filters: filters.length > 1 ? filters.filter((x) => x.id !== filterId) : filters
     })),
   editFilter: (newFilter) =>
     set(({ filters, counter }) => {
