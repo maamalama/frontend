@@ -1,6 +1,5 @@
 .heading,
 .subheading {
-  text-align: center;
   margin: 0;
 }
 
@@ -44,7 +43,9 @@
 }
 
 .header {
-  padding: 40px 0;
+  position: absolute;
+  top: 40px;
+  left: 40px;
 }
 
 .h3 {

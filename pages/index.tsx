@@ -30,8 +30,8 @@ const Index = () => {
         <h2 className={styles.subheading}>Query Ethereum users by condition</h2>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
-      <main className={`${styles.column}`} style={{ gap: '60px' }}>
-        <div className={styles.column} style={{ gap: '20px' }}>
+      <main className={`${styles.column}`} style={{ gap: '45px', paddingTop: '35px' }}>
+        <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Filter users</h3>
           <div className={styles.list}>
             {filters.map((filter) => {
@@ -68,7 +68,7 @@ const Index = () => {
             </button>
           </div>
         </div>
-        <div className={styles.column} style={{ gap: '20px' }}>
+        <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
             placeholder="Select event"
