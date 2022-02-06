@@ -13,8 +13,7 @@ type Options = { label: string; value: FilterType; caption: string }
 
 const options: Options[] = [
   { label: 'Hold NFTs', value: 'nft', caption: 'Users who have NFT(s) in their wallet' },
-  { label: 'Own ERC-20 tokens', value: 'erc20', caption: 'Users who own ERC-20 tokens' },
-  { label: 'Sold on OpenSea', value: 'opensea', caption: 'Users who have traded on OpenSea' }
+  { label: 'Own ERC-20 tokens', value: 'erc20', caption: 'Users who own ERC-20 tokens' }
 ]
 
 export const AddFilter = () => {
@@ -52,8 +51,6 @@ export const AddFilter = () => {
                   amount: '0',
                   type: 'erc20'
                 })
-              } else if (option.value === 'opensea') {
-                addFilter({ type: 'opensea', label: 'Traded on OpenSea' })
               }
               setExpanded(false)
             }}

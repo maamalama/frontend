@@ -1,7 +1,7 @@
 import create from 'zustand'
 import { ChainId } from '../data/networks'
 
-export type FilterType = 'erc20' | 'nft' | 'opensea'
+export type FilterType = 'erc20' | 'nft'
 
 export type Filter = {
   type: FilterType

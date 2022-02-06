@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import { parseUnits } from '@ethersproject/units'
 import { AddFilter } from '../components/AddFilter'
 import { HoldsNFT } from '../components/HoldsNFT'
 import { OwnsCrypto } from '../components/OwnsTokens'
@@ -8,12 +7,15 @@ import { useFilters } from '../hooks/useFilters'
 import indexStyles from './index.module.css'
 import shared from '../shared.module.css'
 import dynamic from 'next/dynamic'
+import { Select } from '../components/Select'
+import { events } from '../data/events'
+import { CurrentValue } from '../components/select/CurrentValue'
+import { SelectOption } from '../components/select/Option'
+import { fetchChart } from '../lib/fetchChart'
 
 const Chart = dynamic(() => import('../components/Charts'), { ssr: false })
 
 const styles = { ...indexStyles, ...shared }
-
-const BASE_URL = 'https://awake-api.vercel.app/api'
 
 const Index = () => {
   const filters = useFilters((state) => state.filters)
@@ -30,7 +32,7 @@ const Index = () => {
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column}`} style={{ gap: '60px' }}>
         <div className={styles.column} style={{ gap: '20px' }}>
-          <h3 className={styles.h3}>Filter users, who</h3>
+          <h3 className={styles.h3}>Filter users</h3>
           <div className={styles.list}>
             {filters.map((filter) => {
               switch (filter.type) {
@@ -38,8 +40,6 @@ const Index = () => {
                   return <OwnsCrypto filter={filter} />
                 case 'nft':
                   return <HoldsNFT filter={filter} />
-                case 'opensea':
-                  return <TradedOpenSea filter={filter} />
               }
             })}
           </div>
@@ -49,14 +49,7 @@ const Index = () => {
               className={indexStyles.queryButton}
               onClick={() => {
                 setLoading(true)
-                const amounts = filters
-                  .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
-                  .join(',')
-
-                const addresses = filters.map((x) => x.address).join(',')
-                const networks = filters.map((x) => x.chainId).join(',')
-
-                fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
+                fetchChart(filters)
                   .then((res) => {
                     if (res.status !== 200) {
                       return setError(res.statusText)
@@ -75,7 +68,14 @@ const Index = () => {
             </button>
           </div>
         </div>
-
+        <div className={styles.column} style={{ gap: '20px' }}>
+          <h3 className={styles.h3}>Events</h3>
+          <Select
+            placeholder="Select event"
+            options={events}
+            components={{ SingleValue: CurrentValue, Option: SelectOption }}
+          />
+        </div>
         <Chart isLoading={isLoading} entries={chartData} error={error} />
       </main>
     </>

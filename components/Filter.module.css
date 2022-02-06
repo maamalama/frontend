@@ -1,17 +1,3 @@
-.collectionIcon {
-  border-radius: 999px;
-  margin-right: 10px;
-}
-
-.chainIdIcon {
-  position: absolute;
-  border-radius: 999px;
-}
-
-.collectionContainer {
-  position: relative;
-}
-
 .input,
 .deleteButton {
   height: 38px;

@@ -31,7 +31,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       onChange={(v) => {
         setErc20Token(v)
       }}
-      containerStyles={{ maxWidth: '293px' }}
+      containerStyles={{ maxWidth: '350px' }}
       childrenAfter={
         <>
           {' '}
@@ -43,13 +43,14 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
             style={{ width: '6rem' }}
             className={styles.input}
           />
+          tokens
           <button className={styles.deleteButton} onClick={() => removeFilter(filter.id)}>
             <img src="/minus.svg" height={24} width={24} alt="close" />
           </button>
         </>
       }
     >
-      own at least{' '}
+      own{' '}
     </FilterUI>
   )
 }
