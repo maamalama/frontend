@@ -31,10 +31,16 @@
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 14px;
+  transition: 150ms;
+
+  border: 1px solid;
+  border-color: transparent;
 }
 
 .queryButton:hover {
-  background-color: #303030;
+  background-color: white;
+  color: black;
+  border-color: black;
 }
 
 .header {

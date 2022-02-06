@@ -3,14 +3,16 @@
   font-size: 14px;
   background-color: white;
   border: var(--border);
-
   padding: 0 16px;
   height: 40px;
   box-sizing: border-box;
+  transition: 150ms;
+  color: #666;
 }
 
 .addFilterButton:hover {
-  background-color: #eaeaea;
+  color: black;
+  border-color: black;
 }
 
 .container {

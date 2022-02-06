@@ -122,7 +122,7 @@ export const FilterUI = ({
         // formatCreateLabel={(option) => <span>Create {option}</span>}
         styles={{
           container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }),
-          control: (styles) => ({ ...styles, borderRadius: '6px' }),
+          control: (styles) => ({ ...styles, borderRadius: '6px', borderColor: '#eaeaea' }),
           option: (styles, state) => ({
             ...styles,
             backgroundColor: state.isFocused ? '#2684FF' : 'white',

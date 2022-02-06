@@ -24,6 +24,11 @@
 
 .input {
   border: var(--border);
+  transition: 100ms;
+}
+
+.input:hover {
+  border-color: hsl(0, 0%, 70%);
 }
 
 .input:focus,

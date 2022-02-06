@@ -1,6 +1,6 @@
 .chart {
-  width: 700px;
-  min-height: 300px;
+  width: 600px;
+  min-height: 370px;
   padding: 16px;
   margin: 0px;
   box-sizing: border-box;
@@ -23,8 +23,8 @@
 }
 
 .body {
-  width: 668px;
-
+  width: 568px;
+  height: 370px;
   display: flex;
   justify-content: center;
   align-items: center;
