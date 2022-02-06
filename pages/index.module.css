@@ -30,7 +30,7 @@
   border: 1px solid;
   border-color: transparent;
 
-  min-width: 140px;
+  width: 140px;
 }
 
 .queryButton:hover {

@@ -7,7 +7,7 @@ import type { Option } from '../../lib/types'
 
 const { Option: OptionComponent } = components
 
-export const SelectOption = (props: OptionProps<Option>) => {
+export function SelectOption<T extends Option>(props: OptionProps<T>) {
   return (
     <OptionComponent {...props}>
       <span className={`${sharedStyles.row}`}>

@@ -14,14 +14,14 @@ export const events: EventInfo[] = [
     logo: 'https://etherscan.io/token/images/aave_32.png',
     caption: 'Deposits on AAVE (Mainnet)',
     chainId: ChainId.ETH,
-    value: 'aave-mainnet'
+    value: 'aave_deposit_ethereum'
   },
   {
     label: 'AAVE v2 deposits',
     logo: 'https://etherscan.io/token/images/aave_32.png',
     caption: 'Deposits on AAVE (Polygon)',
     chainId: ChainId.MATIC,
-    value: 'aave-polygon'
+    value: 'aave_deposit_polygon'
   },
   {
     label: 'OpenSea trades',

@@ -7,7 +7,7 @@ import type { Option } from '../../lib/types'
 
 const { SingleValue } = components
 
-export const CurrentValue = (props: SingleValueProps<Option>) => {
+export function CurrentValue<T extends Option>(props: SingleValueProps<T>) {
   return (
     <SingleValue {...props}>
       <span className={`${sharedStyles.row}`}>

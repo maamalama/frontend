@@ -7,10 +7,13 @@ import indexStyles from './index.module.css'
 import shared from '../shared.module.css'
 import dynamic from 'next/dynamic'
 import { Select } from '../components/Select'
-import { events } from '../data/events'
+import { EventInfo, events } from '../data/events'
 import { CurrentValue } from '../components/select/CurrentValue'
 import { SelectOption } from '../components/select/Option'
-import { fetchChart } from '../lib/fetchChart'
+import { fetchChart } from '../lib/fetchFilters'
+import { useLazyEffect } from '../hooks/useLazyEffect'
+import { fetchEvent } from '../lib/fetchEvent'
+import { ChartData } from '../lib/types'
 
 const Chart = dynamic(() => import('../components/Charts'), { ssr: false })
 
@@ -18,9 +21,10 @@ const styles = { ...indexStyles, ...shared }
 
 const Index = () => {
   const filters = useFilters((state) => state.filters)
-  const [chartData, setChartData] = useState<{ value: number; time: string }[]>()
+  const [chartData, setChartData] = useState<ChartData>()
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
+  const [event, setEvent] = useState<EventInfo>()
 
   return (
     <>
@@ -41,39 +45,44 @@ const Index = () => {
               }
             })}
           </div>
-          <div className={shared.row} style={{ justifyContent: 'space-between' }}>
-            <AddFilter />
-            <button
-              className={indexStyles.queryButton}
-              onClick={() => {
-                setLoading(true)
-                fetchChart(filters)
-                  .then((res) => {
-                    if (res.status !== 200) {
-                      return setError(res.statusText)
-                    } else return res.json()
-                  })
-                  .then((json) => {
-                    setLoading(false)
-                    if (json) {
-                      setChartData(json)
-                    }
-                  })
-                  .catch((err) => setError(err.message))
-              }}
-            >
-              Query
-            </button>
-          </div>
+
+          <AddFilter />
         </div>
         <div className={styles.column} style={{ gap: '16px' }}>
           <h3 className={styles.h3}>Events</h3>
           <Select
+            onChange={(event: EventInfo) => setEvent(event)}
             placeholder="Select event"
             options={events}
             components={{ SingleValue: CurrentValue, Option: SelectOption }}
           />
         </div>
+
+        <button
+          className={indexStyles.queryButton}
+          onClick={() => {
+            setLoading(true)
+
+            const res: Promise<Response> = event ? fetchEvent(filters, event) : fetchChart(filters)
+
+            res
+              .then((res) => {
+                if (res.status !== 200) {
+                  return setError(res.statusText)
+                } else return res.json()
+              })
+              .then((json) => {
+                setLoading(false)
+                if (json) {
+                  setChartData(json)
+                }
+              })
+              .catch((err) => setError(err.message))
+          }}
+        >
+          Query
+        </button>
+
         <Chart isLoading={isLoading} entries={chartData} error={error} />
       </main>
     </>
