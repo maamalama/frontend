@@ -66,7 +66,7 @@ const lineOptions: DeepPartial<LineStyleOptions & SeriesOptionsCommon> = {
 
 interface ChartProps {
   isLoading: boolean
-  entries: { time: string; amount: number }[]
+  entries: { time: string; value: number }[]
   error?: unknown
 }
 
@@ -79,7 +79,7 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
   useEffect(() => {
     if (!entries) return
 
-    const data: LineData[] = entries.map((e) => ({ time: e.time, value: e.amount }))
+    const data: LineData[] = entries.map((e) => ({ time: e.time, value: e.value }))
     if (!lineSeries) {
       // init data
       const chart = createChart(document.getElementById('chart'), chartOptions)

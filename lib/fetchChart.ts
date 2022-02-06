@@ -11,5 +11,5 @@ export const fetchChart = (filters: Filter[]) => {
   const addresses = filters.map((x) => x.address).join(',')
   const networks = filters.map((x) => x.chainId).join(',')
 
-  return fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&network=${networks}`)
+  return fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&networks=${networks}`)
 }

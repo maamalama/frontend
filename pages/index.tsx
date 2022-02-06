@@ -19,7 +19,7 @@ const styles = { ...indexStyles, ...shared }
 
 const Index = () => {
   const filters = useFilters((state) => state.filters)
-  const [chartData, setChartData] = useState<{ amount: number; time: string }[]>()
+  const [chartData, setChartData] = useState<{ value: number; time: string }[]>()
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
