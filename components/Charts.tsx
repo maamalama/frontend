@@ -68,9 +68,10 @@ interface ChartProps {
   isLoading: boolean
   entries: { time: string; value: number }[]
   error?: unknown
+  header?: string
 }
 
-const Chart = ({ isLoading, entries, error }: ChartProps) => {
+const Chart = ({ isLoading, entries, error, header = 'Token holders' }: ChartProps) => {
   const [chart, setChart] = useState(null)
   const [lineSeries, setLineSeries] = useState(null)
 
@@ -96,7 +97,7 @@ const Chart = ({ isLoading, entries, error }: ChartProps) => {
 
   return (
     <div className={styles.chart}>
-      <div className={styles.header}>{chartVisible && 'Token holders'}</div>
+      <div className={styles.header}>{chartVisible && header}</div>
       <div className={styles.body}>
         {isLoading && (
           <div className={styles.loader}>

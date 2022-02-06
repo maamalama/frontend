@@ -53,6 +53,25 @@ const Index = () => {
     fetchAllData()
   }, [event])
 
+  const header = useMemo(() => {
+    let strings: string[] = []
+
+    const nfts = new Set(
+      filters
+        .filter((f) => f.type === 'nft')
+        .map((s) => {
+          return s.symbol
+        })
+    )
+    const tokens = new Set(filters.filter((f) => f.type === 'erc20').map((s) => s.symbol))
+
+    if (nfts.size > 0) strings.push(`${Array.from(nfts).join(', ')} holders`)
+
+    if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
+
+    return event ? `${strings.join(', ')} who have ${event.label}` : strings.join(', ')
+  }, [filters, event])
+
   return (
     <>
       <header className={styles.header}>
@@ -93,7 +112,7 @@ const Index = () => {
           />
         </div>
 
-        <Chart isLoading={isLoading} entries={chartData} error={error} />
+        <Chart header={header} isLoading={isLoading} entries={chartData} error={error} />
       </main>
     </>
   )

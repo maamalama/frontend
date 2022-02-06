@@ -13,12 +13,10 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
 
   useLazyEffect(() => {
     editFilter({
+      ...erc20Token,
       type: 'erc20',
       id: filter.id,
-      amount,
-      address: erc20Token.address,
-      chainId: erc20Token.chainId,
-      label: erc20Token.label
+      amount
     })
   }, [erc20Token, amount])
 

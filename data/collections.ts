@@ -13,7 +13,6 @@ export const collections: Collection[] = [
     address: '0x026224a2940bfe258d0dbe947919b62fe321f042',
     label: 'lobsterdao',
     symbol: 'LOBS',
-
     logo: 'https://etherscan.io/token/images/lobsterdao_32.png',
     chainId: ChainId.ETH
   },
@@ -21,7 +20,6 @@ export const collections: Collection[] = [
     address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
     label: 'BoredApeYachtClub',
     symbol: 'BAYC',
-
     logo: 'https://etherscan.io/token/images/boredapeyc_32.png',
     chainId: ChainId.ETH
   },

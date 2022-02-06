@@ -14,12 +14,10 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
 
   useLazyEffect(() => {
     editFilter({
+      ...collection,
       type: 'nft',
       id: filter.id,
-      amount,
-      address: collection.address,
-      chainId: collection.chainId,
-      label: collection.label
+      amount
     })
   }, [collection, amount])
 

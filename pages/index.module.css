@@ -1,8 +1,8 @@
 .heading {
   margin: 0;
-  color: #382e2e;
-  font-size: 16px;
-  font-weight: normal;
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .header {
@@ -41,7 +41,6 @@
 
 .h3 {
   color: black;
-  font-size: 24px;
   font-weight: 600;
   margin: 0;
 }

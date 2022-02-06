@@ -11,6 +11,7 @@ export type Filter = {
   decimals?: number
   id?: number
   label: string
+  symbol: string
 }
 
 export type State = {
