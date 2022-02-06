@@ -1,22 +1,24 @@
 .heading {
   margin: 0;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .subheading {
-  font-size: 16px;
-  color: gray;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.562);
   font-weight: 400;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
 .header {
-  padding: 15px;
+  padding: 14px;
+  padding-top: 12px;
+  padding-left: 30px;
   background-color: var(--fg);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .list {
@@ -53,7 +55,7 @@
   color: var(--fg);
   font-weight: 500;
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .main {
