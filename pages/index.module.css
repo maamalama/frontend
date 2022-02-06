@@ -17,7 +17,7 @@
   padding: 14px;
   padding-top: 12px;
   padding-left: 30px;
-  background-color: var(--fg);
+  background-color: #1a1a1a;
   margin-bottom: 30px;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .queryButton {
-  background-color: black;
+  background-color: #1a1a1a;
   color: white;
   padding: 0 16px;
   height: 36px;
