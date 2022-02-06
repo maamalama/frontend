@@ -103,6 +103,7 @@ const Index = () => {
           <h3 className={styles.h3}>Events</h3>
           <Select
             isClearable
+            menuIsOpen
             onChange={(event: EventInfo) => {
               setEvent(event)
             }}

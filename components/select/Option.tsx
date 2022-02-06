@@ -4,6 +4,7 @@ import { networks } from '../../data/networks'
 import styles from './Option.module.css'
 import sharedStyles from '../../shared.module.css'
 import type { Option } from '../../lib/types'
+import addFilterStyles from '../AddFilter.module.css'
 
 const { Option: OptionComponent } = components
 
@@ -34,7 +35,14 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
             />
           )}
         </span>
-        {props.data.label}
+        <div>
+          {props.data.label}
+          {props.data.caption && (
+            <div className={addFilterStyles.caption} style={{ color: props.isFocused ? 'white' : 'gray' }}>
+              {props.data.caption}
+            </div>
+          )}
+        </div>
       </span>
     </OptionComponent>
   )
