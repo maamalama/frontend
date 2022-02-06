@@ -81,7 +81,7 @@ const Index = () => {
         <h2 className={styles.subheading}>web3 user analytics</h2>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
-      <main className={`${styles.column}`}>
+      <main className={`${styles.column} ${styles.main}`}>
         <div className={styles.column} style={{ gap: '10px', marginBottom: '45px' }}>
           <h3 className={styles.h3}>Filter users</h3>
           <div className={styles.list}>
