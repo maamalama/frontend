@@ -56,7 +56,7 @@ export const collections: Collection[] = [
   },
   {
     address: '0xa5f1ea7df861952863df2e8d1312f7305dabf215',
-    label: 'ZED Horse',
+    label: 'ZED Run',
     symbol: 'ZED',
     chainId: ChainId.MATIC,
     logo: 'https://etherscan.io/token/images/zedrun_128b.png'

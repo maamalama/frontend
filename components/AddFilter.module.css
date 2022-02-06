@@ -3,6 +3,7 @@
   font-size: 14px;
   background-color: white;
   border: var(--border);
+
   padding: 0 16px;
   height: 40px;
   box-sizing: border-box;
@@ -33,6 +34,11 @@
   text-align: left;
   padding: 10px 16px;
   font-size: 14px;
+}
+
+.filterButton:last-child {
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
 }
 
 .filterButton:hover {

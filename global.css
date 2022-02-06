@@ -21,6 +21,6 @@ button {
 
 :root {
   --shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  --radius: 8px;
+  --radius: 6px;
   --border: 1px solid #ccc;
 }
