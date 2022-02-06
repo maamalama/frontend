@@ -1,16 +1,7 @@
-.heading,
-.subheading {
-  margin: 0;
-}
-
 .heading {
+  margin: 0;
   color: #382e2e;
-}
-
-.subheading {
-  font-size: 20px;
-  margin-top: 12px;
-  color: #635858;
+  font-size: 16px;
   font-weight: normal;
 }
 
@@ -34,6 +25,8 @@
 
   border: 1px solid;
   border-color: transparent;
+
+  min-width: 140px;
 }
 
 .queryButton:hover {
@@ -44,8 +37,8 @@
 
 .header {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 35px;
+  left: 35px;
 }
 
 .h3 {

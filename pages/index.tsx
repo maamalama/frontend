@@ -27,7 +27,6 @@ const Index = () => {
     <>
       <header className={styles.header}>
         <h1 className={styles.heading}>On-chain user analytics</h1>
-        <h2 className={styles.subheading}>Query Ethereum users by condition</h2>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column}`} style={{ gap: '45px', paddingTop: '35px' }}>

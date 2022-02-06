@@ -8,6 +8,7 @@
   box-sizing: border-box;
   transition: 150ms;
   color: #666;
+  min-width: 140px;
 }
 
 .addFilterButton:hover {
