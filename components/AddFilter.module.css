@@ -41,8 +41,10 @@
   border-bottom-right-radius: var(--radius);
 }
 
-.filterButton:hover {
-  background-color: #f1f2f3;
+.filterButton:hover,
+.filterButton:hover > .caption {
+  background-color: #2684ff;
+  color: white;
 }
 
 .addFilterButton,
