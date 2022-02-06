@@ -20,7 +20,7 @@ button {
 }
 
 :root {
-  --radius: 6px;
+  --radius: 4px;
   --border: 1px solid #eaeaea;
   --blue: #2684ff;
 }
