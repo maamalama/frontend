@@ -65,5 +65,12 @@ export const collections: Collection[] = [
     symbol: '',
     chainId: ChainId.MATIC,
     logo: 'https://lh3.googleusercontent.com/UB1LDoe50XlszRwIUb3KS226G8Xzx_wSyPI26dWhD5LUEITInjw63JGt39Y4SoE0gqQiZuMaieUUCmQS2jAHn1TwVgX_qkEPpws4=s130'
+  },
+  {
+    address: '0x7Bd29408f11D2bFC23c34f18275bBf23bB716Bc7',
+    label: 'Meebits',
+    symbol: '⚇',
+    chainId: ChainId.ETH,
+    logo: 'https://etherscan.io/token/images/meebits_32.png'
   }
 ]
