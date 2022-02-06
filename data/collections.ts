@@ -58,5 +58,12 @@ export const collections: Collection[] = [
     symbol: 'ZED',
     chainId: ChainId.MATIC,
     logo: 'https://etherscan.io/token/images/zedrun_128b.png'
+  },
+  {
+    address: '0x7c885c4bfd179fb59f1056fbea319d579a278075',
+    label: 'Royal LDAs',
+    symbol: '',
+    chainId: ChainId.MATIC,
+    logo: 'https://lh3.googleusercontent.com/UB1LDoe50XlszRwIUb3KS226G8Xzx_wSyPI26dWhD5LUEITInjw63JGt39Y4SoE0gqQiZuMaieUUCmQS2jAHn1TwVgX_qkEPpws4=s130'
   }
 ]
