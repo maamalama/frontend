@@ -25,8 +25,8 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
           )}
           {props.data.chainId && (
             <img
-              height={12}
-              width={12}
+              height={14}
+              width={14}
               style={{
                 bottom: '0',
                 right: '7.5px',
@@ -40,7 +40,10 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
         <div>
           {props.data.label}
           {props.data.caption && (
-            <div className={addFilterStyles.caption} style={{ color: props.isFocused ? 'white' : 'gray' }}>
+            <div
+              className={addFilterStyles.caption}
+              style={{ color: props.isDisabled ? 'gray' : props.isFocused ? 'white' : 'gray' }}
+            >
               {props.data.caption}
             </div>
           )}

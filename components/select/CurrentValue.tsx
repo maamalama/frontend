@@ -23,8 +23,8 @@ export function CurrentValue<T extends Option>(props: SingleValueProps<T>) {
           )}
           {props.data.chainId && (
             <img
-              height={12}
-              width={12}
+              height={14}
+              width={14}
               style={{
                 bottom: '0',
                 right: '7.5px'
