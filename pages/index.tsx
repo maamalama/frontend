@@ -53,7 +53,7 @@ const Index = () => {
     fetchAllData()
   }, [event])
 
-  const header = useMemo(() => {
+  const createHeader = () => {
     let strings: string[] = []
 
     const nfts = new Set(
@@ -70,7 +70,9 @@ const Index = () => {
     if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
 
     return event ? `Total amount of ${event.label} by ${strings.join(', ')}` : strings.join(', ')
-  }, [filters, event])
+  }
+
+  const [header, setHeader] = useState('')
 
   return (
     <>
@@ -94,7 +96,13 @@ const Index = () => {
 
           <div className={styles.row} style={{ justifyContent: 'space-between' }}>
             <AddFilter />{' '}
-            <button className={indexStyles.queryButton} onClick={() => fetchAllData()}>
+            <button
+              className={indexStyles.queryButton}
+              onClick={() => {
+                setHeader(createHeader())
+                fetchAllData()
+              }}
+            >
               Query
             </button>
           </div>
@@ -105,6 +113,7 @@ const Index = () => {
             isOptionDisabled={(option) => option.value === false}
             isClearable
             onChange={(event: EventInfo) => {
+              setHeader(createHeader())
               setEvent(event)
             }}
             placeholder="Select event (optional)"
