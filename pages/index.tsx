@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { AddFilter } from '../components/AddFilter'
 import { HoldsNFT } from '../components/HoldsNFT'
 import { OwnsCrypto } from '../components/OwnsTokens'
@@ -14,6 +14,7 @@ import { fetchChart } from '../lib/fetchFilters'
 import { useLazyEffect } from '../hooks/useLazyEffect'
 import { fetchEvent } from '../lib/fetchEvent'
 import { ChartData } from '../lib/types'
+import { ExternalLink } from 'react-external-link'
 
 const Chart = dynamic(() => import('../components/Charts'), { ssr: false })
 
@@ -84,14 +85,9 @@ const Index = () => {
           <h1 className={styles.heading}>Hashscan</h1>
           <h2 className={styles.subheading}>web3 user analytics</h2>
         </div>
-        <a
-          className={styles.signUpLink}
-          href="https://vey568uwvva.typeform.com/to/S5EG2s8Y"
-          target="_blank"
-          rel="noopener noreferer"
-        >
+        <ExternalLink className={styles.signUpLink} href="https://vey568uwvva.typeform.com/to/S5EG2s8Y">
           Sign Up
-        </a>
+        </ExternalLink>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column} ${styles.main}`}>
@@ -136,6 +132,10 @@ const Index = () => {
         </div>
 
         <Chart header={header} isLoading={isLoading} entries={chartData} error={error} />
+        <footer className={styles.footer}>
+          we're open for partnership, contact us on{' '}
+          <ExternalLink href="https://twitter.com/jackqack">twitter</ExternalLink>
+        </footer>
       </main>
     </>
   )

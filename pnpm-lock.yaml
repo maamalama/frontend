@@ -8,6 +8,7 @@ specifiers:
   next: ^12.0.10
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-external-link: ^1.2.2
   react-select: ^5.2.2
   typescript: ^4.5.5
   typescript-plugin-css-modules: ^3.4.0
@@ -19,6 +20,7 @@ dependencies:
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-external-link: 1.2.2_react-dom@17.0.2+react@17.0.2
   react-select: 5.2.2_b3482aaf5744fc7c2aeb7941b0e0a78f
   zustand: 3.6.9_react@17.0.2
 
@@ -882,6 +884,16 @@ packages:
       object-assign: 4.1.1
       react: 17.0.2
       scheduler: 0.20.2
+    dev: false
+
+  /react-external-link/1.2.2_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-CbJidnDmhcKlH5gVyt2dbmylcwayMY1wuRW8J1V1o7ZPMHdoUrDDmh/GvAMe847eI3sQBg7PLwSLAl5GiyuI+g==}
+    peerDependencies:
+      react: ^17.0
+      react-dom: ^17.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /react-is/16.13.1:
