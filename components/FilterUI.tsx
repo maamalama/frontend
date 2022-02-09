@@ -26,10 +26,12 @@ export const FilterUI = ({
 
   const filters = useFilters((state) => state.filters)
 
+  const isFirstFilter = filters.findIndex(f => f.id === filterId) === 0
+
   return (
     <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
       <span style={{ width: '28px', textAlign: 'right' }}>
-        {filterId === 1 ? `${actionText[0].toUpperCase()}${actionText.slice(1)}` : 'and'}
+        {isFirstFilter ? `${actionText[0].toUpperCase()}${actionText.slice(1)}` : 'and'}
       </span>{' '}
       {children}
       <Select
