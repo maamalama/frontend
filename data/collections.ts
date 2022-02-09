@@ -10,13 +10,6 @@ export type Collection = {
 
 export const collections: Collection[] = [
   {
-    address: '0xca21d4228cdcc68d4e23807e5e370c07577dd152',
-    label: 'Zorbs',
-    symbol: 'ZORB',
-    logo: 'https://lh3.googleusercontent.com/O2J_GV66yHfYeHIl-ASFknUqJ1qPB-W1D6xB2Xk-Po9GVE5Te9hkBSPsjCVTTHzq1QYgLppo4LcDtHiV3pxeSfB1b9_fP5pGbiRuUg=s0',
-    chainId: ChainId.ETH
-  },
-  {
     address: '0x026224a2940bfe258d0dbe947919b62fe321f042',
     label: 'lobsterdao',
     symbol: 'LOBS',
@@ -127,6 +120,13 @@ export const collections: Collection[] = [
     label: 'Uniswap V3: Positions NFT',
     symbol: 'UNI-V3-POS',
     logo: 'https://etherscan.io/token/images/uniswapv3_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xca21d4228cdcc68d4e23807e5e370c07577dd152',
+    label: 'Zorbs',
+    symbol: 'ZORB',
+    logo: 'https://lh3.googleusercontent.com/O2J_GV66yHfYeHIl-ASFknUqJ1qPB-W1D6xB2Xk-Po9GVE5Te9hkBSPsjCVTTHzq1QYgLppo4LcDtHiV3pxeSfB1b9_fP5pGbiRuUg=s0',
     chainId: ChainId.ETH
   }
 ]
