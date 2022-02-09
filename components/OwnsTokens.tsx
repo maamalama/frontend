@@ -35,6 +35,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       }}
       containerStyles={{ maxWidth: '350px' }}
       filterId={filter.id}
+      actionText="own"
       childrenAfter={
         <>
           {' '}
@@ -49,8 +50,6 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
           {erc20Token.symbol}
         </>
       }
-    >
-      own{' '}
-    </FilterUI>
+    />
   )
 }

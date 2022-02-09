@@ -35,6 +35,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
         setCollection(v)
       }}
       filterId={filter.id}
+      actionText="hold"
       childrenAfter={
         <>
           <input
@@ -47,8 +48,6 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
           <div>NFTs</div>
         </>
       }
-    >
-      hold{' '}
-    </FilterUI>
+    />
   )
 }

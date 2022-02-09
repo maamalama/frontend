@@ -13,12 +13,14 @@ export const FilterUI = ({
   containerStyles,
   childrenAfter = '',
   filterId,
+  actionText,
   ...props
 }: {
   options: any[]
-  children: ReactNode
+  children?: ReactNode
   containerStyles?: CSSProperties
   childrenAfter?: ReactNode
+  actionText: string
 } & SelectProps<typeof options[0], false> & { filterId?: number }) => {
   const removeFilter = useFilters((state) => state.removeFilter)
 
@@ -26,6 +28,9 @@ export const FilterUI = ({
 
   return (
     <div className={`${styles.container} ${sharedStyles.row} ${sharedStyles.gap}`}>
+      <span style={{ width: '28px', textAlign: 'right' }}>
+        {filterId === 1 ? `${actionText[0].toUpperCase()}${actionText.slice(1)}` : 'and'}
+      </span>{' '}
       {children}
       <Select
         // menuIsOpen={true}
