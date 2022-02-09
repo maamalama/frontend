@@ -10,6 +10,13 @@ export type Collection = {
 
 export const collections: Collection[] = [
   {
+    address: '0xca21d4228cdcc68d4e23807e5e370c07577dd152',
+    label: 'Zorbs',
+    symbol: 'ZORB',
+    logo: 'https://lh3.googleusercontent.com/O2J_GV66yHfYeHIl-ASFknUqJ1qPB-W1D6xB2Xk-Po9GVE5Te9hkBSPsjCVTTHzq1QYgLppo4LcDtHiV3pxeSfB1b9_fP5pGbiRuUg=s0',
+    chainId: ChainId.ETH
+  },
+  {
     address: '0x026224a2940bfe258d0dbe947919b62fe321f042',
     label: 'lobsterdao',
     symbol: 'LOBS',
@@ -21,6 +28,13 @@ export const collections: Collection[] = [
     label: 'BoredApeYachtClub',
     symbol: 'BAYC',
     logo: 'https://etherscan.io/token/images/boredapeyc_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0x60e4d786628fea6478f785a6d7e704777c86a7c6',
+    label: 'MutantApeYachtClub',
+    symbol: 'MAYC',
+    logo: 'https://etherscan.io/token/images/mutantapeyacht_32.png',
     chainId: ChainId.ETH
   },
   {
@@ -71,6 +85,48 @@ export const collections: Collection[] = [
     label: 'Cool Cats',
     symbol: 'COOL',
     logo: 'https://etherscan.io/token/images/coolcatsnft_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0x74ee68a33f6c9f113e22b3b77418b75f85d07d22',
+    label: 'Zerion Genesis Collection',
+    symbol: 'ZGC',
+    logo: 'https://play-lh.googleusercontent.com/Fcuy0i4qe55Y7N7JRZbVyH4fnnoPGuiJ3gHp3apbgLFm_2cDOaTAGHoS727U_wF6CMY',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xfaff15c6cdaca61a4f87d329689293e07c98f578',
+    label: 'Zapper NFT Season 1',
+    symbol: 'ZPR_NFT',
+    logo: 'https://etherscan.io/token/images/zapperfioff_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xf1f3ca6268f330fda08418db12171c3173ee39c9',
+    label: 'Zapper NFT Season 2',
+    symbol: 'ZPR NFT',
+    logo: 'https://etherscan.io/token/images/zapperfioff_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0',
+    label: 'SuperRare',
+    symbol: 'SUPR',
+    logo: 'https://etherscan.io/token/images/superare_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xd1e5b0ff1287aa9f9a268759062e4ab08b9dacbe',
+    label: 'Unstoppable Domains (.crypto)',
+    symbol: 'UD',
+    logo: 'https://etherscan.io/token/images/UnstoppableDomains_32.png',
+    chainId: ChainId.ETH
+  },
+  {
+    address: '0xc36442b4a4522e871399cd717abdd847ab11fe88',
+    label: 'Uniswap V3: Positions NFT',
+    symbol: 'UNI-V3-POS',
+    logo: 'https://etherscan.io/token/images/uniswapv3_32.png',
     chainId: ChainId.ETH
   }
 ]
