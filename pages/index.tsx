@@ -133,8 +133,8 @@ const Index = () => {
 
         <Chart header={header} isLoading={isLoading} entries={chartData} error={error} />
         <footer className={styles.footer}>
-          we're open for partnership, contact us on{' '}
-          <ExternalLink href="https://twitter.com/jackqack">twitter</ExternalLink>
+          We're open for partnership, contact us on{' '}
+          <ExternalLink href="https://twitter.com/jackqack">Twitter</ExternalLink>
         </footer>
       </main>
     </>
