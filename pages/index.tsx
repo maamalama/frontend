@@ -86,7 +86,7 @@ const Index = () => {
           <h2 className={styles.subheading}>web3 user analytics</h2>
         </div>
         <ExternalLink className={styles.signUpLink} href="https://vey568uwvva.typeform.com/to/S5EG2s8Y">
-          Sign Up
+          Subscribe for updates
         </ExternalLink>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
