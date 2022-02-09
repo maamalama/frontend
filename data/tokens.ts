@@ -19,12 +19,12 @@ export const tokens: ERC20Token[] = [
     decimals: 18
   },
   {
-    address: '0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5',
-    chainId: 1,
-    symbol: 'OHM',
-    label: 'Olympus DAO',
-    logo: 'https://etherscan.io/token/images/olympusdao2_32.png',
-    decimals: 9
+    address: '0x5a98fcbea516cf06857215779fd812ca3bef1b32',
+    chainId: ChainId.ETH,
+    symbol: 'LDO',
+    label: 'Lido DAO Token',
+    logo: 'https://etherscan.io/token/images/lido-dao_32.png',
+    decimals: 18
   },
   {
     address: '0xc18360217d8f7ab5e7c516566761ea12ce7f9d72',
@@ -33,14 +33,6 @@ export const tokens: ERC20Token[] = [
     label: 'ENS',
     decimals: 18,
     logo: 'https://etherscan.io/token/images/ens2_32.png'
-  },
-  {
-    address: '0x5a98fcbea516cf06857215779fd812ca3bef1b32',
-    chainId: ChainId.ETH,
-    symbol: 'LDO',
-    label: 'Lido DAO Token',
-    logo: 'https://etherscan.io/token/images/lido-dao_32.png',
-    decimals: 18
   },
   {
     address: '0x23b608675a2b2fb1890d3abbd85c5775c51691d5',
@@ -73,5 +65,13 @@ export const tokens: ERC20Token[] = [
     label: 'Bankless DAO',
     decimals: 18,
     logo: 'https://etherscan.io/token/images/banklesstoken_32.png'
-  }
+  },
+  {
+    address: '0x383518188C0C6d7730D91b2c03a03C837814a899',
+    chainId: ChainId.ETH,
+    symbol: 'OHM',
+    label: 'OHM V1',
+    logo: 'https://etherscan.io/token/images/olympusdao2_32.png',
+    decimals: 9
+  },
 ]
