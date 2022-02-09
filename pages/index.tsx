@@ -26,9 +26,33 @@ const Index = () => {
   const [isLoading, setLoading] = useState(false)
   const [event, setEvent] = useState<EventInfo>()
 
+  const createHeader = (): string => {
+    let strings: string[] = []
+
+    const nfts = new Set(
+      filters
+        .filter((f) => f.type === 'nft')
+        .map((s) => {
+          return s.symbol
+        })
+    )
+    const tokens = new Set(filters.filter((f) => f.type === 'erc20').map((s) => s.symbol))
+
+    if (nfts.size > 0) strings.push(`${Array.from(nfts).join(', ')} holders`)
+
+    if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
+
+    return event && event.label !== 'No event - total amount of users'
+      ? `Total amount of ${event.label} by ${strings.join(', ')}`
+      : strings.join(', ')
+  }
+
+  const [header, setHeader] = useState('')
+
   const fetchAllData = () => {
     setLoading(true)
 
+    setHeader(createHeader())
     const res = event?.value ? fetchEvent(filters, event) : fetchChart(filters)
 
     res
@@ -53,32 +77,21 @@ const Index = () => {
     fetchAllData()
   }, [event])
 
-  const createHeader = () => {
-    let strings: string[] = []
-
-    const nfts = new Set(
-      filters
-        .filter((f) => f.type === 'nft')
-        .map((s) => {
-          return s.symbol
-        })
-    )
-    const tokens = new Set(filters.filter((f) => f.type === 'erc20').map((s) => s.symbol))
-
-    if (nfts.size > 0) strings.push(`${Array.from(nfts).join(', ')} holders`)
-
-    if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
-
-    return event ? `Total amount of ${event.label} by ${strings.join(', ')}` : strings.join(', ')
-  }
-
-  const [header, setHeader] = useState('')
-
   return (
     <>
       <header className={styles.header}>
-        <h1 className={styles.heading}>Hashscan</h1>
-        <h2 className={styles.subheading}>web3 user analytics</h2>
+        <div className={styles.column}>
+          <h1 className={styles.heading}>Hashscan</h1>
+          <h2 className={styles.subheading}>web3 user analytics</h2>
+        </div>
+        <a
+          className={styles.signUpLink}
+          href="https://vey568uwvva.typeform.com/to/S5EG2s8Y"
+          target="_blank"
+          rel="noopener noreferer"
+        >
+          Sign Up
+        </a>
       </header>
       {/* {JSON.stringify(filters, null, 2)} */}
       <main className={`${styles.column} ${styles.main}`}>
@@ -100,7 +113,6 @@ const Index = () => {
             <button
               className={indexStyles.queryButton}
               onClick={() => {
-                setHeader(createHeader())
                 fetchAllData()
               }}
             >
@@ -115,7 +127,6 @@ const Index = () => {
             isOptionDisabled={(option) => option.value === false}
             isClearable
             onChange={(event: EventInfo) => {
-              setHeader(createHeader())
               setEvent(event)
             }}
             placeholder="Select event (optional)"

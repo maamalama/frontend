@@ -14,11 +14,15 @@
 }
 
 .header {
-  padding: 14px;
+  padding-bottom: 12px;
   padding-top: 12px;
   padding-left: 30px;
+  padding-right: 30px;
   background-color: #1a1a1a;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list {
@@ -61,4 +65,13 @@
 .main {
   width: 600px;
   margin: 0 auto;
+}
+
+.signUpLink {
+  text-underline-offset: 5px;
+  color: white;
+}
+
+.signUpLink:hover {
+  color: rgb(230, 223, 223);
 }
