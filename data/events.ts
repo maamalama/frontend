@@ -15,6 +15,20 @@ export const events: EventInfo[] = [
     logo: '/user.svg'
   },
   {
+    label: 'OpenSea trades',
+    logo: 'https://etherscan.io/token/images/opensea_32.png',
+    caption: 'Trades on OpenSea',
+    chainId: ChainId.ETH,
+    value: 'opensea_trade_ethereum'
+  },
+  {
+    label: 'LooksRare trades',
+    logo: 'https://etherscan.io/token/images/looksrare_32.png',
+    caption: 'Trades on LooksRare',
+    chainId: ChainId.ETH,
+    value: 'looksrare_trade_ethereum'
+  },
+  {
     label: 'AAVE v2 deposits',
     logo: 'https://etherscan.io/token/images/aave_32.png',
     caption: 'Deposits on AAVE (Mainnet)',
@@ -27,19 +41,5 @@ export const events: EventInfo[] = [
     caption: 'Deposits on AAVE (Polygon)',
     chainId: ChainId.MATIC,
     value: 'aave_deposit_polygon'
-  },
-  {
-    label: 'LooksRare trades',
-    logo: 'https://etherscan.io/token/images/looksrare_32.png',
-    caption: 'Trades on LooksRare',
-    chainId: ChainId.ETH,
-    value: 'looksrare_trade_ethereum'
-  },
-  {
-    label: 'OpenSea trades',
-    logo: 'https://etherscan.io/token/images/opensea_32.png',
-    caption: 'Trades on OpenSea',
-    chainId: ChainId.ETH,
-    value: false
   }
 ]
