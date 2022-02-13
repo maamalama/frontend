@@ -30,7 +30,7 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
     <FilterUI
       value={collection}
       options={collections}
-      containerStyles={{ maxWidth: '350px' }}
+      containerStyles={{ maxWidth: '330px' }}
       onChange={(v) => {
         setCollection(v)
       }}
@@ -42,7 +42,6 @@ export const HoldsNFT = ({ filter }: { filter: Filter }) => {
             value={amount}
             minLength={1}
             onChange={(e) => setAmount(e.currentTarget.value)}
-            style={{ width: '6rem' }}
             className={styles.input}
           />
           <div>NFTs</div>

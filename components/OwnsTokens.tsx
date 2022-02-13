@@ -33,7 +33,7 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
       onChange={(v) => {
         setErc20Token(v)
       }}
-      containerStyles={{ maxWidth: '350px' }}
+      containerStyles={{ maxWidth: '330px' }}
       filterId={filter.id}
       actionText="own"
       childrenAfter={
@@ -44,7 +44,6 @@ export const OwnsCrypto = ({ filter }: { filter: Filter }) => {
             minLength={1}
             min={0}
             onChange={(e) => setAmount(e.currentTarget.value)}
-            style={{ width: '6rem' }}
             className={styles.input}
           />
           {erc20Token.symbol}

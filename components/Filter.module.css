@@ -10,6 +10,7 @@
 .input {
   border: var(--border);
   transition: 100ms;
+  width: 4rem;
 }
 
 .input:hover {

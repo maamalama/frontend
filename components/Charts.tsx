@@ -5,7 +5,7 @@ import styles from './Chart.module.css'
 import { ProgressBar } from './ProgressBar'
 
 const chartOptions: DeepPartial<ChartOptions> = {
-  width: 552,
+  width: 486,
   height: 370,
   layout: {
     background: { color: 'transparent' },
