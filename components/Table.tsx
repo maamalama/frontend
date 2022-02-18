@@ -15,8 +15,7 @@ export const Table = ({ data, error, isLoading }: TableProps) => {
     (): Column<TableData[0]>[] => [
       {
         Header: 'Token',
-        accessor: (row) => row.token.address, // accessor is the "key" in the data,
-        Cell: ({ value }) => <span style={{ fontFamily: 'monospace' }}>{value}</span>
+        accessor: (row) => row.token.address // accessor is the "key" in the data,
       },
 
       {
@@ -48,7 +47,10 @@ export const Table = ({ data, error, isLoading }: TableProps) => {
 
   return (
     // apply the table props
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{ border: isLoading || (!data && !error && !isLoading) ? 'var(--border)' : 'none' }}
+    >
       {isLoading && (
         <div className={styles.loader}>
           <ProgressBar color="black" />
