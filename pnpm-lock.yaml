@@ -1,20 +1,24 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@ethersproject/address': ^5.5.0
   '@ethersproject/units': ^5.5.0
   '@types/node': ^17.0.14
   '@types/react': ^17.0.38
+  '@types/react-table': ^7.7.9
   lightweight-charts: ^3.7.0
   next: ^12.0.10
   react: ^17.0.2
   react-dom: ^17.0.2
   react-external-link: ^1.2.2
   react-select: ^5.2.2
+  react-table: ^7.7.0
   typescript: ^4.5.5
   typescript-plugin-css-modules: ^3.4.0
   zustand: ^3.6.9
 
 dependencies:
+  '@ethersproject/address': 5.5.0
   '@ethersproject/units': 5.5.0
   lightweight-charts: 3.7.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
@@ -22,11 +26,13 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-external-link: 1.2.2_react-dom@17.0.2+react@17.0.2
   react-select: 5.2.2_b3482aaf5744fc7c2aeb7941b0e0a78f
+  react-table: 7.7.0_react@17.0.2
   zustand: 3.6.9_react@17.0.2
 
 devDependencies:
   '@types/node': 17.0.14
   '@types/react': 17.0.38
+  '@types/react-table': 7.7.9
   typescript: 4.5.5
   typescript-plugin-css-modules: 3.4.0_typescript@4.5.5
 
@@ -106,6 +112,16 @@ packages:
     resolution: {integrity: sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==}
     dev: false
 
+  /@ethersproject/address/5.5.0:
+    resolution: {integrity: sha512-l4Nj0eWlTUh6ro5IbPTgbpT4wRbdH5l8CQf7icF7sb/SI3Nhd9Y9HzhonTSTi6CefI0necIw7LJqQPopPLZyWw==}
+    dependencies:
+      '@ethersproject/bignumber': 5.5.0
+      '@ethersproject/bytes': 5.5.0
+      '@ethersproject/keccak256': 5.5.0
+      '@ethersproject/logger': 5.5.0
+      '@ethersproject/rlp': 5.5.0
+    dev: false
+
   /@ethersproject/bignumber/5.5.0:
     resolution: {integrity: sha512-6Xytlwvy6Rn3U3gKEc1vP7nR92frHkv6wtVr95LFR3jREXiCPzdWxKQ1cx4JGQBXxcguAwjA8murlYN2TSiEbg==}
     dependencies:
@@ -126,8 +142,22 @@ packages:
       '@ethersproject/bignumber': 5.5.0
     dev: false
 
+  /@ethersproject/keccak256/5.5.0:
+    resolution: {integrity: sha512-5VoFCTjo2rYbBe1l2f4mccaRFN/4VQEYFwwn04aJV2h7qf4ZvI2wFxUE1XOX+snbwCLRzIeikOqtAoPwMza9kg==}
+    dependencies:
+      '@ethersproject/bytes': 5.5.0
+      js-sha3: 0.8.0
+    dev: false
+
   /@ethersproject/logger/5.5.0:
     resolution: {integrity: sha512-rIY/6WPm7T8n3qS2vuHTUBPdXHl+rGxWxW5okDfo9J4Z0+gRRZT0msvUdIJkE4/HS29GUMziwGaaKO2bWONBrg==}
+    dev: false
+
+  /@ethersproject/rlp/5.5.0:
+    resolution: {integrity: sha512-hLv8XaQ8PTI9g2RHoQGf/WSxBfTB/NudRacbzdxmst5VHAqd1sMibWG7SENzT5Dj3yZ3kJYx+WiRYEcQTAkcYA==}
+    dependencies:
+      '@ethersproject/bytes': 5.5.0
+      '@ethersproject/logger': 5.5.0
     dev: false
 
   /@ethersproject/units/5.5.0:
@@ -251,6 +281,12 @@ packages:
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+
+  /@types/react-table/7.7.9:
+    resolution: {integrity: sha512-ejP/J20Zlj9VmuLh73YgYkW2xOSFTW39G43rPH93M4mYWdMmqv66lCCr+axZpkdtlNLGjvMG2CwzT4S6abaeGQ==}
+    dependencies:
+      '@types/react': 17.0.38
+    dev: true
 
   /@types/react-transition-group/4.4.4:
     resolution: {integrity: sha512-7gAPz7anVK5xzbeQW9wFBDg7G++aPLAFY0QaSMOou9rJZpbuI58WAuJrgu+qR92l61grlnCUe7AFX8KGahAgug==}
@@ -590,6 +626,10 @@ packages:
     resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==}
     dev: true
 
+  /js-sha3/0.8.0:
+    resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: false
@@ -918,6 +958,14 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/react'
+    dev: false
+
+  /react-table/7.7.0_react@17.0.2:
+    resolution: {integrity: sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA==}
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /react-transition-group/4.4.2_react-dom@17.0.2+react@17.0.2:

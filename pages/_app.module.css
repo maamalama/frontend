@@ -1,0 +1,44 @@
+.nav {
+  padding-bottom: 12px;
+  padding-top: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #1a1a1a;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav > a {
+  color: white;
+  text-underline-offset: 5px;
+}
+
+.nav > a:hover {
+  color: rgb(230, 223, 223);
+}
+
+.heading {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  font-weight: 600;
+}
+.subheading {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.562);
+  font-weight: 400;
+  margin: 0;
+  margin-top: 2px;
+}
+
+.footer {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.footer a {
+  color: #57578d;
+}

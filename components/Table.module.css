@@ -1,0 +1,26 @@
+.table,
+.th,
+.td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+.table {
+  width: 100%;
+}
+
+.container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  background: white;
+  box-shadow: rgba(55, 53, 47, 0.15) 0px 0px 0px 1px;
+  height: 470px;
+  overflow-y: scroll;
+}
+
+.td,
+.th {
+  padding: 8px;
+  color: var(--fg);
+}

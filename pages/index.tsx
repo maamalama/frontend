@@ -15,6 +15,7 @@ import { useLazyEffect } from '../hooks/useLazyEffect'
 import { fetchEvent } from '../lib/fetchEvent'
 import { ChartData } from '../lib/types'
 import { ExternalLink } from 'react-external-link'
+import { createHeader } from '../lib/createHeader'
 
 const Chart = dynamic(() => import('../components/Charts'), { ssr: false })
 
@@ -27,33 +28,12 @@ const Index = () => {
   const [isLoading, setLoading] = useState(false)
   const [event, setEvent] = useState<EventInfo>()
 
-  const createHeader = (): string => {
-    let strings: string[] = []
-
-    const nfts = new Set(
-      filters
-        .filter((f) => f.type === 'nft')
-        .map((s) => {
-          return s.symbol
-        })
-    )
-    const tokens = new Set(filters.filter((f) => f.type === 'erc20').map((s) => s.symbol))
-
-    if (nfts.size > 0) strings.push(`${Array.from(nfts).join(', ')} holders`)
-
-    if (tokens.size > 0) strings.push(`${Array.from(tokens).join(', ')} owners`)
-
-    return event && event.label !== 'No event - total amount of users'
-      ? `Total amount of ${event.label} by ${strings.join(', ')}`
-      : strings.join(', ')
-  }
-
   const [header, setHeader] = useState('')
 
   const fetchAllData = () => {
     setLoading(true)
 
-    setHeader(createHeader())
+    setHeader(createHeader(filters, event))
     const res = event?.value ? fetchEvent(filters, event) : fetchChart(filters)
 
     res
@@ -79,65 +59,49 @@ const Index = () => {
   }, [event])
 
   return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.column}>
-          <h1 className={styles.heading}>Hashscan</h1>
-          <h2 className={styles.subheading}>web3 user analytics</h2>
+    <main className={`${styles.column} ${indexStyles.main}`}>
+      <div className={styles.column} style={{ gap: '10px', marginBottom: '45px' }}>
+        <h3 className={styles.h3}>Filter users</h3>
+        <div className={styles.list}>
+          {filters.map((filter) => {
+            switch (filter.type) {
+              case 'erc20':
+                return <OwnsCrypto filter={filter} />
+              case 'nft':
+                return <HoldsNFT filter={filter} />
+            }
+          })}
         </div>
-        <ExternalLink className={styles.signUpLink} href="https://vey568uwvva.typeform.com/to/S5EG2s8Y">
-          Subscribe for updates
-        </ExternalLink>
-      </header>
-      {/* {JSON.stringify(filters, null, 2)} */}
-      <main className={`${styles.column} ${styles.main}`}>
-        <div className={styles.column} style={{ gap: '10px', marginBottom: '45px' }}>
-          <h3 className={styles.h3}>Filter users</h3>
-          <div className={styles.list}>
-            {filters.map((filter) => {
-              switch (filter.type) {
-                case 'erc20':
-                  return <OwnsCrypto filter={filter} />
-                case 'nft':
-                  return <HoldsNFT filter={filter} />
-              }
-            })}
-          </div>
 
-          <div className={styles.row} style={{ justifyContent: 'space-between' }}>
-            <AddFilter />{' '}
-            <button
-              className={indexStyles.queryButton}
-              onClick={() => {
-                fetchAllData()
-              }}
-            >
-              Query
-            </button>
-          </div>
-        </div>
-        <div className={styles.column} style={{ gap: '10px', marginBottom: '30px' }}>
-          <h3 className={styles.h3}>Events</h3>
-          <Select
-            controlStyles={{ padding: '4px 0' }}
-            isOptionDisabled={(option) => option.value === false}
-            isClearable
-            onChange={(event: EventInfo) => {
-              setEvent(event)
+        <div className={styles.row} style={{ justifyContent: 'space-between' }}>
+          <AddFilter />
+          <button
+            className={indexStyles.queryButton}
+            onClick={() => {
+              fetchAllData()
             }}
-            placeholder="Select event (optional)"
-            options={events}
-            components={{ SingleValue: CurrentValue, Option: SelectOption }}
-          />
+          >
+            Query
+          </button>
         </div>
+      </div>
+      <div className={styles.column} style={{ gap: '10px', marginBottom: '30px' }}>
+        <h3 className={styles.h3}>Events</h3>
+        <Select
+          controlStyles={{ padding: '4px 0' }}
+          isOptionDisabled={(option) => option.value === false}
+          isClearable
+          onChange={(event: EventInfo) => {
+            setEvent(event)
+          }}
+          placeholder="Select event (optional)"
+          options={events}
+          components={{ SingleValue: CurrentValue, Option: SelectOption }}
+        />
+      </div>
 
-        <Chart header={header} isLoading={isLoading} entries={chartData} error={error} />
-        <footer className={styles.footer}>
-          We're open for partnerships, find us on{' '}
-          <ExternalLink href="https://twitter.com/jackqack">Twitter</ExternalLink>
-        </footer>
-      </main>
-    </>
+      <Chart header={header} isLoading={isLoading} entries={chartData} error={error} />
+    </main>
   )
 }
 

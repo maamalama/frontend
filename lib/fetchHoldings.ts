@@ -2,7 +2,7 @@ import { parseUnits } from '@ethersproject/units'
 import { BASE_URL } from '../data/constants'
 import { Filter } from '../hooks/useFilters'
 
-export const fetchChart = (filters: Filter[]) => {
+export const fetchHoldings = (filters: Filter[]) => {
   const amounts = filters
     .map((x) => (x.type == 'erc20' ? parseUnits(x.amount, x.decimals).toString() : x.amount))
     .join(',')
@@ -10,5 +10,5 @@ export const fetchChart = (filters: Filter[]) => {
   const addresses = filters.map((x) => x.address).join(',')
   const networks = filters.map((x) => x.chainId).join(',')
 
-  return fetch(`${BASE_URL}/users?tokens=${addresses}&amounts=${amounts}&days=90&networks=${networks}`)
+  return fetch(`${BASE_URL}/holdings?tokens=${addresses}&amounts=${amounts}&days=90&networks=${networks}`)
 }

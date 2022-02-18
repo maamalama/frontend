@@ -1,8 +1,7 @@
 import { parseUnits } from '@ethersproject/units'
+import { BASE_URL } from '../data/constants'
 import { EventInfo } from '../data/events'
 import { Filter } from '../hooks/useFilters'
-
-const BASE_URL = 'https://awake-api.vercel.app/api'
 
 export const fetchEvent = (filters: Filter[], event: EventInfo) => {
   const amounts = filters

@@ -11,3 +11,9 @@ export type Option = {
 }
 
 export type ChartData = { value: number; time: string }[]
+
+export type TableData = {
+  token: { network: ChainId; address: string }
+  holders: number
+  share: number
+}[]
