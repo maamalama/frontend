@@ -23,6 +23,7 @@
 .th {
   padding: 8px;
   color: var(--fg);
+  font-size: 12px;
 }
 
 .emptyText,
