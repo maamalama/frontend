@@ -24,3 +24,13 @@
   padding: 8px;
   color: var(--fg);
 }
+
+.emptyText {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #57606a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

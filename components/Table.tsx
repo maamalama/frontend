@@ -50,13 +50,13 @@ export const Table = ({ data, error, isLoading }: TableProps) => {
 
   return (
     // apply the table props
-    <div className={styles.container} style={{ alignItems: isLoading ? 'center' : 'flex-start' }}>
+    <div className={styles.container}>
       {isLoading && (
         <div className={chartStyles.loader}>
           <ProgressBar color="black" />
         </div>
       )}
-      {!data && !error && !isLoading && <div>Compose filters to query user holdings</div>}
+      {!data && !error && !isLoading && <div className={styles.emptyText}>Compose filters to query user holdings</div>}
       {!isLoading && error && <div>Failed to load chart</div>}
       {!isLoading && data?.length > 1 && (
         <table className={styles.table} {...getTableProps()}>
