@@ -25,7 +25,8 @@
   color: var(--fg);
 }
 
-.emptyText {
+.emptyText,
+.loader {
   font-size: 14px;
   line-height: 1.2;
   color: #57606a;

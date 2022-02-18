@@ -2,8 +2,6 @@ import { useMemo } from 'react'
 import { Column, useTable } from 'react-table'
 import { TableData } from '../lib/types'
 import { ProgressBar } from './ProgressBar'
-import chartStyles from './Chart.module.css'
-import { shortenAddress } from '../lib/shortenAddress'
 import styles from './Table.module.css'
 
 interface TableProps {
@@ -52,7 +50,7 @@ export const Table = ({ data, error, isLoading }: TableProps) => {
     // apply the table props
     <div className={styles.container}>
       {isLoading && (
-        <div className={chartStyles.loader}>
+        <div className={styles.loader}>
           <ProgressBar color="black" />
         </div>
       )}
