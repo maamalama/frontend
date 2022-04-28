@@ -41,8 +41,9 @@ export const AddFilter = () => {
         <div style={{ fontSize: '0.8rem', color: 'gray', fontWeight: 'bold', paddingLeft: '16px', paddingTop: '12px' }}>
           Filters
         </div>
-        {options.map((option) => (
+        {options.map((option, idx) => (
           <button
+            key={idx}
             role="listitem"
             className={styles.filterButton}
             style={{ cursor: option.value === false ? 'not-allowed' : 'pointer' }}

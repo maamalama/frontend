@@ -46,9 +46,9 @@ const Holdings = () => {
           {filters.map((filter) => {
             switch (filter.type) {
               case 'erc20':
-                return <OwnsCrypto filter={filter} />
+                return <OwnsCrypto key={filter.id} filter={filter} />
               case 'nft':
-                return <HoldsNFT filter={filter} />
+                return <HoldsNFT key={filter.id} filter={filter} />
             }
           })}
         </div>
