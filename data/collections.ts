@@ -31,7 +31,7 @@ export const collections: Collection[] = [
     chainId: ChainId.ETH
   },
   {
-    address: '0x7Bd29408f11D2bFC23c34f18275bBf23bB716Bc7',
+    address: '0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7',
     label: 'Meebits',
     symbol: '⚇',
     chainId: ChainId.ETH,
@@ -74,7 +74,7 @@ export const collections: Collection[] = [
     chainId: ChainId.ETH
   },
   {
-    address: '0x1A92f7381B9F03921564a437210bB9396471050C',
+    address: '0x1a92f7381b9f03921564a437210bb9396471050c',
     label: 'Cool Cats',
     symbol: 'COOL',
     logo: 'https://etherscan.io/token/images/coolcatsnft_32.png',
