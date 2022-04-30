@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AddFilter } from '../components/AddFilter'
 import { HoldsNFT } from '../components/HoldsNFT'
 import { OwnsCrypto } from '../components/OwnsTokens'
@@ -8,6 +8,7 @@ import styles from '../shared.module.css'
 import indexStyles from './index.module.css'
 import { Table } from '../components/Table'
 import { TableData } from '../lib/types'
+import { Column } from 'react-table'
 
 const Holdings = () => {
   const filters = useFilters((state) => state.filters)
@@ -38,34 +39,46 @@ const Holdings = () => {
       })
   }
 
+  const columns = useMemo(
+    (): Column<TableData[0]>[] => [{
+      Header: 'Token',
+      accessor: (row) => row.token.address // accessor is the "key" in the data,
+    }, {
+      Header: 'Holders',
+      accessor: 'holders'
+    }, {
+      Header: 'Share',
+      accessor: 'share',
+      Cell: ({ value }) => `${value.toFixed(2)}%`
+    }],
+    []
+  )
+
   return (
     <main className={`${styles.column} ${indexStyles.main}`}>
       <div className={styles.column} style={{ gap: '10px', marginBottom: '45px' }}>
-        <h3 className={styles.h3}>Filter users</h3>
-        <div className={styles.list}>
+        <h3 className={indexStyles.h3}>Filter users</h3>
+        <div className={indexStyles.list}>
           {filters.map((filter) => {
             switch (filter.type) {
               case 'erc20':
-                return <OwnsCrypto key={filter.id} filter={filter} />
+                return <OwnsCrypto key={filter.id} filter={filter}/>
               case 'nft':
-                return <HoldsNFT key={filter.id} filter={filter} />
+                return <HoldsNFT key={filter.id} filter={filter}/>
             }
           })}
         </div>
 
         <div className={styles.row} style={{ justifyContent: 'space-between' }}>
-          <AddFilter />
-          <button
-            className={indexStyles.queryButton}
-            onClick={() => {
-              fetchAllData()
-            }}
-          >
+          <AddFilter/>
+          <button className={indexStyles.queryButton} onClick={() => {
+            fetchAllData()
+          }}>
             Query
           </button>
         </div>
       </div>
-      <Table {...{ error, isLoading, data }} />
+      <Table {...{ error, isLoading, data, columns }} />
     </main>
   )
 }

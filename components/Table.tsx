@@ -8,31 +8,10 @@ interface TableProps {
   error?: unknown
   isLoading: boolean
   data: TableData
+  columns: Column<TableData[0]>[]
 }
 
-export const Table = ({ data, error, isLoading }: TableProps) => {
-  const columns = useMemo(
-    (): Column<TableData[0]>[] => [
-      {
-        Header: 'Token',
-        accessor: (row) => row.token.address // accessor is the "key" in the data,
-      },
-
-      {
-        Header: 'Holders',
-
-        accessor: 'holders'
-      },
-      {
-        Header: 'Share',
-        accessor: 'share',
-        Cell: ({ value }) => `${value.toFixed(2)}%`
-      }
-    ],
-
-    []
-  )
-
+export const Table = ({ data, error, isLoading, columns }: TableProps) => {
   const {
     getTableProps,
 

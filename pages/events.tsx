@@ -21,7 +21,7 @@ const Chart = dynamic(() => import('../components/Charts'), { ssr: false })
 
 const styles = { ...indexStyles, ...shared }
 
-const Index = () => {
+const Events = () => {
   const filters = useFilters((state) => state.filters)
   const [chartData, setChartData] = useState<ChartData>()
   const [error, setError] = useState<string>()
@@ -66,9 +66,9 @@ const Index = () => {
           {filters.map((filter) => {
             switch (filter.type) {
               case 'erc20':
-                return <OwnsCrypto filter={filter} />
+                return <OwnsCrypto key={filter.id} filter={filter} />
               case 'nft':
-                return <HoldsNFT filter={filter} />
+                return <HoldsNFT key={filter.id} filter={filter} />
             }
           })}
         </div>
@@ -105,4 +105,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Events

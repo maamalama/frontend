@@ -35,6 +35,11 @@
   font-size: 18px;
 }
 
+.h4 {
+  color: var(--fg);
+  margin-bottom: 0;
+}
+
 .main {
   width: 524px;
   margin: 0 auto;

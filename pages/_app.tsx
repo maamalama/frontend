@@ -21,8 +21,9 @@ const App = ({ pageProps, Component }: AppProps) => (
           </div>
         </a>
       </Link>
-      <Link href="/">Users & events</Link>
+      <Link href="/events">Users & events</Link>
       <Link href="/holdings">Holdings</Link>
+      <Link href="/nft">NFT analytics</Link>
       <ExternalLink className={styles.signUpLink} href="https://vey568uwvva.typeform.com/to/S5EG2s8Y">
         Subscribe for updates
       </ExternalLink>

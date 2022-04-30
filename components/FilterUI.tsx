@@ -35,6 +35,8 @@ export const FilterUI = ({
       </span>{' '}
       {children}
       <Select
+        id='filter-ui'
+        instanceId='filter-ui'
         // menuIsOpen={true}
         // formatCreateLabel={(option) => <span>Create {option}</span>}
         styles={{ container: (styles) => ({ ...styles, ...containerStyles, width: '100%' }) }}
