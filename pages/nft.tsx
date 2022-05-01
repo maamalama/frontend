@@ -51,7 +51,7 @@ const NftAnalyticsPage = () => {
   const holdingsColumns = useMemo(
     (): Column<NftToErc20Holding>[] => [{
       Header: 'Token',
-      accessor: (row) => row.token.address // accessor is the "key" in the data,
+      accessor: (row) => row.token.name // accessor is the "key" in the data,
     }, {
       Header: 'Holders',
       accessor: 'holders'
@@ -70,6 +70,9 @@ const NftAnalyticsPage = () => {
     }, {
       Header: 'Amount',
       accessor: 'amount'
+    }, {
+      Header: 'Net worth',
+      accessor: (row) => `$${Math.trunc(row.total_balance_usd).toLocaleString()}`
     }],
     []
   )
