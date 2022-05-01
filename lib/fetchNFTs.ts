@@ -54,6 +54,10 @@ export type NftToErc20Holding = {
   token: {
     network: ChainId
     address: string
+    name: string
+    symbol: string
+    decimals: number
+    logo: string
   }
   holders: number
   share: number
@@ -68,6 +72,7 @@ export const fetchNftHoldings = (token: string) => {
 export type NftHolder = {
   address: string
   amount: number
+  total_balance_usd: number
 }
 
 export const fetchNftHolders = (token: string) => {

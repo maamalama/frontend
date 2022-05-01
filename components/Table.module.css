@@ -3,9 +3,9 @@
   border: var(--border);
   font-family: monospace;
   border-collapse: collapse;
-  padding: 8px;
+  padding: 10px 12px;
   color: var(--fg);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .table {
