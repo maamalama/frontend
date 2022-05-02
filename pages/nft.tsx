@@ -63,7 +63,7 @@ const NftAnalyticsPage = () => {
       accessor: 'amount'
     }, {
       Header: 'Net worth',
-      accessor: (row) => prettyNetWorth(row.total_balance_usd)
+      accessor: (row) => prettyNetWorth(row.total_balance_usd) || '—'
     }],
     []
   )
@@ -89,14 +89,14 @@ const NftAnalyticsPage = () => {
 
               <div className={css.plate}>
                 <div className={css.box}>
-                  {data.stats.avgNetWorthInUsd} $
+                  {prettyNetWorth(data.stats.avgNetWorthInUsd) || formatBigNum(data.stats.avgNetWorthInUsd)} $
                 </div>
                 avg net worth
               </div>
 
               <div className={css.plate}>
                 <div className={css.box}>
-                  {data.stats.medianPortfolioValueInUsd} $
+                  {Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()} $
                 </div>
                 median portfolio value
               </div>
@@ -127,8 +127,14 @@ function prettyNetWorth(amountInUsd: number): string {
   if (digits <= 6) return f([amountInUsd / 1000, 'k']) // 159'000 -> $159k
   if (digits <= 9) return f([amountInUsd / 1_000_000, 'b'])
   if (digits <= 12) return f([amountInUsd / 1_000_000_000, 'tn'])
-  return '—'
+  return `$${formatBigNum(amountInUsd)}`
 }
 
+function formatBigNum(amountInUsd: number): string {
+  console.log(amountInUsd)
+  let subs = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }
+  let uppers = `${Math.log10(amountInUsd) | 0}`.split('').map(ch => subs[ch] ?? ch).join('')
+  return `10${uppers}`
+}
 
 export default NftAnalyticsPage
