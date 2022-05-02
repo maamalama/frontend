@@ -3,6 +3,14 @@
   margin-right: 10px;
 }
 
+.collectionEmptyIcon {
+  border-radius: 999px;
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  background: lightgray;
+}
+
 .chainIdIcon {
   position: absolute;
   border-radius: 999px;

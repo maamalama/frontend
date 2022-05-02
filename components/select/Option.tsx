@@ -13,7 +13,7 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
     <OptionComponent {...props}>
       <span className={`${sharedStyles.row}`}>
         <span className={`${styles.collectionContainer}`}>
-          {props.data.logo && (
+          {props.data.logo ? (
             <img
               className={styles.collectionIcon}
               src={props.data.logo}
@@ -22,7 +22,7 @@ export function SelectOption<T extends Option>(props: OptionProps<T>) {
               alt={props.data.symbol}
               style={props.isDisabled ? { filter: 'grayscale(1)' } : {}}
             />
-          )}
+          ) : <div className={styles.collectionEmptyIcon} /> }
           {props.data.chainId && (
             <img
               height={14}
