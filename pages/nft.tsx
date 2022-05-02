@@ -53,7 +53,7 @@ const NftAnalyticsPage = () => {
 
   const holdersColumns = useMemo(
     (): Column<NftHolder>[] => [{
-      Header: 'Token',
+      Header: 'Address',
       accessor: (row) => row.address, // accessor is the "key" in the data,
       Cell: ({ value }) => (
         <a href={`https://etherscan.io/address/${value}`} className={css.inTableLink}>{value}</a>
