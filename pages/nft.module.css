@@ -55,6 +55,7 @@
 
 .inTableLink {
   color: initial;
+  font-family: inherit;
   text-decoration: none;
 }
 
