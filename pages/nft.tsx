@@ -72,7 +72,7 @@ const NftAnalyticsPage = () => {
       accessor: 'amount'
     }, {
       Header: 'Net worth',
-      accessor: (row) => `$${Math.trunc(row.total_balance_usd).toLocaleString()}`
+      accessor: (row) => prettyNetWorth(row.total_balance_usd)
     }],
     []
   )
@@ -126,5 +126,18 @@ const NftAnalyticsPage = () => {
     </main>
   )
 }
+
+function prettyNetWorth(amountInUsd: number): string {
+  let digits = Math.log10(amountInUsd)
+
+  let f = ([num, suffix]: [number, string]) => `$${Math.trunc(num).toLocaleString()}${suffix}`
+
+  if (digits <= 4) return f([amountInUsd, '']) // 9999 -> $9999
+  if (digits <= 6) return f([amountInUsd / 1000, 'k']) // 159'000 -> $159k
+  if (digits <= 9) return f([amountInUsd / 1_000_000, 'b'])
+  if (digits <= 12) return f([amountInUsd / 1_000_000_000, 'tn'])
+  return '—'
+}
+
 
 export default NftAnalyticsPage
