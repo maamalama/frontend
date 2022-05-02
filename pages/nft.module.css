@@ -52,3 +52,12 @@
   background-size: contain;
   background-position: center;
 }
+
+.inTableLink {
+  color: initial;
+  text-decoration: none;
+}
+
+.inTableLink:hover {
+  text-decoration: underline;
+}

@@ -8,6 +8,7 @@ import { Collection } from '../data/collections'
 import { Column } from 'react-table'
 import { Table } from '../components/Table'
 import { TableData } from '../lib/types'
+import { ExternalLink } from 'react-external-link'
 
 const NftAnalyticsPage = () => {
   const [data, setData] = useState<{ stats: any, holders: any, holdings: any }>()
@@ -55,7 +56,7 @@ const NftAnalyticsPage = () => {
       Cell: ({ value }) => (
         <div className={css.holdingsTokenCell}>
           <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
-          {value.name}
+          <a href={`https://etherscan.io/token/${value.address}`} className={css.inTableLink}>{value.name}</a>
         </div>
       ),
     }, {
@@ -72,7 +73,10 @@ const NftAnalyticsPage = () => {
   const holdersColumns = useMemo(
     (): Column<NftHolder>[] => [{
       Header: 'Token',
-      accessor: (row) => row.address // accessor is the "key" in the data,
+      accessor: (row) => row.address, // accessor is the "key" in the data,
+      Cell: ({ value }) => (
+        <a href={`https://etherscan.io/address/${value}`} className={css.inTableLink}>{value}</a>
+      )
     }, {
       Header: 'Amount',
       accessor: 'amount'
