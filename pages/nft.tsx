@@ -3,7 +3,7 @@ import { CollectionOfNFT } from '../components/CollectionOfNFT'
 import css from './nft.module.css'
 import indexStyles from './index.module.css'
 import sharedStyles from '../shared.module.css'
-import { fetchNFTs, fetchNftStats, fetchNftHolders, fetchNftHoldings, NftToErc20Holding, NftHolder } from '../lib/fetchNFTs'
+import { fetchNFTs, NftToErc20Holding, NftHolder, fetchNftAnalytics } from '../lib/fetchNFTs'
 import { Collection } from '../data/collections'
 import { Column } from 'react-table'
 import { Table } from '../components/Table'
@@ -24,29 +24,10 @@ const NftAnalyticsPage = () => {
     setData(null)
     setLoading(true)
 
-    let queries = [
-      fetchNftStats(nftCollection),
-      fetchNftHolders(nftCollection),
-      fetchNftHoldings(nftCollection),
-    ] as const
-
-    const [stats, holders, holdings] =
-      await Promise
-        .all(
-          queries.map(query =>
-            query
-              .then((json) => {
-                setLoading(false)
-                if (json) {
-                  setError(undefined)
-                  return json
-                }
-              })
-              .catch((err) => {
-                setError(err.message)
-              })))
-
-    setData({ stats, holders, holdings })
+    fetchNftAnalytics(nftCollection)
+      .then(setData)
+      .catch(err => setError(err?.message))
+      .finally(() => setLoading(false))
   }
 
   const holdingsColumns = useMemo(
