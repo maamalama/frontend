@@ -44,8 +44,8 @@
 .container {
   padding: 16px;
   border-radius: var(--radius);
-  border: var(--border);
-  background-color: white;
+  /*border: var(--border);*/
+  /*background-color: white;*/
   position: relative;
   height: 36px;
   font-size: 14px;

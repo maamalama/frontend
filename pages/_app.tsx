@@ -9,10 +9,10 @@ import Link from 'next/link'
 const App = ({ pageProps, Component }: AppProps) => (
   <>
     <Head>
-      <link rel="icon" href="/logo_favicon.png" type="image/png" />
+      <link rel="icon" href="/logo_favicon.png" type="image/png"/>
       <title>Hashscan - web3 user analytics</title>
     </Head>
-    <nav className={styles.nav}>
+    <header className={styles.header}>
       <Link href="/">
         <a style={{ textDecoration: 'none' }}>
           <div className={shared.column}>
@@ -21,17 +21,28 @@ const App = ({ pageProps, Component }: AppProps) => (
           </div>
         </a>
       </Link>
-      <Link href="/events">Users & events</Link>
-      <Link href="/holdings">Holdings</Link>
-      <Link href="/nft">NFT analytics</Link>
       <ExternalLink className={styles.signUpLink} href="https://vey568uwvva.typeform.com/to/S5EG2s8Y">
         Subscribe for updates
       </ExternalLink>
+    </header>
+    <nav className={styles.nav}>
+      <div className={styles.nav_block}>
+        <h6 className={styles.nav_block__title}>QUICK ACCESS</h6>
+        <Link href="/events"><a className={styles.nav_block__item}>Users & events</a></Link>
+        <Link href="/holdings"><a className={styles.nav_block__item}>Holdings</a></Link>
+        <Link href="/nft"><a className={styles.nav_block__item}>NFT analytics</a></Link>
+      </div>
+      <div>{/* filler */}</div>
+      <footer className={styles.footer}>
+        <div>
+          We're open for partnerships,<br/>
+          find us on <ExternalLink href="https://twitter.com/jackqack">Twitter</ExternalLink>
+        </div>
+      </footer>
     </nav>
-    <Component {...pageProps} />
-    <footer className={styles.footer}>
-      We're open for partnerships, find us on <ExternalLink href="https://twitter.com/jackqack">Twitter</ExternalLink>
-    </footer>
+    <div className={styles.content}>
+      <Component {...pageProps} />
+    </div>
   </>
 )
 
