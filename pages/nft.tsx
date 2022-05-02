@@ -51,7 +51,13 @@ const NftAnalyticsPage = () => {
   const holdingsColumns = useMemo(
     (): Column<NftToErc20Holding>[] => [{
       Header: 'Token',
-      accessor: (row) => row.token.name // accessor is the "key" in the data,
+      accessor: (row) => row.token, // accessor is the "key" in the data,
+      Cell: ({ value }) => (
+        <div className={css.holdingsTokenCell}>
+          <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
+          {value.name}
+        </div>
+      ),
     }, {
       Header: 'Holders',
       accessor: 'holders'

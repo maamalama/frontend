@@ -36,3 +36,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.holdingsTokenCell {
+  position: relative;
+  padding-left: 26px;
+}
+
+.holdingsIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
