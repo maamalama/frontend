@@ -15,10 +15,12 @@ export const fetchNFTs = () => {
 }
 
 export const fetchNftAnalytics = async (token: string) => {
+  let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}`).then(res => res.json())
   let holdingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}`).then(res => res.json())
   let holdersReq = fetch(`${BASE_URL}/nft/holders?token=${token}`).then(res => res.json())
 
-  let [holdings, holders] = await Promise.all([holdingsReq, holdersReq]) as [NftToErc20Holding[], NftHolder[]]
+  let [nftHoldings, holdings, holders] =
+    await Promise.all([nftHoldingsReq, holdingsReq, holdersReq]) as [NftToErc20Holding[], NftToErc20Holding[], NftHolder[]]
   const balances = holders.map(h => h.total_balance_usd).sort((a, b) => a - b)
 
   let holdersTotal = holders.length
@@ -31,6 +33,7 @@ export const fetchNftAnalytics = async (token: string) => {
 
   return {
     holdings: holdings.slice(0, 20),
+    nftHoldings: nftHoldings.slice(0, 20),
     holders: holders.slice(0, 20),
     stats: { holdersTotal, avgNetWorthInUsd, medianPortfolioValueInUsd },
   }

@@ -83,3 +83,10 @@
 .inTableLink:hover {
   text-decoration: underline;
 }
+
+.splitTables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  grid-gap: 24px;
+}
