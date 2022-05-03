@@ -73,7 +73,7 @@ const NftAnalyticsPage = () => {
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
         <h3 className={indexStyles.h4}>Choose NFT collection</h3>
         <div className={`${indexStyles.list} ${css.container}`}>
-          <CollectionOfNFT nfts={nftList} onClick={col => fetchAllData(col.address)}/>
+          <CollectionOfNFT nfts={nftList} onClick={col => col && fetchAllData(col.address)}/>
         </div>
 
         {isLoading && <div className={css.container}><ProgressBar color="black" /></div>}
