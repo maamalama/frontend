@@ -71,44 +71,49 @@ const NftAnalyticsPage = () => {
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
-        <h3 className={indexStyles.h3}>Choose NFT collection</h3>
-        <div className={indexStyles.list}>
+        <h3 className={indexStyles.h4}>Choose NFT collection</h3>
+        <div className={`${indexStyles.list} ${css.container}`}>
           <CollectionOfNFT nfts={nftList} onClick={col => fetchAllData(col.address)}/>
         </div>
 
         {data && !isLoading && !error &&
           <div className={indexStyles.list}>
             <h4 className={indexStyles.h4}>Token Stats</h4>
-            <div className={css.row}>
+
+            <div className={css.platesArray}>
               <div className={css.plate}>
-                <div className={css.box}>
-                  {data.stats.holdersTotal}
-                </div>
-                total holders
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>total holders</div>
+                  <h3 className={css.plateValue}>{data.stats.holdersTotal}</h3>
+                </article>
               </div>
 
               <div className={css.plate}>
-                <div className={css.box}>
-                  {prettyNetWorth(data.stats.avgNetWorthInUsd) || formatBigNum(data.stats.avgNetWorthInUsd)} $
-                </div>
-                avg net worth
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>avg net worth</div>
+                  <h3 className={css.plateValue}>
+                    {prettyNetWorth(data.stats.avgNetWorthInUsd) || formatBigNum(data.stats.avgNetWorthInUsd)}
+                  </h3>
+                </article>
               </div>
 
               <div className={css.plate}>
-                <div className={css.box}>
-                  {Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()} $
-                </div>
-                median portfolio value
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>median portfolio value</div>
+                  <h3 className={css.plateValue}>
+                    ${Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()}
+                  </h3>
+                </article>
               </div>
             </div>
 
             <h4 className={indexStyles.h4}>Holders</h4>
-            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
+            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
               <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
             </div>
 
             <h4 className={indexStyles.h4}>Top Token Holdings</h4>
-            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
+            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
               <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />
             </div>
           </div>}

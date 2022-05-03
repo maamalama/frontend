@@ -29,7 +29,7 @@ button {
 
 #__next {
   display: grid;
-  grid-template-areas: "header header" "nav content";
+  grid-template-areas: "nav content";
   grid-template-columns: min-content auto;
   height: 100vh;
   overflow: hidden;

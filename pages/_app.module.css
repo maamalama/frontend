@@ -1,6 +1,5 @@
 .header {
-  grid-area: header;
-  padding: 8px 16px;
+  padding: 8px 24px;
   background-color: #1a1a1a;
   display: flex;
   justify-content: space-between;
@@ -13,17 +12,22 @@
 }
 
 .header > a:hover {
-  color: rgb(230, 223, 223);
+  color: darkgrey;
 }
 
 .nav {
   grid-area: nav;
   width: 236px;
-  border-right: 1px solid rgb(19, 55, 82);
-  height: calc(100vh - 2 * env(safe-area-inset-bottom) - 60px);
+  background: #1a1a1a;
+  color: white;
+  height: calc(100vh - 2 * env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: repeat(1, max-content) repeat(1, minmax(0px, min-content));
+}
+
+.nav a {
+  color: white;
 }
 
 .nav_block {
@@ -36,6 +40,7 @@
   font-size: 12px;
   line-height: 20px;
   font-weight: 600;
+  color: darkgrey;
 }
 
 .nav_block__item {
@@ -69,14 +74,15 @@
 
 .footer {
   font-size: 12px;
-  color: gray;
+  color: lightgray;
   margin-bottom: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .footer a {
-  color: #57578d;
+  color: #7ebeff;
   display: inline;
 }

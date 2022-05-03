@@ -28,20 +28,30 @@
   border-color: black;
 }
 
+.h1 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
 .h3 {
   color: var(--fg);
   font-weight: 500;
   margin: 0;
-  font-size: 18px;
 }
 
 .h4 {
   color: var(--fg);
-  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 0px;
+  padding: 0 16px;
 }
 
 .main {
   width: 100%;
   margin: 0 auto;
-  padding: 8px 48px;
+  padding: 18px 48px;
 }

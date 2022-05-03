@@ -1,11 +1,54 @@
 .container {
   padding: 16px;
-  border-radius: var(--radius);
+}
+
+.platesArray {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.plate {
+  padding: 16px;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.plateContent {
   border: var(--border);
-  background-color: white;
   position: relative;
-  /*height: 36px;*/
+  border-radius: 4px;
+  overflow: auto;
+  /*color: rgb(255, 255, 255);*/
+  padding: 24px;
+  height: 100%;
+  /*background: rgb(0, 26, 44) none repeat scroll 0% 0%;*/
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: max-height 100ms ease-in 0s;
+  max-height: 30000px;
+}
+
+.plateTitle {
+  width: 100%;
   font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.plateValue {
+  font-size: 24px;
+  line-height: 32px;
+  font-family: monospace;
+  margin: 0;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  text-align: center;
 }
 
 .row {
@@ -13,28 +56,6 @@
   flex: 1 1;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.plate {
-  font-size: 12px;
-  width: calc(32px * 5);
-  text-align: center;
-  font-variant: small-caps;
-}
-
-.box {
-  padding: 16px;
-  border-radius: var(--radius);
-  border: var(--border);
-  background-color: white;
-  position: relative;
-  height: 36px;
-  font-size: 18px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .holdingsTokenCell {
