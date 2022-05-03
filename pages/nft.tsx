@@ -8,7 +8,7 @@ import { Collection } from '../data/collections'
 import { Column } from 'react-table'
 import { Table } from '../components/Table'
 import { TableData } from '../lib/types'
-import { ExternalLink } from 'react-external-link'
+import { ProgressBar } from '../components/ProgressBar'
 
 const NftAnalyticsPage = () => {
   const [data, setData] = useState<{ stats: any, holders: any, holdings: any }>()
@@ -75,6 +75,8 @@ const NftAnalyticsPage = () => {
         <div className={`${indexStyles.list} ${css.container}`}>
           <CollectionOfNFT nfts={nftList} onClick={col => fetchAllData(col.address)}/>
         </div>
+
+        {isLoading && <div className={css.container}><ProgressBar color="black" /></div>}
 
         {data && !isLoading && !error &&
           <div className={indexStyles.list}>
