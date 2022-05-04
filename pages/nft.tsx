@@ -51,27 +51,6 @@ const NftAnalyticsPage = () => {
     []
   )
 
-  const nftHoldingsColumns = useMemo(
-    (): Column<NftToErc20Holding>[] => [{
-      Header: 'NFT Token',
-      accessor: (row) => row.token, // accessor is the "key" in the data,
-      Cell: ({ value }) => (
-        <div className={css.holdingsTokenCell}>
-          <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
-          <a href={`https://etherscan.io/token/${value.address}`} className={css.inTableLink}>{value.name}</a>
-        </div>
-      ),
-    }, {
-      Header: 'Holders',
-      accessor: 'holders'
-    }, {
-      Header: 'Share',
-      accessor: 'share',
-      Cell: ({ value }) => `${value.toFixed(2)}%`
-    }],
-    []
-  )
-
   const holdersColumns = useMemo(
     (): Column<NftHolder>[] => [{
       Header: 'Address',
@@ -135,11 +114,16 @@ const NftAnalyticsPage = () => {
               <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
             </div>
 
-            <h4 className={indexStyles.h4}>Top Token Holdings</h4>
-            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
+            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
               <div className={css.splitTables}>
-                <div><Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} /></div>
-                <div><Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: nftHoldingsColumns }} /></div>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
+                  <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />
+                </div>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
+                  <Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: holdingsColumns }} />
+                </div>
               </div>
             </div>
           </div>}
