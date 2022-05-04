@@ -84,6 +84,11 @@
   text-decoration: underline;
 }
 
+.addressLink {
+  font-family: monospace;
+  font-size: 13px;
+}
+
 .splitTables {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

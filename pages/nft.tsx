@@ -37,7 +37,9 @@ const NftAnalyticsPage = () => {
       Cell: ({ value }) => (
         <div className={css.holdingsTokenCell}>
           <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
-          <a href={`https://etherscan.io/token/${value.address}`} className={css.inTableLink}>{value.name}</a>
+          <a href={`https://etherscan.io/token/${value.address}`} className={`${css.inTableLink} ${value.name ? '' : css.addressLink}`}>
+            {value.name || value.address}
+          </a>
         </div>
       ),
     }, {
