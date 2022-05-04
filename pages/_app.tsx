@@ -26,9 +26,9 @@ const App = ({ pageProps, Component }: AppProps) => (
       </div>
 
       <div className={styles.nav_block}>
+        <NavLink href="/nft" className={styles.nav_block__item} activeClassName={styles.active}>NFT analytics</NavLink>
         <NavLink href="/events" className={styles.nav_block__item} activeClassName={styles.active}>Users & events</NavLink>
         <NavLink href="/holdings" className={styles.nav_block__item} activeClassName={styles.active}>Holdings</NavLink>
-        <NavLink href="/nft" className={styles.nav_block__item} activeClassName={styles.active}>NFT analytics</NavLink>
       </div>
       <div>{/* filler */}</div>
       <footer className={styles.footer}>
