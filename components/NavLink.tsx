@@ -6,7 +6,7 @@ export const NavLink = ({ href, children, className, activeClassName }) => {
   const router = useRouter()
 
   // let className = children.props.className || ''
-  if (router.pathname === href) {
+  if (router.pathname.includes(href)) {
     className = `${className} ${activeClassName}`
   }
 

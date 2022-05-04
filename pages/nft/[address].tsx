@@ -1,24 +1,21 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CollectionOfNFT } from '../components/CollectionOfNFT'
-import css from './nft.module.css'
-import indexStyles from './index.module.css'
-import sharedStyles from '../shared.module.css'
-import { fetchNFTs, NftToErc20Holding, NftHolder, fetchNftAnalytics } from '../lib/fetchNFTs'
-import { Collection } from '../data/collections'
+import css from './shared.module.css'
+import indexStyles from '../index.module.css'
+import sharedStyles from '../../shared.module.css'
+import { NftToErc20Holding, NftHolder, fetchNftAnalytics } from '../../lib/fetchNFTs'
 import { Column } from 'react-table'
-import { Table } from '../components/Table'
-import { TableData } from '../lib/types'
-import { ProgressBar } from '../components/ProgressBar'
+import { Table } from '../../components/Table'
+import { TableData } from '../../lib/types'
+import { ProgressBar } from '../../components/ProgressBar'
+import { useRouter } from 'next/router'
 
 const NftAnalyticsPage = () => {
   const [data, setData] = useState<{ stats: any, holders: any, holdings: any, nftHoldings: any }>()
-  const [nftList, setNftList] = useState<Collection[]>([])
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
-  useEffect(() => {
-    fetchNFTs().then(setNftList).catch(err => setError(err.message))
-  }, [])
+  const router = useRouter()
+  const address = router.query.address
 
   const fetchAllData = async (nftCollection) => {
     setData(null)
@@ -29,6 +26,8 @@ const NftAnalyticsPage = () => {
       .catch(err => setError(err?.message))
       .finally(() => setLoading(false))
   }
+
+  useEffect(() => { address && fetchAllData(address) }, [address])
 
   const holdingsColumns = useMemo(
     (): Column<NftToErc20Holding>[] => [{
@@ -73,11 +72,6 @@ const NftAnalyticsPage = () => {
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
-        <h3 className={indexStyles.h4}>Choose NFT collection</h3>
-        <div className={`${indexStyles.list} ${css.container}`}>
-          <CollectionOfNFT nfts={nftList} onClick={col => col && fetchAllData(col.address)}/>
-        </div>
-
         {isLoading && <div className={css.container}><ProgressBar color="black"/></div>}
 
         {data && !isLoading && !error &&
