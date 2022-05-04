@@ -69,19 +69,19 @@ const NftAnalyticsPage = () => {
     []
   )
 
+  let loader = isLoading && <div className={css.container}><ProgressBar color="black"/></div>
+
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
-        {isLoading && <div className={css.container}><ProgressBar color="black"/></div>}
-
-        {data && !isLoading && !error &&
+        {!error &&
           <div className={indexStyles.list}>
             <h4 className={indexStyles.h4}>Token Stats</h4>
             <div className={css.platesArray}>
               <div className={css.plate}>
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>total holders</div>
-                  <h3 className={css.plateValue}>{data.stats.holdersTotal}</h3>
+                  <h3 className={css.plateValue}>{loader || data && data.stats.holdersTotal}</h3>
                 </article>
               </div>
 
@@ -89,7 +89,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>avg net worth</div>
                   <h3 className={css.plateValue}>
-                    {prettyNetWorth(data.stats.avgNetWorthInUsd) || formatBigNum(data.stats.avgNetWorthInUsd)}
+                    {loader || data && (prettyNetWorth(data.stats.avgNetWorthInUsd) || formatBigNum(data.stats.avgNetWorthInUsd))}
                   </h3>
                 </article>
               </div>
@@ -98,7 +98,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>median portfolio value</div>
                   <h3 className={css.plateValue}>
-                    ${Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()}
+                    {loader || data && `$${Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()}`}
                   </h3>
                 </article>
               </div>
@@ -110,7 +110,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last day</div>
                   <h3 className={css.plateValue}>
-                    {Math.random() * 1000 | 0}
+                    {loader || data && (Math.random() * 1000 | 0)}
                   </h3>
                 </article>
               </div>
@@ -119,7 +119,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last week</div>
                   <h3 className={css.plateValue}>
-                    {1000 + 7 * Math.random() * 1000 | 0}
+                    {loader || data && (1000 + 7 * Math.random() * 1000 | 0)}
                   </h3>
                 </article>
               </div>
@@ -128,7 +128,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last month</div>
                   <h3 className={css.plateValue}>
-                    {7000 + 30 * Math.random() * 1000 | 0}
+                    {loader || data && (7000 + 30 * Math.random() * 1000 | 0)}
                   </h3>
                 </article>
               </div>
@@ -136,18 +136,18 @@ const NftAnalyticsPage = () => {
 
             <h4 className={indexStyles.h4}>Holders</h4>
             <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
-              <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
+              {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
             </div>
 
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
               <div className={css.splitTables}>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
-                  <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />
+                  {loader || data && <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />}
                 </div>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
-                  <Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: holdingsColumns }} />
+                  {loader || data && <Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: holdingsColumns }} />}
                 </div>
               </div>
             </div>
