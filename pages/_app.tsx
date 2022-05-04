@@ -5,6 +5,7 @@ import '../global.css'
 import styles from './_app.module.css'
 import shared from '../shared.module.css'
 import Link from 'next/link'
+import { NavLink } from '../components/NavLink'
 
 const App = ({ pageProps, Component }: AppProps) => (
   <>
@@ -25,10 +26,9 @@ const App = ({ pageProps, Component }: AppProps) => (
       </div>
 
       <div className={styles.nav_block}>
-        <h6 className={styles.nav_block__title}>QUICK ACCESS</h6>
-        <Link href="/events"><a className={styles.nav_block__item}>Users & events</a></Link>
-        <Link href="/holdings"><a className={styles.nav_block__item}>Holdings</a></Link>
-        <Link href="/nft"><a className={styles.nav_block__item}>NFT analytics</a></Link>
+        <NavLink href="/events" className={styles.nav_block__item} activeClassName={styles.active}>Users & events</NavLink>
+        <NavLink href="/holdings" className={styles.nav_block__item} activeClassName={styles.active}>Holdings</NavLink>
+        <NavLink href="/nft" className={styles.nav_block__item} activeClassName={styles.active}>NFT analytics</NavLink>
       </div>
       <div>{/* filler */}</div>
       <footer className={styles.footer}>

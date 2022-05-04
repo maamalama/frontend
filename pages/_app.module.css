@@ -52,6 +52,11 @@
   display: flex;
 }
 
+.active {
+  background: #ffffff22;
+  text-decoration: none;
+}
+
 .content {
   grid-area: content;
   overflow-y: auto;
