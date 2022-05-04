@@ -15,8 +15,8 @@ export const fetchNFTs = () => {
 }
 
 export const fetchNftAnalytics = async (token: string) => {
-  let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}`).then(res => res.json())
-  let holdingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}`).then(res => res.json())
+  let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=nft&limit=25`).then(res => res.json())
+  let holdingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=erc20&limit=25`).then(res => res.json())
   let holdersReq = fetch(`${BASE_URL}/nft/holders?token=${token}`).then(res => res.json())
 
   let [nftHoldings, holdings, holders] =
