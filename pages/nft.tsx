@@ -81,7 +81,6 @@ const NftAnalyticsPage = () => {
         {data && !isLoading && !error &&
           <div className={indexStyles.list}>
             <h4 className={indexStyles.h4}>Token Stats</h4>
-
             <div className={css.platesArray}>
               <div className={css.plate}>
                 <article className={css.plateContent}>
@@ -104,6 +103,36 @@ const NftAnalyticsPage = () => {
                   <div className={css.plateTitle}>median portfolio value</div>
                   <h3 className={css.plateValue}>
                     ${Math.trunc(data.stats.medianPortfolioValueInUsd).toLocaleString()}
+                  </h3>
+                </article>
+              </div>
+            </div>
+
+            <h4 className={indexStyles.h4}>Active Users</h4>
+            <div className={css.platesArray}>
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last day</div>
+                  <h3 className={css.plateValue}>
+                    {Math.random() * 1000 | 0}
+                  </h3>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last week</div>
+                  <h3 className={css.plateValue}>
+                    {1000 + 7 * Math.random() * 1000 | 0}
+                  </h3>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last month</div>
+                  <h3 className={css.plateValue}>
+                    {7000 + 30 * Math.random() * 1000 | 0}
                   </h3>
                 </article>
               </div>
