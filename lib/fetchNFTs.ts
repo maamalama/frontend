@@ -34,7 +34,7 @@ export const fetchNftAnalytics = async (token: string) => {
   return {
     holdings: holdings.slice(0, 20),
     nftHoldings: nftHoldings.slice(0, 20),
-    holders: holders.slice(0, 20),
+    holders: holders.slice(0, 10),
     stats: { holdersTotal, avgNetWorthInUsd, medianPortfolioValueInUsd },
   }
 }
