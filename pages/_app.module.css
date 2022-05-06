@@ -60,6 +60,8 @@
 .content {
   grid-area: content;
   overflow-y: auto;
+  min-width: 670px;
+  overflow-x: scroll;
 }
 
 .heading {

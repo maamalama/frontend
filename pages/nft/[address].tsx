@@ -37,7 +37,7 @@ const NftAnalyticsPage = () => {
         <div className={css.holdingsTokenCell}>
           <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
           <a href={`https://etherscan.io/token/${value.address}`} className={`${css.inTableLink} ${value.name ? '' : css.addressLink}`}>
-            {value.name || value.address}
+            {value.name || value.address.slice(0, 20) + '…'}
           </a>
         </div>
       ),
@@ -69,7 +69,7 @@ const NftAnalyticsPage = () => {
     []
   )
 
-  let loader = isLoading && <div className={css.container}><ProgressBar color="black"/></div>
+  let loader = isLoading && <div><ProgressBar color="black"/></div>
 
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
@@ -142,11 +142,11 @@ const NftAnalyticsPage = () => {
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
               <div className={css.splitTables}>
                 <div>
-                  <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
                   {loader || data && <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />}
                 </div>
                 <div>
-                  <h4 className={`${indexStyles.h4} ${css.container}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
                   {loader || data && <Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: holdingsColumns }} />}
                 </div>
               </div>

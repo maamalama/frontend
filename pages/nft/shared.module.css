@@ -2,6 +2,10 @@
   padding: 16px;
 }
 
+.pb4 {
+  padding: 16px;
+}
+
 .platesArray {
   display: flex;
   flex-wrap: wrap;
@@ -12,6 +16,7 @@
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
+  transition: height 100ms ease-in 0s;
 }
 
 .plateContent {
@@ -91,7 +96,7 @@
 
 .splitTables {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   width: 100%;
   grid-gap: 24px;
 }
