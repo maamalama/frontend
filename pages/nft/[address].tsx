@@ -110,8 +110,11 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last day</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && (Math.random() * 1000 | 0)}
+                    {loader || data && data.stats.activity.day}
                   </h3>
+                  <div className={css.plateSubValue}>
+                    {data && ((data.stats.activity.day / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                  </div>
                 </article>
               </div>
 
@@ -119,8 +122,11 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last week</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && (1000 + 7 * Math.random() * 1000 | 0)}
+                    {loader || data && data.stats.activity.week}
                   </h3>
+                  <div className={css.plateSubValue}>
+                    {data && ((data.stats.activity.week / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                  </div>
                 </article>
               </div>
 
@@ -128,8 +134,11 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last month</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && (7000 + 30 * Math.random() * 1000 | 0)}
+                    {loader || data && data.stats.activity.month}
                   </h3>
+                  <div className={css.plateSubValue}>
+                    {data && ((data.stats.activity.month / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                  </div>
                 </article>
               </div>
             </div>

@@ -56,6 +56,14 @@
   text-align: center;
 }
 
+.plateSubValue {
+  margin: 0;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+  color: rgb(133, 133, 133);
+}
+
 .row {
   display: flex;
   flex: 1 1;
