@@ -87,6 +87,13 @@ const NftAnalyticsPage = () => {
 
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
+      {data && <div className={css.holdingsTokenCell} style={{ position: 'fixed', transform: 'rotate(+90deg)', transformOrigin: 'left', top: '0', left: '256px' }}>
+        <div className={css.holdingsIcon} style={{ backgroundImage: `url(${data.token.logo})` }}/>
+        <a href={`https://etherscan.io/token/${data.token.address}`} className={`${css.inTableLink} ${data.token.name ? '' : css.addressLink}`}>
+          {data.token.name || data.token.address.slice(0, 20) + '…'}
+        </a>
+      </div>}
+
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
         {!error &&
           <div className={indexStyles.list}>
