@@ -175,7 +175,7 @@ const NftAnalyticsPage = () => {
                 </div>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.protocols, columns: protocolsColumns }} />}
+                  {loader || data && <Table {...{ error, isLoading, data: data.protocols as any, columns: protocolsColumns as any }} />}
                 </div>
               </div>
             </div>
