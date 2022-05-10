@@ -12,6 +12,7 @@
   width: 100%;
   border: none;
   border-collapse: collapse;
+  background: white;
 }
 
 .table tr:hover {
@@ -22,10 +23,10 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
-  background: white;
   min-height: 470px;
   border-radius: 2px;
   width: 100%;
+  padding: 16px;
 }
 
 .emptyText,
