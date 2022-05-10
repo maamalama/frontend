@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import css from './shared.module.css'
 import indexStyles from '../index.module.css'
 import sharedStyles from '../../shared.module.css'
-import { NftToErc20Holding, NftHolder, fetchNftAnalytics } from '../../lib/fetchNFTs'
+import { NftToErc20Holding, NftHolder, fetchNftAnalytics, ProtocolStat } from '../../lib/fetchNFTs'
 import { Column } from 'react-table'
 import { Table } from '../../components/Table'
 import { TableData } from '../../lib/types'
@@ -10,7 +10,7 @@ import { ProgressBar } from '../../components/ProgressBar'
 import { useRouter } from 'next/router'
 
 const NftAnalyticsPage = () => {
-  const [data, setData] = useState<{ token: any, stats: any, holders: any, holdings: any, nftHoldings: any }>()
+  const [data, setData] = useState<{ token: any, protocols: any, stats: any, holders: any, holdings: any, nftHoldings: any }>()
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
@@ -50,6 +50,20 @@ const NftAnalyticsPage = () => {
       Cell: ({ value }) => `${value.toFixed(2)}%`
     }],
     []
+  )
+
+  const protocolsColumns = useMemo(
+    (): Column<ProtocolStat>[] => [{
+      Header: 'Protocol',
+      accessor: (row) => row.name,
+    }, {
+      Header: 'Last month',
+      accessor: (row) => `${row.usersLastMonth} (${Math.round(row.usersLastMonth / data?.stats?.holdersTotal * 100)}%)`,
+    }, {
+      Header: 'In total',
+      accessor: (row) => `${row.usersInTotal} (${Math.round(row.usersInTotal / data?.stats?.holdersTotal * 100)}%)`,
+    }],
+    [data?.stats?.holdersTotal]
   )
 
   const holdersColumns = useMemo(
@@ -146,9 +160,17 @@ const NftAnalyticsPage = () => {
               </div>
             </div>
 
-            <h4 className={indexStyles.h4}>Holders</h4>
-            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
-              {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
+            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
+              <div className={css.splitTables}>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Holders</h4>
+                  {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
+                </div>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
+                  {loader || data && <Table {...{ error, isLoading, data: data.protocols, columns: protocolsColumns }} />}
+                </div>
+              </div>
             </div>
 
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
