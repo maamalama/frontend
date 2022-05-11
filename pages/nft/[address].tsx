@@ -10,7 +10,7 @@ import { ProgressBar } from '../../components/ProgressBar'
 import { useRouter } from 'next/router'
 
 const NftAnalyticsPage = () => {
-  const [data, setData] = useState<{ token: any, protocols: any, stats: any, holders: any, holdings: any, nftHoldings: any }>()
+  const [data, setData] = useState<{ token: any, protocols: any, networks: any, stats: any, holders: any, holdings: any, nftHoldings: any }>()
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
@@ -55,13 +55,21 @@ const NftAnalyticsPage = () => {
   const protocolsColumns = useMemo(
     (): Column<ProtocolStat>[] => [{
       Header: 'Protocol',
-      accessor: (row) => row.name,
+      accessor: (row) => row,
+      Cell: ({ value }) => (
+        <div className={css.holdingsTokenCell}>
+          <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
+          <a href={value.url} className={`${css.inTableLink}`}>
+            {value.name}
+          </a>
+        </div>
+      ),
     }, {
       Header: 'Last month',
-      accessor: (row) => `${row.usersLastMonth} (${Math.round(row.usersLastMonth / data?.stats?.holdersTotal * 100)}%)`,
+      accessor: (row) => `${row.users_last_month} (${Math.round(row.users_last_month / data?.stats?.holdersTotal * 100)}%)`,
     }, {
       Header: 'In total',
-      accessor: (row) => `${row.usersInTotal} (${Math.round(row.usersInTotal / data?.stats?.holdersTotal * 100)}%)`,
+      accessor: (row) => `${row.users_in_total} (${Math.round(row.users_in_total / data?.stats?.holdersTotal * 100)}%)`,
     }],
     [data?.stats?.holdersTotal]
   )
@@ -167,15 +175,20 @@ const NftAnalyticsPage = () => {
               </div>
             </div>
 
+            <h4 className={indexStyles.h4}>Holders</h4>
+            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
+              {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
+            </div>
+
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
               <div className={css.splitTables}>
                 <div>
-                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Holders</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
-                </div>
-                <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
                   {loader || data && <Table {...{ error, isLoading, data: data.protocols as any, columns: protocolsColumns as any }} />}
+                </div>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Networks</h4>
+                  {loader || data && <Table {...{ error, isLoading, data: data.networks as any, columns: protocolsColumns as any }} />}
                 </div>
               </div>
             </div>

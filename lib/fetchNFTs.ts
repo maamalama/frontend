@@ -19,23 +19,12 @@ export const fetchNftAnalytics = async (token: string) => {
   let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=nft&limit=25`).then(res => res.json())
   let holdingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=erc20&limit=25`).then(res => res.json())
   let holdersReq = fetch(`${BASE_URL}/nft/holders?token=${token}`).then(res => res.json())
-  // let protocolsReq = fetch(`${BASE_URL}/nft/protocols?token=${token}`).then(res => res.json())
+  let protocolsReq = fetch(`${BASE_URL}/nft/protocols?token=${token}&limit=20`).then(res => res.json())
+  let networksReq = fetch(`${BASE_URL}/nft/networks?token=${token}&limit=20`).then(res => res.json())
 
-  let protocolsReq = Promise.resolve([
-    { name: 'Uniswap V2', usersLastMonth: 120, usersInTotal: 304 },
-    { name: 'Uniswap V3', usersLastMonth: 451, usersInTotal: 958 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-    { name: 'SushiSwap', usersLastMonth: 75, usersInTotal: 231 },
-  ])
-
-  let [protocols, stats, nftHoldings, holdings, holders] =
-    await Promise.all([protocolsReq, statsReq, nftHoldingsReq, holdingsReq, holdersReq]) as
-      [ProtocolStat[], NftStats, NftToErc20Holding[], NftToErc20Holding[], NftHolder[]]
+  let [networks, protocols, stats, nftHoldings, holdings, holders] =
+    await Promise.all([networksReq, protocolsReq, statsReq, nftHoldingsReq, holdingsReq, holdersReq]) as
+      [NetworkStat[], ProtocolStat[], NftStats, NftToErc20Holding[], NftToErc20Holding[], NftHolder[]]
 
   const balances = holders.map(h => h.total_balance_usd).sort((a, b) => a - b)
 
@@ -55,6 +44,7 @@ export const fetchNftAnalytics = async (token: string) => {
     nftHoldings: nftHoldings.slice(0, 20),
     holders: holders.slice(0, 10),
     protocols,
+    networks,
     stats: {
       activity: {
         day: stats.active_1d,
@@ -103,6 +93,16 @@ export type NftStats = {
 
 export type ProtocolStat = {
   name: string
-  usersLastMonth: number
-  usersInTotal: number
+  logo: string
+  url: string
+  users_last_month: number
+  users_in_total: number
+}
+
+export type NetworkStat = {
+  name: string
+  logo: string
+  url: string
+  users_last_month: number
+  users_in_total: number
 }
