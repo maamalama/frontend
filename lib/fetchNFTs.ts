@@ -1,5 +1,6 @@
 import { BASE_URL } from '../data/constants'
 import { ChainId } from '../data/networks'
+import { rng } from './random'
 
 export type Nft = {
   address: string
@@ -55,6 +56,19 @@ export const fetchNftAnalytics = async (token: string) => {
       avgNetWorthInUsd,
       medianPortfolioValueInUsd,
     },
+  }
+}
+
+export function randomify(token: string, data: Awaited<ReturnType<typeof fetchNftAnalytics>>): Awaited<ReturnType<typeof fetchNftAnalytics>> {
+  rng.seed(parseInt(token.slice(token.length - 10), 16))
+  return {
+    ...data,
+    holdings: data.holdings.map(h => ({ ...h, holders: rng.mix(h.holders) })),
+    nftHoldings: data.nftHoldings.map(h => ({ ...h, holders: rng.mix(h.holders) })),
+    holders: data.holders.map(h => ({ ...h, amount: rng.mix(h.amount), total_balance_usd: rng.mix(h.total_balance_usd) })),
+    protocols: data.protocols.map(p => ({ ...p, users_in_total: rng.mix(p.users_in_total), users_last_month: rng.mix(p.users_last_month) })),
+    networks: data.networks.map(n => ({ ...n, users_in_total: rng.mix(n.users_in_total), users_last_month: rng.mix(n.users_last_month) })),
+    stats: data.stats,
   }
 }
 

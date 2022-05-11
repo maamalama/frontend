@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import css from './shared.module.css'
 import indexStyles from '../index.module.css'
 import sharedStyles from '../../shared.module.css'
-import { NftToErc20Holding, NftHolder, fetchNftAnalytics, ProtocolStat } from '../../lib/fetchNFTs'
+import { NftToErc20Holding, NftHolder, fetchNftAnalytics, ProtocolStat, randomify } from '../../lib/fetchNFTs'
 import { Column } from 'react-table'
 import { Table } from '../../components/Table'
 import { TableData } from '../../lib/types'
@@ -22,7 +22,7 @@ const NftAnalyticsPage = () => {
     setLoading(true)
 
     fetchNftAnalytics(nftCollection)
-      .then(setData)
+      .then(d => setData(randomify(nftCollection, d)))
       .catch(err => setError(err?.message))
       .finally(() => setLoading(false))
   }
