@@ -63,11 +63,11 @@ export function randomify(token: string, data: Awaited<ReturnType<typeof fetchNf
   rng.seed(parseInt(token.slice(token.length - 10), 16))
   return {
     ...data,
-    holdings: data.holdings.map(h => ({ ...h, holders: rng.mix(h.holders) })),
-    nftHoldings: data.nftHoldings.map(h => ({ ...h, holders: rng.mix(h.holders) })),
-    holders: data.holders.map(h => ({ ...h, amount: rng.mix(h.amount), total_balance_usd: rng.mix(h.total_balance_usd) })),
-    protocols: data.protocols.map(p => ({ ...p, users_in_total: rng.mix(p.users_in_total), users_last_month: rng.mix(p.users_last_month) })),
-    networks: data.networks.map(n => ({ ...n, users_in_total: rng.mix(n.users_in_total), users_last_month: rng.mix(n.users_last_month) })),
+    holdings: data.holdings,
+    nftHoldings: data.nftHoldings,
+    holders: data.holders,
+    protocols: data.protocols,
+    networks: data.networks,
     stats: data.stats,
   }
 }
