@@ -142,10 +142,10 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last day</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && data.stats.activity.day}
+                    {loader || data && ((data.stats.activity.day / data.stats.holdersTotal * 100).toFixed(0) + '%')}
                   </h3>
                   <div className={css.plateSubValue}>
-                    {data && ((data.stats.activity.day / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                    {data && data.stats.activity.day}
                   </div>
                 </article>
               </div>
@@ -154,10 +154,10 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last week</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && data.stats.activity.week}
+                    {loader || data && ((data.stats.activity.week / data.stats.holdersTotal * 100).toFixed(0) + '%')}
                   </h3>
                   <div className={css.plateSubValue}>
-                    {data && ((data.stats.activity.week / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                    {data && data.stats.activity.week}
                   </div>
                 </article>
               </div>
@@ -166,10 +166,10 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last month</div>
                   <h3 className={css.plateValue}>
-                    {loader || data && data.stats.activity.month}
+                    {loader || data && ((data.stats.activity.month / data.stats.holdersTotal * 100).toFixed(0) + '%')}
                   </h3>
                   <div className={css.plateSubValue}>
-                    {data && ((data.stats.activity.month / data.stats.holdersTotal * 100).toFixed(0) + '%')}
+                    {data && data.stats.activity.month}
                   </div>
                 </article>
               </div>
