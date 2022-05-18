@@ -65,6 +65,25 @@ const NftAnalyticsPage = () => {
         </div>
       ),
     }, {
+      Header: 'Users',
+      accessor: (row) => `${row.users_in_total} (${Math.round(row.users_in_total / data?.stats?.holdersTotal * 100)}%)`,
+    }],
+    [data?.stats?.holdersTotal]
+  )
+
+  const networksColumns = useMemo(
+    (): Column<ProtocolStat>[] => [{
+      Header: 'Protocol',
+      accessor: (row) => row,
+      Cell: ({ value }) => (
+        <div className={css.holdingsTokenCell}>
+          <div className={css.holdingsIcon} style={{ backgroundImage: `url(${value.logo})` }}/>
+          <a href={value.url} className={`${css.inTableLink}`}>
+            {value.name}
+          </a>
+        </div>
+      ),
+    }, {
       Header: 'Last month',
       accessor: (row) => `${row.users_last_month} (${Math.round(row.users_last_month / data?.stats?.holdersTotal * 100)}%)`,
     }, {
@@ -188,7 +207,7 @@ const NftAnalyticsPage = () => {
                 </div>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Networks</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.networks as any, columns: protocolsColumns as any }} />}
+                  {loader || data && <Table {...{ error, isLoading, data: data.networks as any, columns: networksColumns as any }} />}
                 </div>
               </div>
             </div>
