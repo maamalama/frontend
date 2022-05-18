@@ -66,7 +66,7 @@ export function randomify(token: string, data: Awaited<ReturnType<typeof fetchNf
     holdings: data.holdings,
     nftHoldings: data.nftHoldings,
     holders: data.holders,
-    protocols: data.protocols,
+    protocols: data.protocols.filter(p => p.users_in_total >= data.stats.holdersTotal / 100),
     networks: data.networks,
     stats: data.stats,
   }
