@@ -26,18 +26,15 @@ export const Table = ({ data, error, isLoading, columns }: TableProps) => {
 
   return (
     // apply the table props
-    <div
-      className={styles.container}
-      style={{ border: isLoading || (!data && !error && !isLoading) ? 'var(--border)' : 'none' }}
-    >
+    <div className={`${styles.container} ${isLoading || (!data && !error && !isLoading) ? styles.container_loading : ''}`}>
       {isLoading && (
         <div className={styles.loader}>
           <ProgressBar color="black" />
         </div>
       )}
-      {!data && !error && !isLoading && <div className={styles.emptyText}>Compose filters to query user holdings</div>}
+      {!data && !error && !isLoading && <div className={styles.emptyText}>No data is available</div>}
       {!isLoading && error && <div>Failed to load chart</div>}
-      {!isLoading && data?.length > 1 && (
+      {!isLoading && data?.length >= 1 && (
         <table className={styles.table} {...getTableProps()}>
           <thead>
             {

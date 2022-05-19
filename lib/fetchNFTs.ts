@@ -61,12 +61,13 @@ export const fetchNftAnalytics = async (token: string) => {
 
 export function randomify(token: string, data: Awaited<ReturnType<typeof fetchNftAnalytics>>): Awaited<ReturnType<typeof fetchNftAnalytics>> {
   rng.seed(parseInt(token.slice(token.length - 10), 16))
+  let protocols = data.protocols.filter(p => p.users_in_total >= data.stats.holdersTotal / 100)
   return {
     ...data,
     holdings: data.holdings,
     nftHoldings: data.nftHoldings,
     holders: data.holders,
-    protocols: data.protocols.filter(p => p.users_in_total >= data.stats.holdersTotal / 100),
+    protocols: data.protocols.slice(0, Math.max(protocols.length, data.networks.length)),
     networks: data.networks,
     stats: data.stats,
   }

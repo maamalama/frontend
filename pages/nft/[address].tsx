@@ -196,18 +196,18 @@ const NftAnalyticsPage = () => {
 
             <h4 className={indexStyles.h4}>Holders</h4>
             <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
-              {loader || data && <Table {...{ error, isLoading, data: data.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />}
+              <Table {...{ error, isLoading, data: data?.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
             </div>
 
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
               <div className={css.splitTables}>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.protocols as any, columns: protocolsColumns as any }} />}
+                  <Table {...{ error, isLoading, data: data?.protocols as any, columns: protocolsColumns as any }} />
                 </div>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Networks</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.networks as any, columns: networksColumns as any }} />}
+                  <Table {...{ error, isLoading, data: data?.networks as any, columns: networksColumns as any }} />
                 </div>
               </div>
             </div>
@@ -216,11 +216,11 @@ const NftAnalyticsPage = () => {
               <div className={css.splitTables}>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.holdings ?? [], columns: holdingsColumns }} />}
+                  <Table {...{ error, isLoading, data: data?.holdings ?? [], columns: holdingsColumns }} />
                 </div>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
-                  {loader || data && <Table {...{ error, isLoading, data: data.nftHoldings ?? [], columns: holdingsColumns }} />}
+                  <Table {...{ error, isLoading, data: data?.nftHoldings ?? [], columns: holdingsColumns }} />
                 </div>
               </div>
             </div>
