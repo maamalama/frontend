@@ -109,7 +109,10 @@ const NftAnalyticsPage = () => {
           <div className={indexStyles.list}>
             <h4 className={indexStyles.h4}>Social stats</h4>
             <div className={`${sharedStyles.container} ${css.container} ${css.social_media_stats}`}>
-              <div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>
+              {/*<div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>*/}
+              <div>
+                <button style={{cursor: 'pointer', padding: '4px'}}><img src={'/discord.ico'} width={15} height={15}/> Connect Discord to view analytics</button>
+              </div>
               <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers</div>
             </div>
 
