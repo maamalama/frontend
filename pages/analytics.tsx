@@ -115,9 +115,6 @@ const NftAnalyticsPage = () => {
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
         {!error &&
           <div className={indexStyles.list}>
-            {/*{data && <h4 className={indexStyles.h1}>*/}
-            {/*  <img src={data.token.logo} width={36} height={36}/> {data.token.name || data.token.address}</h4>}*/}
-
             <h4 className={indexStyles.h4}>Token Stats</h4>
             <div className={css.platesArray}>
               <div className={css.plate}>
