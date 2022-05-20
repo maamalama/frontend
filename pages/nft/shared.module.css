@@ -2,6 +2,19 @@
   /*padding: 16px;*/
 }
 
+.social_media_stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  line-height: 16px;
+  margin-bottom: 16px;
+}
+
+.social_media_stats img {
+  vertical-align: sub;
+}
+
 .pb4 {
   padding: 16px !important;
 }

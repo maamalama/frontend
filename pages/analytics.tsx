@@ -124,6 +124,12 @@ const NftAnalyticsPage = () => {
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
         {!error &&
           <div className={indexStyles.list}>
+            <h4 className={indexStyles.h4}>Social stats</h4>
+            <div className={`${sharedStyles.container} ${css.container} ${css.social_media_stats}`}>
+              <div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>
+              <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers</div>
+            </div>
+
             <h4 className={indexStyles.h4}>Token Stats</h4>
             <div className={css.platesArray}>
               <div className={css.plate}>
