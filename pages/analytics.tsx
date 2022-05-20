@@ -150,10 +150,7 @@ const NftAnalyticsPage = () => {
                   </h3>
                 </article>
               </div>
-            </div>
 
-            <h4 className={indexStyles.h4}>Active Users</h4>
-            <div className={css.platesArray}>
               <div className={css.plate}>
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>last day</div>
@@ -189,11 +186,6 @@ const NftAnalyticsPage = () => {
                   </div>
                 </article>
               </div>
-            </div>
-
-            <h4 className={indexStyles.h4}>Holders</h4>
-            <div className={`${sharedStyles.row} ${sharedStyles.container} ${css.container}`}>
-              <Table {...{ error, isLoading, data: data?.holders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
             </div>
 
             <div className={`${sharedStyles.row} ${sharedStyles.container}`}>

@@ -9,12 +9,14 @@
 .platesArray {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 16px;
 }
 
 .plate {
-  padding: 16px;
-  flex-basis: 0;
-  flex-grow: 1;
+  flex: 1 0 30%;
+  /*flex-basis: 0;*/
+  /*flex-grow: 1;*/
   max-width: 100%;
   transition: height 100ms ease-in 0s;
 }
