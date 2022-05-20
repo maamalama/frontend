@@ -1,14 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import css from '../pages/_app.module.css'
 
-export const NavLink = ({ href, children, className, activeClassName }) => {
+export const NavLink = ({ href, children, icon }) => {
   const router = useRouter()
+  let isActive = router.pathname.includes(href)
 
-  // let className = children.props.className || ''
-  if (router.pathname.includes(href)) {
-    className = `${className} ${activeClassName}`
-  }
-
-  return <Link href={href}><a className={className}>{children}</a></Link>
+  return <Link href={href}>
+    <a className={`${css.nav_block__item} ${isActive && css.nav_block__item__active}`}>
+      <div className={css.nav_block__item__icon}>{icon(isActive ? '#2684FF' : '#D6DADE')}</div>
+      <div className={css.nav_block__item__label}>{children}</div>
+    </a>
+  </Link>
 }
