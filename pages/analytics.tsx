@@ -92,23 +92,6 @@ const NftAnalyticsPage = () => {
     [data?.stats?.holdersTotal]
   )
 
-  const holdersColumns = useMemo(
-    (): Column<NftHolder>[] => [{
-      Header: 'Address',
-      accessor: (row) => row.address, // accessor is the "key" in the data,
-      Cell: ({ value }) => (
-        <a href={`https://etherscan.io/address/${value}`} className={css.inTableLink}>{value}</a>
-      )
-    }, {
-      Header: 'Amount',
-      accessor: 'amount'
-    }, {
-      Header: 'Net worth',
-      accessor: (row) => prettyNetWorth(row.total_balance_usd) || '—'
-    }],
-    []
-  )
-
   let loader = isLoading && <div><ProgressBar color="black"/></div>
 
   return (
