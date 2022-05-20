@@ -62,7 +62,7 @@ const App = ({ pageProps, Component }: AppProps) => {
         <NavLink href="/holders" icon={holders}>Holders</NavLink>
         <NavLink href="/analytics" icon={analytics}>Analytics</NavLink>
         <NavLink href="/snapshots" icon={snapshots}>Snapshots</NavLink>
-        <NavLink href="/giveaways" icon={giveaways}>Giveaways</NavLink>
+        <NavLink href="/whitelists" icon={giveaways}>Whitelists</NavLink>
       </div>
       <div>{/* filler */}</div>
       <footer className={styles.footer}></footer>
