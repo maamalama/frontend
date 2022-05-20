@@ -49,3 +49,57 @@
 .actions_panel__action > img {
   padding-right: 4px;
 }
+
+
+.row {
+  display: flex;
+  flex: 1 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.holdingsTokenCell {
+  position: relative;
+  padding-left: 80px;
+}
+
+.holdingsIcon {
+  position: absolute;
+  top: -4px;
+  left: 42px;
+  height: 26px;
+  width: 26px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.starIcon {
+  cursor: pointer;
+  position: absolute;
+  top: -4px;
+  left: 4px;
+  height: 24px;
+  width: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border-radius: 50%;
+  background-image: url('/star.svg');
+}
+
+.inTableLink {
+  color: initial;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.inTableLink:hover {
+  text-decoration: underline;
+}
+
+.addressLink {
+  font-family: monospace;
+  font-size: 13px;
+}

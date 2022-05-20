@@ -6,6 +6,7 @@ specifiers:
   '@types/node': ^17.0.14
   '@types/react': ^17.0.38
   '@types/react-table': ^7.7.9
+  date-fns: ^2.28.0
   lightweight-charts: ^3.7.0
   next: ^12.0.10
   react: ^17.0.2
@@ -20,6 +21,7 @@ specifiers:
 dependencies:
   '@ethersproject/address': 5.5.0
   '@ethersproject/units': 5.5.0
+  date-fns: 2.28.0
   lightweight-charts: 3.7.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
@@ -434,6 +436,11 @@ packages:
 
   /csstype/3.0.10:
     resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==}
+
+  /date-fns/2.28.0:
+    resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /debug/3.1.0:
     resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
