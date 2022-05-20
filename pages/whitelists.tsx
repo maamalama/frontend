@@ -12,6 +12,9 @@ const Whitelists = () => {
         </div>
       </header>
 
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40%' }}>
+        work in progress
+      </div>
     </main>
   )
 }
