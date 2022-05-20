@@ -11,6 +11,7 @@
   flex: 1 1;
   height: 40px;
   padding: 0 58px;
+  margin: 16px;
 }
 
 .search_icon {
@@ -22,4 +23,29 @@
   font-size: 14px;
   color: rgba(0, 0, 0, .4);
   width: 100%;
+}
+
+.actions_panel {
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  font-size: 16px;
+}
+
+.actions_panel__action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.actions_panel__action:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.actions_panel__action > img {
+  padding-right: 4px;
 }

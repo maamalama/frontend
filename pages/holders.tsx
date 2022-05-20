@@ -24,6 +24,15 @@ const Holders = () => {
           <img src={'/search.svg'} width={32} height={32} className={css.search_icon} alt=""/>
           <input type="text" placeholder="Search by address or ENS" className={css.search_input}/>
         </div>
+
+        <div className={css.actions_panel}>
+          <div>1684 holders</div>
+          <div className={css.actions_panel__action}>
+            <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
+            Export
+          </div>
+        </div>
+
       </main>
     </div>
   )
