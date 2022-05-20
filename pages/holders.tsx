@@ -8,8 +8,17 @@ import { fetchNftAnalytics, NftHolder, randomify } from '../lib/fetchNFTs'
 import { ProgressBar } from '../components/ProgressBar'
 import { Table } from '../components/Table'
 import { TableData } from '../lib/types'
+import { useRouter } from 'next/router'
 
 const Holders = () => {
+  let router = useRouter()
+
+  useEffect(() => {
+    if (router.route && !router.route.includes('holders')) {
+      router.push('/holders')
+    }
+  }, [router.route])
+
   let nft = {
     icon: 'https://etherscan.io/token/images/lobsterdao_32.png',
     name: 'lobsterdao',

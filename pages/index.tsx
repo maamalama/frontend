@@ -2,5 +2,5 @@
 // https://nextjs.org/docs/advanced-features/middleware
 // we just reexport /nft page
 
-import page from './nft/index'
+import page from './holders'
 export default page
