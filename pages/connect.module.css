@@ -1,3 +1,109 @@
 .main {
+  grid-area: content;
+  height: 100%;
+  width: 100%;
+  margin: auto;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  background-color: #18191C;
+}
+
+.card {
+  width: 360px;
+  min-height: 420px;
+  padding: 20px 20px;
+  margin-top: -100px;
+
+  background-color: #131314;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.logo {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.profile {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  padding-top: 20px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #b9bbbe;
+  text-align: center;
+  padding-top: 12px;
+}
+
+.connectLayout {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 4px;
+}
+
+.connectDivider {
+  height: 1px;
+  width: 100%;
+  background-color: #1d1d20;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.connect {
+  background-color: #2684FF;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.connectedWallet {
+  background-color: #54A451;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.space {
+  flex-grow: 1;
+  min-height: 40px;
+}
+
+.save {
+  width: 100%;
+  background-color: #2684FF;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border-radius: 4px;
 }
