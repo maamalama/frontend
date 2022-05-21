@@ -7,6 +7,7 @@ import { TableData } from '../lib/types'
 import { useRouter } from 'next/router'
 import { BASE_URL } from '../data/constants'
 import { UsersTable } from '../components/UsersTable'
+import { TagLabel } from '../components/TagLabel'
 
 let lobsters = [
   "https://storage.googleapis.com/opensea-static/opensea-profile/30.png",
@@ -228,6 +229,14 @@ const Holders = () => {
 
         <div className={css.actions_panel}>
           <div>1684 holders</div>
+          <div>
+            <TagLabel>whales</TagLabel>
+            <TagLabel>1 month old</TagLabel>
+            <TagLabel>$1,000,000+</TagLabel>
+            <TagLabel initialIsActive={true}>with past holders</TagLabel>
+            <TagLabel>have twitter</TagLabel>
+            <TagLabel>have discord</TagLabel>
+          </div>
           <div className={css.actions_panel__action}>
             <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
             Export

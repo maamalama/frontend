@@ -1,0 +1,35 @@
+.tag_label {
+  display: inline-flex;
+  vertical-align: top;
+  -moz-box-align: center;
+  align-items: center;
+  max-width: 100%;
+  font-weight: 400;
+  line-height: 1.2;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  font-size: 14px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
+  border-radius: 9999px;
+  border: 1px solid #eaeaea;
+  margin-right: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tag_label:hover {
+  background-color: #eaeaea;
+}
+
+.tag_label__active {
+  background-color: #2684FF;
+  border-color: transparent;
+  color: white;
+}
+
+.tag_label__active:hover {
+  background-color: #2367be;
+}
