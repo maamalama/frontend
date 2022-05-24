@@ -29,14 +29,14 @@ export const Pagination = ({ page, total, onSelect }) => {
         <Button page={0} onClick={onSelect}>{'≪'}</Button>
         <Button page={page - 1} onClick={onSelect}>{'<'}</Button>
         {range(Math.max(0, page - 5), Math.max(0, page - 1))
-          .map(i => <Button page={i} onClick={onSelect}>{i + 1}</Button>)}
+          .map(i => <Button key={i} page={i} onClick={onSelect}>{i + 1}</Button>)}
       </>}
 
       <Button page={page} className={css.pagination__active} onClick={onSelect}>{page + 1}</Button>
 
       {hasRight && <>
         {range(Math.min(total - 1, page + 1), Math.min(total - 1, page + 5))
-          .map(i => <Button page={i} onClick={onSelect}>{i + 1}</Button>)}
+          .map(i => <Button key={i} page={i} onClick={onSelect}>{i + 1}</Button>)}
         <Button page={page + 1} onClick={onSelect}>{'>'}</Button>
         <Button page={total - 1} onClick={onSelect}>{'≫'}</Button>
       </>}

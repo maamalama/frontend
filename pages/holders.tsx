@@ -9,6 +9,9 @@ import { BASE_URL } from '../data/constants'
 import { UsersTable } from '../components/UsersTable'
 import { TagLabel } from '../components/TagLabel'
 import { Pagination } from '../components/Pagination'
+import { useStore } from 'effector-react'
+import { $currentNft } from '../lib/store'
+import { Header } from '../components/Header'
 
 const Holders = () => {
   let router = useRouter()
@@ -19,16 +22,14 @@ const Holders = () => {
     }
   }, [router.route])
 
-  let nft = {
-    icon: 'https://etherscan.io/token/images/lobsterdao_32.png',
-    name: 'lobsterdao',
-  }
+  const nft = useStore($currentNft)
+  if (!nft) return null
+
+  const address = nft.address
 
   const [holders, setHolders] = useState<any[]>(null)
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
-
-  const address = '0x026224a2940bfe258d0dbe947919b62fe321f042'
 
   const fetchAllData = async (nftCollection) => {
     setHolders(null)
@@ -62,7 +63,7 @@ const Holders = () => {
 
         setHolders(holders.map((h, idx) => ({
           ...h, ...{
-            icon: users?.[idx]?.picture?.thumbnail,
+            logo: users?.[idx]?.picture?.thumbnail,
             discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
             firstBought: Date.now() - (Math.random() * 1000 * 3600 * 24 * 14 | 0),
             tokens: [
@@ -164,13 +165,7 @@ const Holders = () => {
 
   return (
     <div className={`${shared.column} ${indexStyles.main}`}>
-      <header className={shared.content_header}>
-        <h1 className={shared.content_header__title}>Holders</h1>
-        <div className={shared.content_header__chain}>
-          <span className={shared.content_header__chain_icon} style={{ backgroundImage: `url(${nft.icon})` }}/>
-          {nft.name}
-        </div>
-      </header>
+      <Header title='Holders'/>
 
       <main className={css.content}>
         <div className={css.search_bar}>

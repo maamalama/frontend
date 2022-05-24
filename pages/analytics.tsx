@@ -5,16 +5,20 @@ import sharedStyles from '../shared.module.css'
 import { NftToErc20Holding, NftHolder, fetchNftAnalytics, ProtocolStat, randomify } from '../lib/fetchNFTs'
 import { Column } from 'react-table'
 import { Table } from '../components/Table'
-import { TableData } from '../lib/types'
 import { ProgressBar } from '../components/ProgressBar'
-import shared from '../shared.module.css'
+import { Header } from '../components/Header'
+import { useStore } from 'effector-react'
+import { $currentNft } from '../lib/store'
 
 const NftAnalyticsPage = () => {
+  const nft = useStore($currentNft)
+  if (!nft) return null
+
   const [data, setData] = useState<{ token: any, protocols: any, networks: any, stats: any, holders: any, holdings: any, nftHoldings: any }>()
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
-  const address = '0x026224a2940bfe258d0dbe947919b62fe321f042'
+  const address = nft.address
 
   const fetchAllData = async (nftCollection) => {
     setData(null)
@@ -96,13 +100,7 @@ const NftAnalyticsPage = () => {
 
   return (
     <main className={`${sharedStyles.column} ${indexStyles.main}`}>
-      <header className={shared.content_header}>
-        <h1 className={shared.content_header__title}>Analytics</h1>
-        <div className={shared.content_header__chain}>
-          <span className={shared.content_header__chain_icon} style={{backgroundImage: 'url(https://etherscan.io/token/images/lobsterdao_32.png)'}}/>
-          lobsterdao
-        </div>
-      </header>
+      <Header title='Analytics'/>
 
       <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
         {!error &&
