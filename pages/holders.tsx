@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { BASE_URL } from '../data/constants'
 import { UsersTable } from '../components/UsersTable'
 import { TagLabel } from '../components/TagLabel'
+import { Pagination } from '../components/Pagination'
 
 let lobsters = [
   'https://storage.googleapis.com/opensea-static/opensea-profile/30.png',
@@ -105,7 +106,7 @@ const Holders = () => {
     name: 'lobsterdao',
   }
 
-  const [holders, setHolders] = useState<any[]>([])
+  const [holders, setHolders] = useState<any[]>(null)
   const [error, setError] = useState<string>()
   const [isLoading, setLoading] = useState(false)
 
@@ -140,7 +141,7 @@ const Holders = () => {
           { domain: null, twitter: null, isFav: false },
         ]
 
-        setHolders(holders.slice(0, 12).map((h, idx) => ({
+        setHolders(holders.map((h, idx) => ({
           ...h, ...{
             icon: users?.[idx]?.picture?.thumbnail,
             discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
@@ -175,6 +176,14 @@ const Holders = () => {
 
   let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
   let filteredHolders = holders?.filter(h => activeFilters.every(p => p(h)))
+
+  let rowsPerPage = 12
+  const [page, setPage] = useState<number>(0)
+  let paginatedHolders = filteredHolders?.slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+
+  useEffect(function resetPageOnFiltersChange() {
+    setPage(0)
+  }, [filters])
 
   const holdersColumns = useMemo(
     (): Column<any>[] => [
@@ -266,7 +275,9 @@ const Holders = () => {
           </div>
         </div>
 
-        <UsersTable {...{ error, isLoading, data: filteredHolders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
+        <UsersTable {...{ error, isLoading, data: paginatedHolders as TableData, columns: holdersColumns as Column<TableData[0]>[] }} />
+
+        <Pagination page={page} total={(filteredHolders?.length || 0) / rowsPerPage | 0} onSelect={setPage}/>
       </main>
     </div>
   )
