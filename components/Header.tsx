@@ -1,6 +1,7 @@
 import css from './Header.module.css'
 import { useStore } from 'effector-react'
 import { $currentNft } from '../lib/store'
+import Link from 'next/link'
 
 export const Header = ({ title }) => {
   const nft = useStore($currentNft)
@@ -11,7 +12,7 @@ export const Header = ({ title }) => {
       <h1 className={css.content_header__title}>{title}</h1>
       <div className={css.content_header__chain}>
         <span className={css.content_header__chain_icon} style={{ backgroundImage: `url(${nft.logo})` }}/>
-        {nft.name}
+        <Link href={'/nft'}><a style={{ color: 'inherit' }}>{nft.name}</a></Link>
       </div>
     </header>
   )
