@@ -65,7 +65,11 @@ const Holders = () => {
             icon: users?.[idx]?.picture?.thumbnail,
             discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
             firstBought: Date.now() - (Math.random() * 1000 * 3600 * 24 * 14 | 0),
-            tokens: [tokenUris[idx * 3], tokenUris[idx * 3 + 1], tokenUris[idx * 3 + 2]],
+            tokens: [
+              tokenUris[(idx * 3) % tokenUris.length],
+              tokenUris[(idx * 3 + 1) % tokenUris.length],
+              tokenUris[(idx * 3 + 2) % tokenUris.length],
+            ].slice(0, Math.min(3, h.amount)),
           }, ...list[idx]
         })))
       })
@@ -136,9 +140,7 @@ const Holders = () => {
         Cell: ({ value: { amount, tokens } }) => (
           <div className={css.tokens}>
             <div className={css.tokens_counter}>{amount}</div>
-            <div className={css.token} style={{ backgroundImage: `url(${tokens[0]})` }}/>
-            <div className={css.token} style={{ backgroundImage: `url(${tokens[1]})` }}/>
-            <div className={css.token} style={{ backgroundImage: `url(${tokens[2]})` }}/>
+            {tokens.map(tok => <div key={tok} className={css.token} style={{ backgroundImage: `url(${tok})` }}/>)}
           </div>
         )
       },
