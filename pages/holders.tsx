@@ -10,10 +10,13 @@ import { UsersTable } from '../components/UsersTable'
 import { TagLabel } from '../components/TagLabel'
 import { Pagination } from '../components/Pagination'
 import { useStore } from 'effector-react'
-import { $currentNft } from '../lib/store'
+import { $currentNft, $holders, fetchHoldersFx, openHoldersPage } from '../lib/store'
 import { Header } from '../components/Header'
+import { restore } from 'effector'
 
 const Holders = () => {
+  useEffect(openHoldersPage, [])
+
   let router = useRouter()
 
   useEffect(() => {
@@ -22,62 +25,9 @@ const Holders = () => {
     }
   }, [router.route])
 
-  const nft = useStore($currentNft)
-  if (!nft) return null
-
-  const address = nft.address
-
-  const [holders, setHolders] = useState<any[]>(null)
-  const [error, setError] = useState<string>()
-  const [isLoading, setLoading] = useState(false)
-
-  const fetchAllData = async (nftCollection) => {
-    setHolders(null)
-    setLoading(true)
-
-    await Promise.all([
-      fetch(`${BASE_URL}/nft/holders?token=${nftCollection}`).then(res => res.json()),
-      fetch(`/token-uris/${nftCollection}.json`).then(res => res.json()),
-      fetch(`https://randomuser.me/api/?results=30&seed=${nftCollection}&noinfo&inc=picture,username,login`).then(res => res.json()),
-    ])
-      .then(([holders, tokenUris, { results: users }]) => {
-        let list = [
-          { domain: 'samx.eth', twitter: 'samx', discord: 'sx#2401', isFav: true },
-          { domain: 'xamgore.eth', twitter: 'xamgore', discord: 'xamgore#2401', isFav: true },
-          { domain: null, discord: null, twitter: null, isFav: false },
-          { domain: null, discord: 'sx#2401', twitter: null, isFav: false },
-          { domain: null, discord: null, twitter: 'samx', isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-          { domain: null, twitter: null, isFav: false },
-        ]
-
-        setHolders(holders.map((h, idx) => ({
-          ...h, ...{
-            logo: users?.[idx]?.picture?.thumbnail,
-            discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
-            tokens: [
-              tokenUris[(idx * 3) % tokenUris.length],
-              tokenUris[(idx * 3 + 1) % tokenUris.length],
-              tokenUris[(idx * 3 + 2) % tokenUris.length],
-            ].slice(0, Math.min(3, h.amount)),
-          }, ...list[idx]
-        })))
-      })
-      .catch(err => setError(err?.message))
-      .finally(() => setLoading(false))
-  }
-
-  useEffect(() => { address && fetchAllData(address) }, [address])
+  const holders = useStore($holders)
+  const isLoading = useStore(fetchHoldersFx.pending)
+  const error = useStore(restore(fetchHoldersFx.failData, null))
 
   const [filters, setFilters] = useState<Record<string, { name: string, isActive: boolean, predicate: (h: any) => boolean }>>({
     _1m_net_worth: {
@@ -140,7 +90,7 @@ const Holders = () => {
         Cell: ({ value: { amount, tokens } }) => (
           <div className={css.tokens}>
             <div className={css.tokens_counter}>{amount}</div>
-            {tokens.map(tok => <div key={tok} className={css.token} style={{ backgroundImage: `url(${tok})` }}/>)}
+            {tokens.slice(0, 3).map(tok => <div key={tok} className={css.token} style={{ backgroundImage: `url(${tok})` }}/>)}
           </div>
         )
       },

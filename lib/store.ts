@@ -1,4 +1,4 @@
-import { createStore, createEvent, createEffect, combine } from 'effector'
+import { createStore, createEvent, createEffect, combine, restore, sample } from 'effector'
 import { BASE_URL } from '../data/constants'
 import { ChainId } from '../data/networks'
 import connectLocalStorage from 'effector-localstorage'
@@ -46,3 +46,76 @@ export const $currentNft = combine(
   $nfts, $currentNftAddress,
   (nfts, address) => nfts.find(n => n.address === address)
 )
+
+
+export type NftHolder = {
+  address: string
+  amount: number
+  total_balance_usd: number
+  first_transfer: number
+  logo?: string
+  domain?: string | null
+  discord?: string | null
+  twitter?: string | null
+  isFav?: boolean
+  tokens: string[]
+}
+
+export const fetchHoldersFx = createEffect({
+  name: 'fetch holders',
+  async handler({ nftAddress }): Promise<NftHolder[]> {
+    let [holders, tokenUris, { results: users }] =
+      await Promise.all([
+        fetch(`${BASE_URL}/nft/holders?token=${nftAddress}`).then(res => res.json()),
+        fetch(`/token-uris/${nftAddress}.json`).then(res => res.json()),
+        fetch(`https://randomuser.me/api/?results=30&seed=${nftAddress}&noinfo&inc=picture,username,login`).then(res => res.json()),
+      ])
+
+    let list = [
+      { domain: 'samx.eth', twitter: 'samx', discord: 'sx#2401', isFav: true },
+      { domain: 'xamgore.eth', twitter: 'xamgore', discord: 'xamgore#2401', isFav: true },
+      { domain: null, discord: null, twitter: null, isFav: false },
+      { domain: null, discord: 'sx#2401', twitter: null, isFav: false },
+      { domain: null, discord: null, twitter: 'samx', isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+      { domain: null, twitter: null, isFav: false },
+    ]
+
+    return holders.map((h, idx) => ({
+      ...h, ...{
+        logo: users?.[idx]?.picture?.thumbnail,
+        discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
+        tokens: [
+          tokenUris[(idx * 3) % tokenUris.length],
+          tokenUris[(idx * 3 + 1) % tokenUris.length],
+          tokenUris[(idx * 3 + 2) % tokenUris.length],
+        ].slice(0, Math.min(3, h.amount)),
+      }, ...list[idx]
+    }))
+  }
+})
+
+export const openHoldersPage = createEvent('open holders page')
+
+sample({
+  source: $currentNftAddress,
+  clock: openHoldersPage,
+  filter: Boolean,
+  fn: nftAddress => ({ nftAddress }),
+  target: fetchHoldersFx,
+})
+
+export const $holders = restore(fetchHoldersFx, null)
+  .reset($currentNftAddress.updates)
+
+fetchHoldersFx.watch(console.log)

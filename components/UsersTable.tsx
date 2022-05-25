@@ -5,7 +5,7 @@ import { ProgressBar } from './ProgressBar'
 import styles from './UsersTable.module.css'
 
 interface TableProps {
-  error?: unknown
+  error?: any
   isLoading: boolean
   data: TableData
   columns: Column<TableData[0]>[]
@@ -26,15 +26,15 @@ export const UsersTable = ({ data, error, isLoading, columns }: TableProps) => {
 
   return (
     // apply the table props
-    <div className={`${styles.container} ${isLoading || (!data && !error && !isLoading) ? styles.container_loading : ''}`}>
-      {isLoading && (
+    <div className={`${styles.container} ${(isLoading && !data && !error || !isLoading && error || !data && !error && !isLoading) ? styles.container_loading : ''}`}>
+      {isLoading && !data && !error && (
         <div className={styles.loader}>
           <ProgressBar color="black" />
         </div>
       )}
       {!data && !error && !isLoading && <div className={styles.emptyText}>No data is available</div>}
       {!isLoading && error && <div>Failed to load chart</div>}
-      {!isLoading && data?.length >= 1 && (
+      {!error && data?.length >= 1 && (
         <table className={styles.table} {...getTableProps()}>
           <thead className={styles.thead}>
             {
