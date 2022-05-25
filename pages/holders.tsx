@@ -29,6 +29,8 @@ const Holders = () => {
   const isLoading = useStore(fetchHoldersFx.pending)
   const error = useStore(restore(fetchHoldersFx.failData, null))
 
+  const [search, setSearch] = useState<string>('')
+
   const [filters, setFilters] = useState<Record<string, { name: string, isActive: boolean, predicate: (h: any) => boolean }>>({
     _1m_net_worth: {
       name: '$1m net worth',
@@ -48,7 +50,10 @@ const Holders = () => {
   })
 
   let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
-  let filteredHolders = holders?.filter(h => activeFilters.every(p => p(h)))
+  let filteredHolders =
+    holders?.filter(h =>
+      activeFilters.every(p => p(h)) &&
+      (h.address.includes(search) || h.domain?.includes(search)))
 
   let rowsPerPage = 12
   const [page, setPage] = useState<number>(0)
@@ -114,25 +119,20 @@ const Holders = () => {
 
   return (
     <div className={`${shared.column} ${indexStyles.main}`}>
-      <Header title='Holders'/>
+      <Header title="Holders"/>
 
       <main className={css.content}>
         <div className={css.search_bar}>
           <img src={'/search.svg'} width={32} height={32} className={css.search_icon} alt=""/>
-          <input type="text" placeholder="Search by address or ENS" className={css.search_input}/>
+          <input type="text" placeholder="Search by address or ENS" className={css.search_input} onChange={e => setSearch(e.target.value)} value={search}/>
         </div>
 
         <div className={css.actions_panel}>
           <div>1684 holders</div>
           <div>
             {Object.entries(filters).map(([key, f]) =>
-                <TagLabel
-                  key={key}
-                  isActive={f.isActive}
-                  onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })}
-                  children={f.name}
-                />
-              )}
+              <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
+            )}
           </div>
           <div className={css.actions_panel__action}>
             <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
