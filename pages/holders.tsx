@@ -88,7 +88,7 @@ const Holders = () => {
     joined_last_week: {
       name: 'Joined last week',
       isActive: false,
-      predicate: h => Date.now() - 1000 * 3600 * 24 * 7 < h.first_transfer,
+      predicate: h => Date.now() - 1000 * 3600 * 24 * 7 < h.first_transfer * 1000,
     },
     at_least_10_tokens: {
       name: 'At least 10 tokens',
@@ -212,7 +212,6 @@ function prettyNetWorth(amountInUsd: number): string {
 }
 
 function formatBigNum(amountInUsd: number): string {
-  console.log(amountInUsd)
   let subs = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }
   let uppers = `${Math.log10(amountInUsd) | 0}`.split('').map(ch => subs[ch] ?? ch).join('')
   return `10${uppers}`
