@@ -65,7 +65,6 @@ const Holders = () => {
           ...h, ...{
             logo: users?.[idx]?.picture?.thumbnail,
             discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
-            firstBought: Date.now() - (Math.random() * 1000 * 3600 * 24 * 14 | 0),
             tokens: [
               tokenUris[(idx * 3) % tokenUris.length],
               tokenUris[(idx * 3 + 1) % tokenUris.length],
@@ -89,7 +88,7 @@ const Holders = () => {
     joined_last_week: {
       name: 'Joined last week',
       isActive: false,
-      predicate: h => Date.now() - 1000 * 3600 * 24 * 7 < h.firstBought,
+      predicate: h => Date.now() - 1000 * 3600 * 24 * 7 < h.first_transfer,
     },
     at_least_10_tokens: {
       name: 'At least 10 tokens',
@@ -151,7 +150,7 @@ const Holders = () => {
       },
       {
         Header: 'First bought',
-        accessor: row => formatRelative(row.firstBought),
+        accessor: row => row.first_transfer ? formatRelative(row.first_transfer * 1000) : '',
       },
       {
         Header: 'Links',
@@ -227,5 +226,5 @@ function formatRelative(date: number): string {
   diff = diff / 24 | 0
   if (diff == 1) return `1 day ago`
   if (diff < 30) return `${diff} days ago`
-  return `meh`
+  return new Date(date).toLocaleDateString()
 }
