@@ -13,6 +13,7 @@ import { useStore } from 'effector-react'
 import { $currentNft, $holders, fetchHoldersFx, openHoldersPage } from '../lib/store'
 import { Header } from '../components/Header'
 import { restore } from 'effector'
+import { format } from 'date-fns'
 
 const Holders = () => {
   useEffect(openHoldersPage, [])
@@ -186,5 +187,5 @@ function formatRelative(date: number): string {
   diff = diff / 24 | 0
   if (diff == 1) return `1 day ago`
   if (diff < 30) return `${diff} days ago`
-  return new Date(date).toLocaleDateString()
+  return format(date, 'dd MMM yyyy')
 }
