@@ -105,7 +105,13 @@ const Holders = () => {
       },
       {
         Header: 'First bought',
-        accessor: row => row.first_transfer ? formatRelative(row.first_transfer * 1000) : '',
+        accessor: row => row.first_transfer
+          ? (
+            <span title={new Date(row.first_transfer * 1000).toLocaleString()}>
+              {formatRelative(row.first_transfer * 1000)}
+            </span>
+          )
+          : null,
       },
       {
         Header: 'Links',
