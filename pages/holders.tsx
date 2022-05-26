@@ -134,6 +134,12 @@ const Holders = () => {
           <input type="text" placeholder="Search by address or ENS" className={css.search_input} onChange={e => setSearch(e.target.value)} value={search}/>
         </div>
 
+        <div className={css.filters_panel}>
+          {Object.entries(filters).map(([key, f]) =>
+            <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
+          )}
+        </div>
+
         <div className={css.actions_panel}>
           {holders?.length && <div>
             {activeFilters.length
@@ -141,11 +147,6 @@ const Holders = () => {
               : `${holders.length} holders`
             }</div>}
 
-          <div>
-            {Object.entries(filters).map(([key, f]) =>
-              <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
-            )}
-          </div>
           <div className={css.actions_panel__action}>
             <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
             Export

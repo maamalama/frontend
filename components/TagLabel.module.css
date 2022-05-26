@@ -18,6 +18,7 @@
   margin-right: 4px;
   cursor: pointer;
   user-select: none;
+  padding: 6px 14px;
 }
 
 .tag_label:hover {
