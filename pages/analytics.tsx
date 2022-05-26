@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import css from './nft/shared.module.css'
 import indexStyles from './index.module.css'
-import sharedStyles from '../shared.module.css'
+import shared from '../shared.module.css'
 import { NftToErc20Holding, NftHolder, fetchNftAnalytics, ProtocolStat, randomify } from '../lib/fetchNFTs'
 import { Column } from 'react-table'
 import { Table } from '../components/Table'
@@ -99,14 +99,14 @@ const NftAnalyticsPage = () => {
   let loader = isLoading && <div><ProgressBar color="black"/></div>
 
   return (
-    <main className={`${sharedStyles.column} ${indexStyles.main}`}>
+    <main className={`${shared.column} ${indexStyles.main}`}>
       <Header title='Analytics'/>
 
-      <div className={sharedStyles.column} style={{ gap: '10px', marginBottom: '45px' }}>
+      <div className={`${shared.column} ${shared.page_content}`} style={{ gap: '10px', marginBottom: '45px', marginTop: '16px' }}>
         {!error &&
           <div className={indexStyles.list}>
             <h4 className={indexStyles.h4}>Social stats</h4>
-            <div className={`${sharedStyles.container} ${css.container} ${css.social_media_stats}`}>
+            <div className={`${shared.container} ${css.container} ${css.social_media_stats}`}>
               {/*<div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>*/}
               <div>
                 <img src={'/discord.ico'} width={15} height={15}/> <a href={'/connect'} style={{color: '#2684FF'}}>Connect Discord to view analytics</a>
@@ -178,7 +178,7 @@ const NftAnalyticsPage = () => {
               </div>
             </div>
 
-            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
+            <div className={`${shared.row} ${shared.container}`}>
               <div className={css.splitTables}>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
@@ -191,7 +191,7 @@ const NftAnalyticsPage = () => {
               </div>
             </div>
 
-            <div className={`${sharedStyles.row} ${sharedStyles.container}`}>
+            <div className={`${shared.row} ${shared.container}`}>
               <div className={css.splitTables}>
                 <div>
                   <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>

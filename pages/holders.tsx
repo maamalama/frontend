@@ -128,7 +128,7 @@ const Holders = () => {
     <div className={`${shared.column} ${indexStyles.main}`}>
       <Header title="Holders"/>
 
-      <main className={css.content}>
+      <main className={`${css.content} ${shared.page_content}`}>
         <div className={css.search_bar}>
           <img src={'/search.svg'} width={32} height={32} className={css.search_icon} alt=""/>
           <input type="text" placeholder="Search by address or ENS" className={css.search_input} onChange={e => setSearch(e.target.value)} value={search}/>
