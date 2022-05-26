@@ -5,25 +5,29 @@
   align-items: center;
   margin: 0 0 20px;
   color: #333;
+  font-size: 12px;
 }
 
 .pagination__button {
-  /*padding: 2px 0px;*/
-  margin: 0 1px;
+  padding: 4px 6px;
+  margin: 0 2px;
   user-select: none;
-  cursor: pointer;
   border-radius: 4px;
-  width: 34px;
-  height: 24px;
-  line-height: 24px;
+  min-width: 30px;
   text-align: center;
+  background: rgba(234, 234, 234, 0.5);
+  color: #888;
 }
 
-.pagination__button:hover {
-  background: #eaeaea;
+.pagination__button__wide {
+  min-width: 120px;
 }
 
 .pagination__active {
-  background: #2684FF99 !important;
-  color: white;
+  color: #2684FF;
+  cursor: pointer;
+}
+
+.pagination__active:hover {
+  background: #eaeaea;
 }
