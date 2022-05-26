@@ -134,7 +134,12 @@ const Holders = () => {
         </div>
 
         <div className={css.actions_panel}>
-          <div>1684 holders</div>
+          {holders?.length && <div>
+            {activeFilters.length
+              ? `${filteredHolders.length} of ${holders.length} holders (${Math.round((filteredHolders.length / holders.length) * 100)}%)`
+              : `${holders.length} holders`
+            }</div>}
+
           <div>
             {Object.entries(filters).map(([key, f]) =>
               <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
