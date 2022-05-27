@@ -67,7 +67,7 @@ export const fetchHoldersFx = createEffect({
     let [holders, tokenUris, { results: users }] =
       await Promise.all([
         fetch(`${BASE_URL}/nft/holders?token=${nftAddress}`).then(res => res.json()),
-        fetch(`/token-uris/${nftAddress}.json`).then(res => res.json()),
+        fetch(`/token-uris/${nftAddress}.json`).then(res => res.json()).catch(() => []),
         fetch(`https://randomuser.me/api/?results=30&seed=${nftAddress}&noinfo&inc=picture,username,login`).then(res => res.json()),
       ])
 
