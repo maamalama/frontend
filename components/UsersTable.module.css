@@ -47,7 +47,7 @@
 
 .container_loading {
   border: var(--border);
-  min-height: 400px;
+  min-height: 580px;
   background-color: white;
 }
 
