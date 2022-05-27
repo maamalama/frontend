@@ -13,8 +13,6 @@ const Button = ({ page, children, onClick, className }: ButtonProps) => {
 }
 
 export const Pagination = ({ page, total, onSelect }) => {
-  if (total === 0) return null
-
   let hasLeft = page !== 0
   let hasRight = page !== total - 1
 
