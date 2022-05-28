@@ -13,6 +13,8 @@ const Button = ({ page, children, onClick, className }: ButtonProps) => {
 }
 
 export const Pagination = ({ page, total, onSelect }) => {
+  total = Math.max(1, Math.ceil(total || 0))
+
   let hasLeft = page !== 0
   let hasRight = page !== total - 1
 

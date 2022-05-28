@@ -157,7 +157,7 @@ const Holders = () => {
           <UsersTable {...{ error, isLoading, data: paginatedHolders, columns: holdersColumns }} />
         </div>
 
-        <Pagination page={page} total={Math.ceil((filteredHolders?.length || 0) / rowsPerPage)  | 0} onSelect={setPage}/>
+        <Pagination page={page} total={filteredHolders?.length / rowsPerPage} onSelect={setPage}/>
       </main>
     </div>
   )
