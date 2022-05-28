@@ -43,6 +43,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: auto;
 }
 
 .actions_panel__action:hover {
