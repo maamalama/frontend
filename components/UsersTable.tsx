@@ -7,8 +7,8 @@ import styles from './UsersTable.module.css'
 interface TableProps {
   error?: any
   isLoading: boolean
-  data: TableData
-  columns: Column<TableData[0]>[]
+  data: any[]
+  columns: Column<any>[]
 }
 
 export const UsersTable = ({ data, error, isLoading, columns }: TableProps) => {
