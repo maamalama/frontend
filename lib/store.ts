@@ -71,36 +71,17 @@ export const fetchHoldersFx = createEffect({
         fetch(`https://randomuser.me/api/?results=30&seed=${nftAddress}&noinfo&inc=picture,username,login`).then(res => res.json()),
       ])
 
-    let list = [
-      { twitter: 'samx', discord: 'sx#2401', isFav: true },
-      { twitter: 'xamgore', discord: 'xamgore#2401', isFav: true },
-      { discord: null, twitter: null, isFav: false },
-      { discord: 'sx#2401', twitter: null, isFav: false },
-      { discord: null, twitter: 'samx', isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-      { twitter: null, isFav: false },
-    ]
-
     return holders.map((h, idx) => ({
       ...h, ...{
-        logo: users?.[idx]?.picture?.thumbnail,
-        discord: users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
+        logo: h.logo ?? users?.[idx]?.picture?.thumbnail,
+        discord: h.discord ?? users?.[idx]?.login?.username?.replace(/(\d+)/, '#$1'),
         tokens: [
           tokenUris[(idx * 3) % tokenUris.length],
           tokenUris[(idx * 3 + 1) % tokenUris.length],
           tokenUris[(idx * 3 + 2) % tokenUris.length],
         ].slice(0, Math.min(3, h.amount)),
-      }, ...list[idx]
+        isFav: Math.random() < 0.2,
+      },
     }))
   }
 })

@@ -70,10 +70,10 @@ const Holders = () => {
         Header: <span style={{ paddingLeft: '80px' }}>Address</span>,
         id: 'address',
         accessor: (row) => row, // accessor is the "key" in the data,
-        Cell: ({ value: { icon, domain = null, address, isFav } }) => (
+        Cell: ({ value: { logo, domain = null, address, isFav } }) => (
           <div className={css.holdingsTokenCell}>
             <div className={css.starIcon} style={{ [isFav && 'backgroundImage']: `url('/star-active.svg')` }}/>
-            <div className={css.holdingsIcon} style={{ backgroundImage: `url(${icon})` }}/>
+            <div className={css.holdingsIcon} style={{ backgroundImage: `url(${logo})` }}/>
             <a href={`https://etherscan.io/address/${address}`} className={css.inTableLink}>{domain || address}</a>
           </div>
         )
