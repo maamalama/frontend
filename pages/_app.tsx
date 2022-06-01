@@ -7,7 +7,7 @@ import shared from '../shared.module.css'
 import Link from 'next/link'
 import { NavLink } from '../components/NavLink'
 import { useRouter } from 'next/router'
-import Connect from './connect'
+import Connect from './connect/[address]'
 import { useEffect } from 'react'
 import { fetchAuthorNFTsFx } from '../lib/store'
 
