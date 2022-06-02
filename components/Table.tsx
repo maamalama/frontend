@@ -26,8 +26,8 @@ export const Table = ({ data = [], error, isLoading, columns }: TableProps) => {
 
   return (
     // apply the table props
-    <div className={`${styles.container} ${isLoading || (!data && !error && !isLoading) ? styles.container_loading : ''}`}>
-      {isLoading && (
+    <div className={`${styles.container} ${(isLoading && !data && !error || !isLoading && error || !data && !error && !isLoading) ? styles.container_loading : ''}`}>
+      {isLoading && !data && !error && (
         <div className={styles.loader}>
           <ProgressBar color="black" />
         </div>

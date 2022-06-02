@@ -22,6 +22,7 @@
 .container {
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   /*min-height: 470px;*/
   border-radius: 2px;
