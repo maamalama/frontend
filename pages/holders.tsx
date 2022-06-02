@@ -48,6 +48,11 @@ const Holders = () => {
       isActive: false,
       predicate: h => h.amount >= 10,
     },
+    has_ens: {
+      name: 'With ENS',
+      isActive: false,
+      predicate: h => !!h.domain,
+    }
   })
 
   let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
