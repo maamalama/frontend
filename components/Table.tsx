@@ -7,8 +7,8 @@ import styles from './Table.module.css'
 interface TableProps {
   error?: unknown
   isLoading: boolean
-  data: TableData
-  columns: Column<TableData[0]>[]
+  data: any
+  columns: Column<any>[]
 }
 
 export const Table = ({ data, error, isLoading, columns }: TableProps) => {

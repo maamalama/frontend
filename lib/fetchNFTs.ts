@@ -1,31 +1,22 @@
 import { BASE_URL } from '../data/constants'
 import { ChainId } from '../data/networks'
 import { rng } from './random'
-
-export type Nft = {
-  address: string
-  name: string
-  symbol: string
-  logo: string
-}
-
-export const fetchNFTs = () => {
-  return fetch(`${BASE_URL}/nft/all`)
-    .then(res => res.json())
-    .then((list: Nft[]) => list.map(it => ({ ...it, label: it.name, chainId: ChainId.ETH })))
-}
+import { ProtocolStat } from '../models/nft/protocols'
+import { NetworkStat } from '../models/nft/networks'
+import { NftHolding } from '../models/nft/holdings'
+import { NftHolder } from '../models/nft/holders'
 
 export const fetchNftAnalytics = async (token: string) => {
-  let statsReq = fetch(`${BASE_URL}/nft/stats?token=${token}`).then(res => res.json())
-  let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=nft&limit=25`).then(res => res.json())
   let holdingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=erc20&limit=25`).then(res => res.json())
+  let nftHoldingsReq = fetch(`${BASE_URL}/nft/holdings?token=${token}&type=nft&limit=25`).then(res => res.json())
   let holdersReq = fetch(`${BASE_URL}/nft/holders?token=${token}`).then(res => res.json())
+  let statsReq = fetch(`${BASE_URL}/nft/stats?token=${token}`).then(res => res.json())
   let protocolsReq = fetch(`${BASE_URL}/nft/protocols?token=${token}&limit=20`).then(res => res.json())
   let networksReq = fetch(`${BASE_URL}/nft/networks?token=${token}&limit=20`).then(res => res.json())
 
   let [networks, protocols, stats, nftHoldings, holdings, holders] =
     await Promise.all([networksReq, protocolsReq, statsReq, nftHoldingsReq, holdingsReq, holdersReq]) as
-      [NetworkStat[], ProtocolStat[], NftStats, NftToErc20Holding[], NftToErc20Holding[], NftHolder[]]
+      [NetworkStat[], ProtocolStat[], NftStats, NftHolding[], NftHolding[], NftHolder[]]
 
   const balances = holders.map(h => h.total_balance_usd).sort((a, b) => a - b)
 
@@ -73,25 +64,6 @@ export function randomify(token: string, data: Awaited<ReturnType<typeof fetchNf
   }
 }
 
-export type NftToErc20Holding = {
-  token: {
-    network: ChainId
-    address: string
-    name: string
-    symbol: string
-    decimals: number
-    logo: string
-  }
-  holders: number
-  share: number
-}
-
-export type NftHolder = {
-  address: string
-  amount: number
-  total_balance_usd: number
-}
-
 export type NftStats = {
   token: {
     network: ChainId
@@ -104,20 +76,4 @@ export type NftStats = {
   active_7d: number
   active_30d: number
   total: number
-}
-
-export type ProtocolStat = {
-  name: string
-  logo: string
-  url: string
-  users_last_month: number
-  users_in_total: number
-}
-
-export type NetworkStat = {
-  name: string
-  logo: string
-  url: string
-  users_last_month: number
-  users_in_total: number
 }

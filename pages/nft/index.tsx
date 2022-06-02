@@ -3,15 +3,16 @@ import { CollectionOfNFT } from '../../components/CollectionOfNFT'
 import css from './index.module.css'
 import indexStyles from '../index.module.css'
 import { useRouter } from 'next/router'
-import { $nfts, setCurrentNftAddress } from '../../lib/store'
+import { $nfts } from '../../models/me/myNfts'
 import { useStore } from 'effector-react'
+import { setMyNftAddress } from '../../models/me/myNft'
 
 const NftAnalyticsPage = () => {
   const nftList = useStore($nfts)
   const router = useRouter()
 
   const onClick = (nft) => {
-    setCurrentNftAddress(nft.address)
+    setMyNftAddress(nft.address)
     router.push('/')
   }
 

@@ -1,10 +1,10 @@
 import css from './Header.module.css'
 import { useStore } from 'effector-react'
-import { $currentNft } from '../lib/store'
+import { $myNft } from '../models/me/myNft'
 import Link from 'next/link'
 
 export const Header = ({ title }) => {
-  const nft = useStore($currentNft)
+  const nft = useStore($myNft)
   if (!nft) return null
 
   return (

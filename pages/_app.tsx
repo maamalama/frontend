@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { ExternalLink } from 'react-external-link'
 import '../global.css'
 import styles from './_app.module.css'
 import shared from '../shared.module.css'
@@ -9,10 +8,10 @@ import { NavLink } from '../components/NavLink'
 import { useRouter } from 'next/router'
 import Connect from './connect/[address]'
 import { useEffect } from 'react'
-import { fetchAuthorNFTsFx } from '../lib/store'
+import { init } from '../models/app'
 
 const App = ({ pageProps, Component }: AppProps) => {
-  useEffect(() => { fetchAuthorNFTsFx({}) }, [])
+  useEffect(init, [])
 
   const holders = color => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g opacity="0.9">

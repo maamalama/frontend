@@ -1,7 +1,7 @@
 import css from './[address].module.css'
 import { useRouter } from 'next/router'
 import { useStoreMap } from 'effector-react'
-import { $nfts } from '../../lib/store'
+import { $nfts } from '../../models/me/myNfts'
 
 const Address = () => {
   let router = useRouter()

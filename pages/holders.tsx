@@ -3,21 +3,16 @@ import shared from '../shared.module.css'
 import css from './holders.module.css'
 import { useEffect, useMemo, useState } from 'react'
 import { Column } from 'react-table'
-import { TableData } from '../lib/types'
 import { useRouter } from 'next/router'
-import { BASE_URL } from '../data/constants'
 import { UsersTable } from '../components/UsersTable'
 import { TagLabel } from '../components/TagLabel'
 import { Pagination } from '../components/Pagination'
 import { useStore } from 'effector-react'
-import { $currentNft, $holders, fetchHoldersFx, openHoldersPage } from '../lib/store'
+import { $holders } from '../models/nft'
 import { Header } from '../components/Header'
-import { restore } from 'effector'
 import { format } from 'date-fns'
 
 const Holders = () => {
-  useEffect(openHoldersPage, [])
-
   let router = useRouter()
 
   useEffect(() => {
@@ -27,8 +22,6 @@ const Holders = () => {
   }, [router.route])
 
   const holders = useStore($holders)
-  const isLoading = useStore(fetchHoldersFx.pending)
-  const error = useStore(restore(fetchHoldersFx.failData, null))
 
   const [search, setSearch] = useState<string>('')
 
@@ -57,7 +50,7 @@ const Holders = () => {
 
   let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
   let filteredHolders =
-    holders?.filter(h =>
+    holders.data?.filter(h =>
       activeFilters.every(p => p(h)) &&
       (h.address.includes(search) || h.domain?.includes(search)))
 
@@ -146,10 +139,10 @@ const Holders = () => {
         </div>
 
         <div className={css.actions_panel}>
-          {holders?.length && <div>
+          {holders.data?.length && <div>
             {activeFilters.length
-              ? `${filteredHolders.length} of ${holders.length} holders (${Math.round((filteredHolders.length / holders.length) * 100)}%)`
-              : `${holders.length} holders`
+              ? `${filteredHolders.length} of ${holders.data.length} holders (${Math.round((filteredHolders.length / holders.data.length) * 100)}%)`
+              : `${holders.data.length} holders`
             }</div>}
 
           <div className={css.actions_panel__action}>
@@ -159,7 +152,7 @@ const Holders = () => {
         </div>
 
         <div style={{minHeight: '610px' }}>
-          <UsersTable {...{ error, isLoading, data: paginatedHolders, columns: holdersColumns }} />
+          <UsersTable {...{ error: holders.error, isLoading: holders.isLoading, data: paginatedHolders, columns: holdersColumns }} />
         </div>
 
         <Pagination page={page} total={filteredHolders?.length / rowsPerPage} onSelect={setPage}/>
