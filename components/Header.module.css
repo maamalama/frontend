@@ -16,6 +16,7 @@
   font-size: 16px;
   font-weight: 500;
   position: relative;
+  cursor: pointer;
 }
 
 .content_header__chain_icon {
@@ -30,4 +31,43 @@
   position: absolute;
   left: -40px;
   top: -6px;
+}
+
+.selector {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  /*min-width: 240px;*/
+  min-height: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: white;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  z-index: 100;
+  overflow: hidden;
+  transition: opacity;
+  transition-duration: 150ms;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.selector__shown {
+  pointer-events: initial;
+  opacity: 1;
+}
+
+.selector__item {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding-left: calc(48px + 2px);
+  padding-right: 16px;
+}
+
+.selector__item:hover {
+  background: #2684ff;
+  color: white;
+  cursor: pointer;
 }

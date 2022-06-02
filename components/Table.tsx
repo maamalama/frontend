@@ -11,7 +11,7 @@ interface TableProps {
   columns: Column<any>[]
 }
 
-export const Table = ({ data, error, isLoading, columns }: TableProps) => {
+export const Table = ({ data = [], error, isLoading, columns }: TableProps) => {
   const {
     getTableProps,
 
