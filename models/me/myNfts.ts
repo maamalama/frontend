@@ -24,6 +24,7 @@ export const fetchAuthorNFTsFx = createEffect({
 })
 
 export const $nfts = restore(fetchAuthorNFTsFx.doneData, [])
+export const $nftsIsLoading = fetchAuthorNFTsFx.pending
 
 persist({ store: $nfts, key: 'myNfts' })
 

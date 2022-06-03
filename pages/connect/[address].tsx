@@ -1,7 +1,7 @@
 import css from './[address].module.css'
 import { useRouter } from 'next/router'
-import { useStoreMap } from 'effector-react'
-import { $nfts } from '../../models/me/myNfts'
+import { useStore, useStoreMap } from 'effector-react'
+import { $nfts, $nftsIsLoading, Nft } from '../../models/me'
 
 const Address = () => {
   let router = useRouter()
@@ -9,9 +9,10 @@ const Address = () => {
     ? window.location.pathname.slice(1 + window.location.pathname.lastIndexOf('/'))
     : router.query.address
 
-  let nft = useStoreMap($nfts, nfts => nfts.find(n => n.address == address) ?? null)
+  let nft = useStoreMap($nfts, nfts => nfts.find(n => n.address == address) ?? {} as Nft)
+  let isLoading = useStore($nftsIsLoading)
 
-  if (!nft) return (
+  if (!nft && !isLoading) return (
     <main className={css.main}>
       Such NFT doesn't exist in our database.
     </main>
@@ -21,7 +22,7 @@ const Address = () => {
     <main className={css.main}>
       <div className={css.logo}>#hashscan</div>
       <div className={css.card}>
-        <img className={css.img} src={nft.logo} height={80} width={80} alt="logo"/>
+        <img className={css.img} src={nft.logo} height={80} width={80} alt=""/>
         <div className={css.profile}>Connect holder profile</div>
         <div className={css.desc}>Connect {nft.name} holder profile to be enrolled to whitelists, giveaways and future partnerships</div>
 
