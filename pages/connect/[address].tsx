@@ -2,8 +2,14 @@ import css from './[address].module.css'
 import { useRouter } from 'next/router'
 import { useStore, useStoreMap } from 'effector-react'
 import { $nfts, $nftsIsLoading, Nft } from '../../models/me'
+import { WagmiConfig, createClient, useAccount, useEnsName, useConnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
-const Address = () => {
+const wagmiClient = createClient({
+  autoConnect: true,
+})
+
+const Connect = () => {
   let router = useRouter()
   let address = globalThis.window
     ? window.location.pathname.slice(1 + window.location.pathname.lastIndexOf('/'))
@@ -12,10 +18,15 @@ const Address = () => {
   let nft = useStoreMap($nfts, nfts => nfts.find(n => n.address == address) ?? {} as Nft)
   let isLoading = useStore($nftsIsLoading)
 
+  const { data: account } = useAccount()
+  const { data: ensName } = useEnsName({ address: account?.address })
+  const { connectAsync, isConnecting } = useConnect({
+    connector: new InjectedConnector(),
+  })
+
   if (!nft && !isLoading) return (
     <main className={css.main}>
-      Such NFT doesn't exist in our database.
-    </main>
+      Such NFT doesn't exist in our database. </main>
   )
 
   return (
@@ -29,7 +40,10 @@ const Address = () => {
         <div className={css.connectLayout} style={{ marginTop: '32px' }}>
           <div className={css.name}><img src={'/cryptos/eth.svg'} width={24} height={24} alt=""/>&nbsp;&nbsp;Wallet</div>
           <div className={css.space}/>
-          <div className={css.connectedWallet}>jackqack.eth</div>
+          {account
+            ? <div className={css.connectedWallet}>{ensName ?? (account.address?.slice(0, 6) + '…' + account.address?.slice(-4))}</div>
+            : <div className={css.connect} onClick={() => !isConnecting && connectAsync()}>Connect</div>
+          }
         </div>
         <div className={css.connectDivider}/>
 
@@ -53,4 +67,12 @@ const Address = () => {
   )
 }
 
-export default Address
+const WalletWrapper = () => {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <Connect/>
+    </WagmiConfig>
+  )
+}
+
+export default WalletWrapper
