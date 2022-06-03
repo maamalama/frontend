@@ -12,7 +12,6 @@ import { $stats, $metrics, $networks, $erc20Holdings, $nftHoldings, $protocols, 
 
 const NftAnalyticsPage = () => {
   const nft = useStore($myNft)
-  if (!nft) return <main/>
 
   const stats = useStore($stats)
   const metrics = useStore($metrics)
