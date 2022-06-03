@@ -18,6 +18,7 @@
   padding-right: 6px;
   position: absolute;
   left: 58px;
+  pointer-events: none;
 }
 
 .search_input {
@@ -131,6 +132,10 @@
   background-size: cover;
   width: 24px;
   height: 24px;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .token:nth-child(2) {

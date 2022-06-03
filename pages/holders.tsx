@@ -106,7 +106,7 @@ const Holders = () => {
         Header: 'First bought',
         accessor: row => row.first_transfer
           ? (
-            <span title={new Date(row.first_transfer * 1000).toLocaleString()}>
+            <span title={new Date(row.first_transfer * 1000).toLocaleString()} className={css.nowrap}>
               {formatRelative(row.first_transfer * 1000)}
             </span>
           )
@@ -151,7 +151,7 @@ const Holders = () => {
           </div>
         </div>
 
-        <div style={{minHeight: '610px' }}>
+        <div style={{minHeight: '610px', padding: '0 16px' }}>
           <UsersTable {...{ error: holders.error, isLoading: holders.isLoading, data: paginatedHolders, columns: holdersColumns }} />
         </div>
 

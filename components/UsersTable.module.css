@@ -37,18 +37,17 @@
 
 .container {
   margin-bottom: 20px;
-  display: flex;
   justify-content: center;
-  /*min-height: 470px;*/
   border-radius: 2px;
   width: 100%;
-  padding: 0 16px;
+  overflow-x: scroll;
 }
 
 .container_loading {
   border: var(--border);
   min-height: 580px;
   background-color: white;
+  display: flex;
 }
 
 .emptyText,
