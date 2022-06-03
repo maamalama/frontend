@@ -11,6 +11,7 @@ import { useStore } from 'effector-react'
 import { $holders } from '../models/nft'
 import { Header } from '../components/Header'
 import { format } from 'date-fns'
+import { AdminPanel } from '../components/AdminPanel'
 
 const Holders = () => {
   let router = useRouter()
@@ -123,41 +124,43 @@ const Holders = () => {
   )
 
   return (
-    <div className={`${shared.column} ${indexStyles.main}`}>
-      <Header title="Holders"/>
+    <AdminPanel>
+      <div className={`${shared.column} ${indexStyles.main}`}>
+        <Header title="Holders"/>
 
-      <main className={`${css.content} ${shared.page_content}`}>
-        <div className={css.search_bar}>
-          <img src={'/search.svg'} width={32} height={32} className={css.search_icon} alt=""/>
-          <input type="text" placeholder="Search by address or ENS" className={css.search_input} onChange={e => setSearch(e.target.value)} value={search}/>
-        </div>
-
-        <div className={css.filters_panel}>
-          {Object.entries(filters).map(([key, f]) =>
-            <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
-          )}
-        </div>
-
-        <div className={css.actions_panel}>
-          {holders.data?.length && <div>
-            {activeFilters.length
-              ? `${filteredHolders.length} of ${holders.data.length} holders (${Math.round((filteredHolders.length / holders.data.length) * 100)}%)`
-              : `${holders.data.length} holders`
-            }</div>}
-
-          <div className={css.actions_panel__action}>
-            <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
-            Export
+        <main className={`${css.content} ${shared.page_content}`}>
+          <div className={css.search_bar}>
+            <img src={'/search.svg'} width={32} height={32} className={css.search_icon} alt=""/>
+            <input type="text" placeholder="Search by address or ENS" className={css.search_input} onChange={e => setSearch(e.target.value)} value={search}/>
           </div>
-        </div>
 
-        <div style={{minHeight: '610px', padding: '0 16px' }}>
-          <UsersTable {...{ error: holders.error, isLoading: holders.isLoading, data: paginatedHolders, columns: holdersColumns }} />
-        </div>
+          <div className={css.filters_panel}>
+            {Object.entries(filters).map(([key, f]) =>
+              <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
+            )}
+          </div>
 
-        <Pagination page={page} total={filteredHolders?.length / rowsPerPage} onSelect={setPage}/>
-      </main>
-    </div>
+          <div className={css.actions_panel}>
+            {holders.data?.length && <div>
+              {activeFilters.length
+                ? `${filteredHolders.length} of ${holders.data.length} holders (${Math.round((filteredHolders.length / holders.data.length) * 100)}%)`
+                : `${holders.data.length} holders`
+              }</div>}
+
+            <div className={css.actions_panel__action}>
+              <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
+              Export
+            </div>
+          </div>
+
+          <div style={{ minHeight: '610px', padding: '0 16px' }}>
+            <UsersTable {...{ error: holders.error, isLoading: holders.isLoading, data: paginatedHolders, columns: holdersColumns }} />
+          </div>
+
+          <Pagination page={page} total={filteredHolders?.length / rowsPerPage} onSelect={setPage}/>
+        </main>
+      </div>
+    </AdminPanel>
   )
 }
 

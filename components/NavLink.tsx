@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import css from '../pages/_app.module.css'
+import css from './AdminPanel.module.css'
 
 export const NavLink = ({ href, children, icon }) => {
   const router = useRouter()

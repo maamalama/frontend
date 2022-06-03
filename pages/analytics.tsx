@@ -9,6 +9,7 @@ import { Header } from '../components/Header'
 import { useStore } from 'effector-react'
 import { $myNft } from '../models/me/myNft'
 import { $stats, $metrics, $networks, $erc20Holdings, $nftHoldings, $protocols, NftHolding, ProtocolStat } from '../models/nft'
+import { AdminPanel } from '../components/AdminPanel'
 
 const NftAnalyticsPage = () => {
   const nft = useStore($myNft)
@@ -92,114 +93,116 @@ const NftAnalyticsPage = () => {
   let loader = isLoading => isLoading && <div><ProgressBar color="black"/></div>
 
   return (
-    <main className={`${shared.column} ${indexStyles.main}`}>
-      <Header title="Analytics"/>
+    <AdminPanel>
+      <main className={`${shared.column} ${indexStyles.main}`}>
+        <Header title="Analytics"/>
 
-      <div className={`${shared.column} ${shared.page_content}`} style={{ gap: '10px', marginBottom: '45px', marginTop: '16px' }}>
+        <div className={`${shared.column} ${shared.page_content}`} style={{ gap: '10px', marginBottom: '45px', marginTop: '16px' }}>
 
-        <div className={indexStyles.list}>
-          <h4 className={indexStyles.h4}>Social stats</h4>
-          <div className={`${css.container} ${css.social_media_stats}`}>
-            {/*<div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>*/}
-            <div>
-              <img src={'/discord.ico'} width={15} height={15}/> <a href={'/connect'} style={{ color: '#2684FF' }}>Connect Discord to view analytics</a>
-            </div>
-            <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers</div>
-          </div>
-
-          <h4 className={indexStyles.h4}>Token Stats</h4>
-          <div className={css.platesArray}>
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>total holders</div>
-                <h3 className={css.plateValue}>{loader(stats.isLoading) || stats.data?.total}</h3>
-              </article>
+          <div className={indexStyles.list}>
+            <h4 className={indexStyles.h4}>Social stats</h4>
+            <div className={`${css.container} ${css.social_media_stats}`}>
+              {/*<div><img src={'/discord.ico'} width={18} height={18}/>&nbsp;&nbsp;2,408 members</div>*/}
+              <div>
+                <img src={'/discord.ico'} width={15} height={15}/> <a href={'/connect'} style={{ color: '#2684FF' }}>Connect Discord to view analytics</a>
+              </div>
+              <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers</div>
             </div>
 
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>avg net worth</div>
-                <h3 className={css.plateValue}>
-                  {loader(metrics.isLoading) || (prettyNetWorth(metrics.data.avgNetWorthInUsd) || formatBigNum(metrics.data.avgNetWorthInUsd))}
-                </h3>
-              </article>
+            <h4 className={indexStyles.h4}>Token Stats</h4>
+            <div className={css.platesArray}>
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>total holders</div>
+                  <h3 className={css.plateValue}>{loader(stats.isLoading) || stats.data?.total}</h3>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>avg net worth</div>
+                  <h3 className={css.plateValue}>
+                    {loader(metrics.isLoading) || (prettyNetWorth(metrics.data.avgNetWorthInUsd) || formatBigNum(metrics.data.avgNetWorthInUsd))}
+                  </h3>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>median portfolio value</div>
+                  <h3 className={css.plateValue}>
+                    {loader(metrics.isLoading) || (metrics.data.medianPortfolioValueInUsd ? `$${Math.trunc(metrics.data.medianPortfolioValueInUsd).toLocaleString()}` : 'undefined')}
+                  </h3>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last day</div>
+                  <h3 className={css.plateValue}>
+                    {loader(stats.isLoading) || toPercent(stats.data.active_1d)}
+                  </h3>
+                  <div className={css.plateSubValue}>
+                    {stats.data?.active_1d}
+                  </div>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last week</div>
+                  <h3 className={css.plateValue}>
+                    {loader(stats.isLoading) || toPercent(stats.data.active_7d)}
+                  </h3>
+                  <div className={css.plateSubValue}>
+                    {stats.data.active_7d}
+                  </div>
+                </article>
+              </div>
+
+              <div className={css.plate}>
+                <article className={css.plateContent}>
+                  <div className={css.plateTitle}>last month</div>
+                  <h3 className={css.plateValue}>
+                    {loader(stats.isLoading) || toPercent(stats.data.active_30d)}
+                  </h3>
+                  <div className={css.plateSubValue}>
+                    {stats.data.active_30d}
+                  </div>
+                </article>
+              </div>
             </div>
 
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>median portfolio value</div>
-                <h3 className={css.plateValue}>
-                  {loader(metrics.isLoading) || (metrics.data.medianPortfolioValueInUsd ? `$${Math.trunc(metrics.data.medianPortfolioValueInUsd).toLocaleString()}` : 'undefined')}
-                </h3>
-              </article>
-            </div>
-
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>last day</div>
-                <h3 className={css.plateValue}>
-                  {loader(stats.isLoading) || toPercent(stats.data.active_1d)}
-                </h3>
-                <div className={css.plateSubValue}>
-                  {stats.data?.active_1d}
+            <div className={`${shared.row}`}>
+              <div className={css.splitTables}>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
+                  <Table {...{ error: nftHoldings.error, isLoading: nftHoldings.isLoading, data: nftHoldings.data, columns: holdingsColumns }} />
                 </div>
-              </article>
-            </div>
-
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>last week</div>
-                <h3 className={css.plateValue}>
-                  {loader(stats.isLoading) || toPercent(stats.data.active_7d)}
-                </h3>
-                <div className={css.plateSubValue}>
-                  {stats.data.active_7d}
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
+                  <Table {...{ error: erc20Holdings.error, isLoading: erc20Holdings.isLoading, data: erc20Holdings.data, columns: holdingsColumns }} />
                 </div>
-              </article>
+              </div>
             </div>
 
-            <div className={css.plate}>
-              <article className={css.plateContent}>
-                <div className={css.plateTitle}>last month</div>
-                <h3 className={css.plateValue}>
-                  {loader(stats.isLoading) || toPercent(stats.data.active_30d)}
-                </h3>
-                <div className={css.plateSubValue}>
-                  {stats.data.active_30d}
+            <div className={`${shared.row}`}>
+              <div className={css.splitTables}>
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
+                  <Table {...{ error: protocols.error, isLoading: protocols.isLoading, data: protocols.data, columns: protocolsColumns }} />
                 </div>
-              </article>
-            </div>
-          </div>
-
-          <div className={`${shared.row}`}>
-            <div className={css.splitTables}>
-              <div>
-                <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top NFT Holdings</h4>
-                <Table {...{ error: nftHoldings.error, isLoading: nftHoldings.isLoading, data: nftHoldings.data, columns: holdingsColumns }} />
-              </div>
-              <div>
-                <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Top Token Holdings</h4>
-                <Table {...{ error: erc20Holdings.error, isLoading: erc20Holdings.isLoading, data: erc20Holdings.data, columns: holdingsColumns }} />
+                <div>
+                  <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Networks</h4>
+                  <Table {...{ error: networks.error, isLoading: networks.isLoading, data: networks.data, columns: networksColumns }} />
+                </div>
               </div>
             </div>
           </div>
 
-          <div className={`${shared.row}`}>
-            <div className={css.splitTables}>
-              <div>
-                <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Protocols</h4>
-                <Table {...{ error: protocols.error, isLoading: protocols.isLoading, data: protocols.data, columns: protocolsColumns }} />
-              </div>
-              <div>
-                <h4 className={`${indexStyles.h4} ${css.container} ${css.pb4}`} style={{ marginTop: 0 }}>Used Networks</h4>
-                <Table {...{ error: networks.error, isLoading: networks.isLoading, data: networks.data, columns: networksColumns }} />
-              </div>
-            </div>
-          </div>
         </div>
-
-      </div>
-    </main>
+      </main>
+    </AdminPanel>
   )
 }
 
