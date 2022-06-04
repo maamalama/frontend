@@ -7,7 +7,7 @@ import { Table } from '../components/Table'
 import { ProgressBar } from '../components/ProgressBar'
 import { Header } from '../components/Header'
 import { useStore } from 'effector-react'
-import { $myNft } from '../models/me/myNft'
+import { $myNft } from '../models/me'
 import { $stats, $metrics, $networks, $erc20Holdings, $nftHoldings, $protocols, NftHolding, ProtocolStat } from '../models/nft'
 import { AdminPanel } from '../components/AdminPanel'
 
@@ -106,7 +106,7 @@ const NftAnalyticsPage = () => {
               <div>
                 <img src={'/discord.ico'} width={15} height={15}/> <a href={'/connect'} style={{ color: '#2684FF' }}>Connect Discord to view analytics</a>
               </div>
-              <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers</div>
+              <div><img src={'/twitter.png'} width={18} height={18}/>&nbsp;&nbsp;14,213 followers / <a href={`/connect/${nft.address}`} style={{ color: '#2684FF' }}>connect</a></div>
             </div>
 
             <h4 className={indexStyles.h4}>Token Stats</h4>
