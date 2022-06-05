@@ -12,6 +12,18 @@ const wagmiClient = createClient({
   autoConnect: false,
 })
 
+const Row = ({ icon, title, isDisabled = false, isConnected = false, onConnect, children }) => {
+  return (
+    <div className={css.connectLayout}>
+      <div className={css.name}><img src={icon} width={24} height={24} alt=""/>&nbsp;&nbsp;{title}</div>
+      <div className={css.space}/>
+      <div className={`${css.connect} ${isConnected && css.connected} ${isDisabled && css.disabled}`} onClick={() => !isConnected && !isDisabled && onConnect()}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
 const Connect = () => {
   let router = useRouter()
   let address = globalThis.window
@@ -21,13 +33,13 @@ const Connect = () => {
   let nft = useStoreMap($nfts, nfts => nfts.find(n => n.address == address) ?? {} as Nft)
   let isLoading = useStore($nftsIsLoading)
 
-  const [twitter, setTwitter] = useState(null)
-
-  const { data: account } = useAccount()
-  const { data: ensName } = useEnsName({ address: account?.address })
-  const { connectAsync, isConnecting } = useConnect({
+  const { connectAsync, isDisconnected, status } = useConnect({
     connector: new InjectedConnector(),
   })
+  const { data: account } = useAccount()
+  const { data: ensName } = useEnsName({ address: account?.address })
+
+  const [twitter, setTwitter] = useState(null)
 
   const { isLoading: isSignLoading, signMessage, isSuccess } = useSignMessage({
     message: JSON.stringify(twitter),
@@ -54,16 +66,14 @@ const Connect = () => {
     }
   })
 
-  const connectTwitter = async () => {
+  const connectTwitter = () => {
     let url = `${BASE_URL}/profile/twitter`
     popupCenter({ url, title: 'Auth', w: 360, h: 420 })
   }
 
-  if (!nft && !isLoading) return (
-    <main className={css.main}>
-      Such NFT doesn't exist in our database.
-    </main>
-  )
+  if (!nft && !isLoading) {
+    return <main className={css.main}>Such NFT doesn't exist in our database.</main>
+  }
 
   return (
     <main className={css.main}>
@@ -73,31 +83,24 @@ const Connect = () => {
         <div className={css.profile}>Connect holder profile</div>
         <div className={css.desc}>Connect holder profile to be enrolled to whitelists, giveaways and future partnerships{nft.name ? ` with ${nft.name}` : ''}</div>
 
-        <div className={css.connectLayout} style={{ marginTop: '32px' }}>
-          <div className={css.name}><img src={'/cryptos/eth.svg'} width={24} height={24} alt=""/>&nbsp;&nbsp;Wallet</div>
-          <div className={css.space}/>
+        <Row icon="/cryptos/eth.svg" title="Wallet" isConnected={!!account} onConnect={() => connectAsync().catch(() => {})}>
           {account
-            ? <div className={css.connected}>{ensName ?? (account.address?.slice(0, 6) + '…' + account.address?.slice(-4))}</div>
-            : <div className={css.connect} onClick={() => !isConnecting && connectAsync()}>Connect</div>
+            ? ensName ?? (account.address?.slice(0, 6) + '…' + account.address?.slice(-4))
+            : (isDisconnected ? 'Connect' : status.slice(0, 1).toUpperCase() + status.slice(1))
           }
-        </div>
+        </Row>
+
         <div className={css.connectDivider}/>
 
-        <div className={css.connectLayout}>
-          <div className={css.name}><img src={'/twitter.png'} width={24} height={24} alt=""/>&nbsp;&nbsp;Twitter</div>
-          <div className={css.space}/>
-          {twitter
-            ? <div className={css.connected}>{twitter.screen_name}</div>
-            : <div className={css.connect} onClick={() => connectTwitter()}>Connect</div>
-          }
-        </div>
+        <Row icon="/twitter.png" title="Twitter" isConnected={twitter} onConnect={connectTwitter}>
+          {twitter ? twitter?.screen_name : 'Connect'}
+        </Row>
+
         <div className={css.connectDivider}/>
 
-        <div className={css.connectLayout}>
-          <div className={css.name}><img src={'/discord.ico'} width={24} height={24} alt=""/>&nbsp;&nbsp;Discord (optional)</div>
-          <div className={css.space}/>
-          <div className={css.connect}>Connect</div>
-        </div>
+        <Row icon="/discord.ico" title="Discord (optional)" onConnect={() => {}} isDisabled={true}>
+          Connect
+        </Row>
 
         <div className={css.space}/>
         {isSuccess
