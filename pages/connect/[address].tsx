@@ -53,7 +53,7 @@ const Connect = () => {
   useEffect(() => {
     const handleEvent = event => {
       const { data } = event
-      if (data?.from === 'connect2') {
+      if (data?.from === 'twitter') {
         event.source.close()
         window.focus()
         setTwitter(data.twitter)
