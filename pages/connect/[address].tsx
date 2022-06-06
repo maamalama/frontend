@@ -1,12 +1,11 @@
 import css from './[address].module.css'
 import { useRouter } from 'next/router'
 import { useStore, useStoreMap } from 'effector-react'
-import { $nfts, $nftsIsLoading, Nft } from '../../models/me'
+import { $nfts, $nftsIsLoading, Nft, sendProfile } from '../../models/me'
 import { WagmiConfig, createClient, useAccount, useEnsName, useConnect, useSignMessage } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { BASE_URL } from '../../data/constants'
 import { useEffect, useState } from 'react'
-import { verifyMessage } from 'ethers/lib/utils'
 
 const wagmiClient = createClient({
   autoConnect: false,
@@ -28,7 +27,7 @@ const Connect = () => {
   let router = useRouter()
   let address = globalThis.window
     ? window.location.pathname.slice(1 + window.location.pathname.lastIndexOf('/'))
-    : router.query.address
+    : router.query.address as string
 
   let nft = useStoreMap($nfts, nfts => nfts.find(n => n.address == address) ?? {} as Nft)
   let isLoading = useStore($nftsIsLoading)
@@ -41,12 +40,11 @@ const Connect = () => {
 
   const [twitter, setTwitter] = useState(null)
 
-  const { isLoading: isSignLoading, signMessage, isSuccess } = useSignMessage({
-    message: JSON.stringify(twitter),
-    onSuccess(data, variables) {
-      // Verify signature when sign message succeeds
-      const address = verifyMessage(variables.message, data)
-      console.log({ data, variables })
+  const payload = { nft: address, holder: account?.address, twitter }
+  const { isLoading: isSignLoading, signMessageAsync, isSuccess } = useSignMessage({
+    message: JSON.stringify(payload),
+    async onSuccess(signature, variables) {
+      await sendProfile({ signature, payload })
     },
   })
 
@@ -104,8 +102,8 @@ const Connect = () => {
 
         <div className={css.space}/>
         {isSuccess
-          ? <div className={css.save} onClick={() => signMessage()}>Saved!</div>
-          : <div className={css.save} onClick={() => signMessage()}>Save {isSignLoading ? '(loading)' : ''}</div>
+          ? <div className={css.save} onClick={() => signMessageAsync().catch(() => {})}>Saved!</div>
+          : <div className={css.save} onClick={() => signMessageAsync().catch(() => {})}>Save {isSignLoading ? '(loading)' : ''}</div>
         }
       </div>
     </main>
