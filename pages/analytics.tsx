@@ -131,7 +131,7 @@ const NftAnalyticsPage = () => {
                 <article className={css.plateContent}>
                   <div className={css.plateTitle}>median portfolio value</div>
                   <h3 className={css.plateValue}>
-                    {loader(metrics.isLoading) || (metrics.data.medianPortfolioValueInUsd ? `$${Math.trunc(metrics.data.medianPortfolioValueInUsd).toLocaleString()}` : 'undefined')}
+                    {loader(metrics.isLoading) || (Number.isFinite(metrics.data.medianPortfolioValueInUsd) ? `$${Math.trunc(metrics.data.medianPortfolioValueInUsd).toLocaleString()}` : 'undefined')}
                   </h3>
                 </article>
               </div>
