@@ -94,11 +94,11 @@ const Connect = () => {
           {twitter ? twitter?.screen_name : 'Connect'}
         </Row>
 
-        <div className={css.connectDivider}/>
+        {/*<div className={css.connectDivider}/>*/}
 
-        <Row icon="/discord.ico" title="Discord (optional)" onConnect={() => {}} isDisabled={true}>
-          Connect
-        </Row>
+        {/*<Row icon="/discord.ico" title="Discord (optional)" onConnect={() => {}} isDisabled={true}>*/}
+        {/*  Connect*/}
+        {/*</Row>*/}
 
         <div className={css.space}/>
         {isSuccess
