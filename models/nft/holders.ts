@@ -33,7 +33,7 @@ const fetchHoldersFx = createEffect({
           tokenUris[(idx * 3 + 1) % tokenUris.length],
           tokenUris[(idx * 3 + 2) % tokenUris.length],
         ].slice(0, Math.min(3, h.amount)),
-        isFav: Math.random() < 0.2,
+        isFav: false,
       },
     }))
   }
