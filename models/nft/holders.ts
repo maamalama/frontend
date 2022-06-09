@@ -11,7 +11,6 @@ export type NftHolder = {
   domain?: string | null
   discord?: string | null
   twitter?: string | null
-  isFav?: boolean
   tokens: string[]
 }
 
@@ -33,7 +32,6 @@ const fetchHoldersFx = createEffect({
           tokenUris[(idx * 3 + 1) % tokenUris.length],
           tokenUris[(idx * 3 + 2) % tokenUris.length],
         ].slice(0, Math.min(3, h.amount)),
-        isFav: false,
       },
     }))
   }

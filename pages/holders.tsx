@@ -12,6 +12,8 @@ import { $holders } from '../models/nft'
 import { Header } from '../components/Header'
 import { format } from 'date-fns'
 import { AdminPanel } from '../components/AdminPanel'
+import { markHolderAsFav } from '../models/nft/stars'
+import { $stars } from '../models/nft/stars'
 
 const Holders = () => {
   let router = useRouter()
@@ -23,6 +25,7 @@ const Holders = () => {
   }, [router.route])
 
   const holders = useStore($holders)
+  const stars = useStore($stars)
 
   const [search, setSearch] = useState<string>('')
 
@@ -46,7 +49,12 @@ const Holders = () => {
       name: 'With ENS',
       isActive: false,
       predicate: h => !!h.domain,
-    }
+    },
+    is_fav: {
+      name: 'Favorite',
+      isActive: false,
+      predicate: h => !!stars[h.address],
+    },
   })
 
   let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
@@ -69,9 +77,9 @@ const Holders = () => {
         Header: <span style={{ paddingLeft: '80px' }}>Address</span>,
         id: 'address',
         accessor: (row) => row, // accessor is the "key" in the data,
-        Cell: ({ value: { logo, domain = null, address, tokens, isFav } }) => (
+        Cell: ({ value: { domain = null, address, tokens } }) => (
           <div className={css.holdingsTokenCell}>
-            <div className={css.starIcon} style={{ [isFav && 'backgroundImage']: `url('/star-active.svg')` }}/>
+            <div className={css.starIcon} onClick={() => markHolderAsFav(address)} style={{ [stars[address] && 'backgroundImage']: `url('/star-active.svg')` }}/>
             <div className={css.holdingsIcon} style={{ backgroundImage: `url(${tokens[0]})` }}/>
             <a href={`https://etherscan.io/address/${address}`} className={css.inTableLink}>{domain || address}</a>
           </div>
@@ -120,7 +128,7 @@ const Holders = () => {
           <a href={`https://opensea.io/${value}`}><img src="https://opensea.io/static/images/logos/opensea.svg" width={19} height={19}/></a>
         )
       }],
-    []
+    [stars, holders]
   )
 
   return (
