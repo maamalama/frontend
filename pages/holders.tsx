@@ -141,7 +141,7 @@ const Holders = () => {
           </div>
 
           <div className={css.actions_panel}>
-            {holders.data?.length && <div>
+            {holders.data?.length > 0 && <div>
               {activeFilters.length
                 ? `${filteredHolders.length} of ${holders.data.length} holders (${Math.round((filteredHolders.length / holders.data.length) * 100)}%)`
                 : `${holders.data.length} holders`
