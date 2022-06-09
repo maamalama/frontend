@@ -15,7 +15,7 @@ const App = ({ pageProps, Component }: AppProps) => {
   return <>
     <Head>
       <link rel="icon" href="/logo_favicon.png" type="image/png"/>
-      <title>Hashscan - web3 user analytics</title>
+      <title>Hashscan - NFT community management</title>
     </Head>
     <Component {...pageProps} />
   </>
