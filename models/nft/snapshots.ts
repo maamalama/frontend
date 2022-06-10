@@ -17,6 +17,20 @@ export type Snapshot = {
 
 export const addSnapshot = createEvent<Snapshot>('add-snapshot')
 
+export const addSnapshotFx = createEffect({
+  name: 'add-snapshot',
+  async handler(s: Snapshot): Promise<void> {
+    await fetch(`${BASE_URL}/snapshots/new?nftAddress=${s.nfts[0]}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(s),
+    })
+  }
+})
+
 export const fetchSnapshotsFx = createEffect({
   name: 'fetch-snapshots',
   async handler(args: { address: string }): Promise<Snapshot[]> {
@@ -33,14 +47,20 @@ export const fetchSnapshotsFx = createEffect({
 
 export const $snapshots = restore<Snapshot[]>(fetchSnapshotsFx.doneData, [])
   .reset($myNftAddress.updates)
-  .on(addSnapshot, (state, payload) => [payload, ...state])
+  .on(addSnapshot, (state, payload) => [{ ...payload, filters: payload.filters ?? [] }, ...state])
 
 sample({
-  clock: merge([initialized, $myNftAddress.updates]),
+  clock: merge([initialized, $myNftAddress.updates, addSnapshotFx.finally]),
   source: $myNftAddress,
   filter: $isAuthor,
   fn: (address) => ({ address }),
   target: fetchSnapshotsFx,
 })
 
-fetchSnapshotsFx.fail.watch(console.log)
+sample({
+  source: addSnapshot,
+  target: addSnapshotFx,
+})
+
+fetchSnapshotsFx.fail.watch(console.error)
+addSnapshotFx.fail.watch(console.error)

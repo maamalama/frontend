@@ -70,6 +70,10 @@ const Holders = () => {
     setPage(0)
   }, [filters])
 
+  function onSnapshotCreate() {
+
+  }
+
   const holdersColumns = useMemo(
     (): Column<any>[] => [
       {
@@ -154,10 +158,17 @@ const Holders = () => {
                 : `${holders.data.length} holders`
               }</div>}
 
-            <div className={css.actions_panel__action}>
-              <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
-              Export
-            </div>
+              <div className={css.space}/>
+
+              <div className={css.actions_panel__action} onClick={onSnapshotCreate}>
+                <img src={'/plus-add.svg'} width={20} height={20} alt=""/>
+                Create snapshot
+              </div>
+
+              <div className={css.actions_panel__action}>
+                <img src={'/inbox-mail.svg'} width={20} height={20} alt=""/>
+                Export
+              </div>
           </div>
 
           <div style={{ minHeight: '610px', padding: '0 16px' }}>

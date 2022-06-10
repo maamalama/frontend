@@ -5,36 +5,52 @@ import { Header } from '../components/Header'
 import { AdminPanel } from '../components/AdminPanel'
 import { useStore } from 'effector-react'
 import { $snapshots, Snapshot } from '../models/nft'
-import { $myNftAddress } from '../models/me'
+import { $myNft } from '../models/me'
 import { Column, useTable } from 'react-table'
 import { useMemo } from 'react'
 import { addSnapshot } from '../models/nft/snapshots'
-import { getName } from 'ikea-name-generator'
 import { format } from 'date-fns'
 import { sha256 } from '../lib/sha256'
+import { ProgressBar } from '../components/ProgressBar'
+import { ExternalLink } from 'react-external-link'
+import { BASE_URL } from '../data/constants'
 
 const Snapshots = () => {
   let snapshots = useStore($snapshots)
-  let myNftAddress = useStore($myNftAddress)
+  let myNft = useStore($myNft)
 
   async function onSnapshotCreate() {
-    let blockNumber = Number(window.prompt('Enter the block number, we\'ll take all the holders'))
+    let blockNumber = Number(window.prompt('Enter the block number, we\'ll gather all holders'))
     if (!blockNumber) return
 
     let id = snapshots.length + 1
-    let nfts = [myNftAddress]
+    let name = `${myNft.name} ${id}`
+    let nfts = [myNft.address]
 
-    let name = getName()
     addSnapshot({
       id,
       nfts,
       created_at: new Date(),
       title: name.slice(0, 1).toUpperCase() + name.slice(1),
-      filters: [],
+      filters: null,
       block: blockNumber,
-      holders_count: Math.random() * 100 | 0,
+      holders_count: null,
       externalId: await sha256(nfts.join() + id.toString()),
     })
+
+    setTimeout(function () {
+      let div = document.querySelector('[contenteditable=true]') as HTMLTextAreaElement
+      div.focus()
+      // let range = document.createRange()
+      // range.selectNodeContents(div)
+      // let sel = window.getSelection()
+      // sel.removeAllRanges()
+      // sel.addRange(range)
+    }, 0)
+  }
+
+  function onTitleChange(e, id) {
+    console.log(e.target.textContent, id)
   }
 
   const columns = useMemo(
@@ -45,7 +61,12 @@ const Snapshots = () => {
       },
       {
         Header: 'Title',
-        accessor: (row) => <span className={css.title} contentEditable={true} onClick={e => e.stopPropagation()}>{row.title}</span>,
+        accessor: (row) => (
+          <span className={css.title} onBlur={e => onTitleChange(e, row.id)} contentEditable={true} onClick={e => e.stopPropagation()} suppressContentEditableWarning={true}
+            title="This title will be shown to NFT holders">
+            {row.title}
+          </span>
+        ),
       },
       {
         Header: 'Date',
@@ -60,16 +81,16 @@ const Snapshots = () => {
       // },
       {
         Header: 'Holders',
-        accessor: (row) => `${row.holders_count}`,
+        accessor: (row) => row.holders_count ?? <ProgressBar size="21px"/>,
       },
       {
         Header: 'Block',
-        accessor: (row) => `${row.block}`,
+        accessor: (row) => <ExternalLink href={`https://etherscan.io/block/${row.block}`}>{row.block}</ExternalLink>,
       },
       {
         Header: 'Link',
         accessor: (row) => {
-          let url = row.externalId ? `https://app.hashscan.xyz/list/${row.externalId}` : '#'
+          let url = `${BASE_URL}/snapshots/get?id=${row.id}&format=txt`
           return <a href={url} title="Copy link" target="_blank" rel="noopener noreferrer" className={css.link}/>
         }
       },

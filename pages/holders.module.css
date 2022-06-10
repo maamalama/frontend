@@ -44,11 +44,15 @@
   font-size: 16px;
 }
 
+.space {
+  flex: 1 1;
+}
+
 .actions_panel__action {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: auto;
+  margin-left: 20px;
 }
 
 .actions_panel__action:hover {
