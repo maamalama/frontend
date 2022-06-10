@@ -12,7 +12,9 @@ specifiers:
   effector-react: ^22.0.6
   effector-storage: ^5.0.0
   ethers: ^5.6.8
+  ikea-name-generator: ^1.0.3
   lightweight-charts: ^3.7.0
+  nanoid: ^4.0.0
   next: ^12.0.10
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -33,7 +35,9 @@ dependencies:
   effector-react: 22.0.6_effector@22.3.0+react@17.0.2
   effector-storage: 5.0.0_effector@22.3.0
   ethers: 5.6.8
+  ikea-name-generator: 1.0.3
   lightweight-charts: 3.7.0
+  nanoid: 4.0.0
   next: 12.0.10_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -2013,6 +2017,10 @@ packages:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: false
 
+  /ikea-name-generator/1.0.3:
+    resolution: {integrity: sha512-CPLBD9hADOgxa5/ONIic0Oz98ZfZTm9AQ5LqugnxEfcz8p65ofDxq9zeZsLNq86QHSO5p1TkiCekqFzSA36iYQ==}
+    dev: false
+
   /image-size/0.5.5:
     resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
@@ -2311,6 +2319,12 @@ packages:
     resolution: {integrity: sha512-fmsZYa9lpn69Ad5eDn7FMcnnSR+8R34W9qJEijxYhTbfOWzr22n1QxCMzXLK+ODyW2973V3Fux959iQoUxzUIA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /needle/2.9.1:
     resolution: {integrity: sha512-6R9fqJ5Zcmf+uYaFgdIHmLwNldn5HbK8L5ybn7Uz+ylX/rnOsSp1AHcvQSrCaFN+qNM1wpymHqD7mVasEOlHGQ==}

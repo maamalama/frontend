@@ -10,10 +10,9 @@ import { Pagination } from '../components/Pagination'
 import { useStore } from 'effector-react'
 import { $holders } from '../models/nft'
 import { Header } from '../components/Header'
-import { format } from 'date-fns'
 import { AdminPanel } from '../components/AdminPanel'
-import { markHolderAsFav } from '../models/nft/stars'
-import { $stars } from '../models/nft/stars'
+import { $stars, markHolderAsFav } from '../models/nft/stars'
+import { formatRelative } from '../lib/formatRelative'
 
 const Holders = () => {
   let router = useRouter()
@@ -189,15 +188,4 @@ function formatBigNum(amountInUsd: number): string {
   let subs = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }
   let uppers = `${Math.log10(amountInUsd) | 0}`.split('').map(ch => subs[ch] ?? ch).join('')
   return `10${uppers}`
-}
-
-function formatRelative(date: number): string {
-  let diff = Math.abs(Date.now() - date) / 1000 / 3600 | 0
-  if (diff < 1) return 'recently'
-  if (diff === 1) return `1 hour ago`
-  if (diff < 24) return `${diff} hours ago`
-  diff = diff / 24 | 0
-  if (diff == 1) return `1 day ago`
-  if (diff < 30) return `${diff} days ago`
-  return format(date, 'dd MMM yyyy')
 }
