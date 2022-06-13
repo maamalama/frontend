@@ -7,7 +7,7 @@ import { useStore } from 'effector-react'
 import { $snapshots, Snapshot } from '../models/nft'
 import { Column, useTable } from 'react-table'
 import { useMemo } from 'react'
-import { addSnapshotAtBlock } from '../models/nft/snapshots'
+import { addSnapshotAtBlock, changeSnapshotTitle } from '../models/nft/snapshots'
 import { format } from 'date-fns'
 import { ProgressBar } from '../components/ProgressBar'
 import { ExternalLink } from 'react-external-link'
@@ -33,18 +33,14 @@ const Snapshots = () => {
     }, 0)
   }
 
-  function onTitleChange(e, id) {
-    console.log(e.target.textContent, id)
-  }
-
   const columns = useMemo(
     (): Column<Snapshot>[] => [
       {
         Header: 'Title',
         accessor: (row) => (
           <div className={css.title_wrap}>
-          <span className={css.title} onBlur={e => onTitleChange(e, row.id)} contentEditable={true} onClick={e => e.stopPropagation()} suppressContentEditableWarning={true}
-            title="This title will be shown to NFT holders">
+          <span className={css.title} onBlur={e => changeSnapshotTitle({ id: row.id, title: e.target.textContent })} contentEditable={true} onClick={e => e.stopPropagation()}
+            suppressContentEditableWarning={true} title="This title will be shown to NFT holders">
             {row.title}
           </span>
           </div>

@@ -20,6 +20,8 @@ export const addSnapshot = createEvent<Snapshot>('add-snapshot')
 export const addSnapshotAtBlock = createEvent<{ block: number }>('add-snapshot-at-block')
 export const addSnapshotWithFilters = createEvent<{ filters: string[], holders: string[] }>('add-snapshot-with-filters')
 
+export const changeSnapshotTitle = createEvent<{ id: number, title: string }>('change-snapshot-title')
+
 export const newSnapshotFx = createEffect({
   name: 'add-snapshot',
   async handler(s: { title: string, nfts: string[], block?: number | null, holders?: string[], filters?: string[] }): Promise<void> {
@@ -38,7 +40,6 @@ export const fetchSnapshotsFx = createEffect({
   name: 'fetch-snapshots',
   async handler(args: { address: string }): Promise<Snapshot[]> {
     let res = await fetch(`${BASE_URL}/snapshots/list?nftAddress=${args.address}`).then(res => res.json())
-    console.dir(res, { depth: null })
     return await Promise.all(res.data.map(async s => ({
       ...s,
       created_at: new Date(s.created_at),
@@ -47,8 +48,18 @@ export const fetchSnapshotsFx = createEffect({
   }
 })
 
+export const changeSnapshotTitleFx = createEffect({
+  name: 'change-snapshot',
+  async handler({ id, title }: { id: number, title: string }): Promise<void> {
+    await fetch(`${BASE_URL}/snapshots/changeTitle/?id=${encodeURIComponent(id)}&title=${encodeURIComponent(title)}`)
+      .then(res => res.json())
+  }
+})
+
 export const $snapshots = restore<Snapshot[]>(fetchSnapshotsFx.doneData, [])
   .reset($myNftAddress.updates)
+  .on(changeSnapshotTitle, (state, payload) =>
+    state.map(s => s.id === payload.id ? { ...s, title: payload.title } : s))
   .on(addSnapshot, (state, payload) => [{
     ...payload,
     holders_count: payload.holders?.length ?? 0,
@@ -98,6 +109,11 @@ sample({
     return { id, title, nfts, filters, holders }
   },
   target: addSnapshot,
+})
+
+sample({
+  source: changeSnapshotTitle,
+  target: changeSnapshotTitleFx,
 })
 
 fetchSnapshotsFx.fail.watch(console.error)
