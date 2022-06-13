@@ -29,35 +29,32 @@ const Holders = () => {
 
   const [search, setSearch] = useState<string>('')
 
-  const [filters, setFilters] = useState<Record<string, { name: string, isActive: boolean, predicate: (h: any) => boolean }>>({
+  const filtersRules = {
     _1m_net_worth: {
       name: '$1m net worth',
-      isActive: false,
       predicate: h => h.total_balance_usd > 1_000_000,
     },
     joined_last_week: {
       name: 'Joined last week',
-      isActive: false,
       predicate: h => Date.now() - 1000 * 3600 * 24 * 7 < h.first_transfer * 1000,
     },
     at_least_10_tokens: {
       name: 'At least 10 tokens',
-      isActive: false,
       predicate: h => h.amount >= 10,
     },
     has_ens: {
       name: 'With ENS',
-      isActive: false,
       predicate: h => !!h.domain,
     },
     is_fav: {
       name: 'Favorite',
-      isActive: false,
       predicate: h => !!stars[h.address],
     },
-  })
+  }
 
-  let activeFilters = Object.values(filters).filter(f => f.isActive).map(f => f.predicate)
+  const [filters, setFilters] = useState<Record<string, boolean>>(Object.fromEntries(Object.keys(filtersRules).map(k => [k, false])))
+
+  let activeFilters = Object.entries(filters).filter(([, isActive]) => isActive).map(([f]) => filtersRules[f].predicate)
   let filteredHolders =
     holders.data?.filter(h =>
       activeFilters.every(p => p(h)) &&
@@ -73,7 +70,7 @@ const Holders = () => {
 
   function createSnapshot() {
     addSnapshotWithFilters({
-      filters: Object.values(filters).filter(f => f.isActive).map(f => f.name),
+      filters: Object.entries(filters).filter(([_, isActive]) => isActive).map(([key]) => filtersRules[key].name),
       holders: filteredHolders?.map(h => h.address) ?? [],
     })
     router.push('/snapshots')
@@ -151,8 +148,8 @@ const Holders = () => {
           </div>
 
           <div className={css.filters_panel}>
-            {Object.entries(filters).map(([key, f]) =>
-              <TagLabel key={key} isActive={f.isActive} onClick={() => setFilters({ ...filters, [key]: { ...f, isActive: !f.isActive } })} children={f.name}/>
+            {Object.entries(filters).map(([key, isActive]) =>
+              <TagLabel key={key} isActive={isActive} onClick={() => setFilters({ ...filters, [key]: !isActive })} children={filtersRules[key].name}/>
             )}
           </div>
 
