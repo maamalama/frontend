@@ -64,7 +64,7 @@ export const AdminPanel = ({ children }) => {
           <Link href="/">
             <a style={{ textDecoration: 'none' }}>
               <div className={shared.column}>
-                <h1 className={styles.heading}>#hashscan</h1>
+                <h1 className={styles.heading}>#hashscan 2.0</h1>
               </div>
             </a>
           </Link>
