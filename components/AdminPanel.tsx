@@ -34,20 +34,15 @@ export const AdminPanel = ({ children }) => {
       strokeLinejoin="round"/>
   </svg>
 
-  const giveaways = color => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g opacity="0.9">
-      <path fillRule="evenodd" clipRule="evenodd" d="M20 8H4C3.448 8 3 8.448 3 9V11C3 11.552 3.448 12 4 12H20C20.552 12 21 11.552 21 11V9C21 8.448 20.552 8 20 8Z" stroke={color}
-        strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12 21V8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M15.6961 6.612C14.6181 7.734 12.9211 8 12.0991 8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M12.0991 8C12.0991 8 11.6051 4.884 12.8201 3.62" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M15.696 6.61199C16.49 5.78599 16.49 4.44599 15.696 3.61999C14.902 2.79399 13.615 2.79399 12.821 3.61999" stroke={color} strokeWidth="1.5" strokeLinecap="round"
-        strokeLinejoin="round"/>
-      <path d="M8.30396 6.612C9.38196 7.734 11.079 8 11.901 8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M11.9009 8C11.9009 8 12.3949 4.884 11.1799 3.62" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M8.304 6.61199C7.51 5.78599 7.51 4.44599 8.304 3.61999C9.098 2.79399 10.385 2.79399 11.179 3.61999" stroke={color} strokeWidth="1.5" strokeLinecap="round"
-        strokeLinejoin="round"/>
-      <path d="M19 12V20C19 20.552 18.552 21 18 21H6C5.448 21 5 20.552 5 20V12" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  const airdrops = color => <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none">
+      <path d="M0 0h24v24h-24Z"/>
+      <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
+  d="M10.421 14.897c-.872-.872-.872-2.286 0-3.158 .872-.872 2.286-.872 3.158 0 .872.872.872 2.286 0 3.158"/>
+      <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
+  d="M8.111 17.207c-2.148-2.148-2.148-5.63 0-7.778 2.148-2.148 5.63-2.148 7.778 0 2.148 2.148 2.148 5.63 0 7.778"/>
+      <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
+  d="M5.636 19.682c-3.515-3.515-3.515-9.213 0-12.728 3.515-3.515 9.213-3.515 12.728 0 3.515 3.515 3.515 9.213 0 12.728"/>
     </g>
   </svg>
 
@@ -79,7 +74,7 @@ export const AdminPanel = ({ children }) => {
           <NavLink href="/holders" icon={holders}>Holders</NavLink>
           <NavLink href="/analytics" icon={analytics}>Analytics</NavLink>
           <NavLink href="/snapshots" icon={snapshots}>Snapshots</NavLink>
-          <NavLink href="/whitelists" icon={giveaways}>Whitelists</NavLink>
+          <NavLink href="/whitelists" icon={airdrops}>Airdrops</NavLink>
         </div>
         <div>{/* filler */}</div>
         <footer className={styles.footer}></footer>
