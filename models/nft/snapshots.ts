@@ -8,7 +8,7 @@ export type Snapshot = {
   id: number
   nfts: string[]
   created_at: Date
-  block: number
+  block: number | null
   holders_count: number
   title: string
   filters: string[]

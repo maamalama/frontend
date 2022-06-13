@@ -85,7 +85,7 @@ const Snapshots = () => {
       },
       {
         Header: 'Block',
-        accessor: (row) => <ExternalLink href={`https://etherscan.io/block/${row.block}`}>{row.block}</ExternalLink>,
+        accessor: (row) => row.block > 0 && <ExternalLink href={`https://etherscan.io/block/${row.block}`}>{row.block}</ExternalLink>,
       },
       {
         Header: 'Link',
