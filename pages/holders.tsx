@@ -13,6 +13,7 @@ import { Header } from '../components/Header'
 import { AdminPanel } from '../components/AdminPanel'
 import { $stars, markHolderAsFav } from '../models/nft/stars'
 import { formatRelative } from '../lib/formatRelative'
+import { addSnapshotWithFilters } from '../models/nft/snapshots'
 
 const Holders = () => {
   let router = useRouter()
@@ -70,8 +71,12 @@ const Holders = () => {
     setPage(0)
   }, [filters])
 
-  function onSnapshotCreate() {
-
+  function createSnapshot() {
+    addSnapshotWithFilters({
+      filters: Object.values(filters).filter(f => f.isActive).map(f => f.name),
+      holders: filteredHolders?.map(h => h.address) ?? [],
+    })
+    router.push('/snapshots')
   }
 
   const holdersColumns = useMemo(
@@ -160,7 +165,7 @@ const Holders = () => {
 
               <div className={css.space}/>
 
-              <div className={css.actions_panel__action} onClick={onSnapshotCreate}>
+              <div className={css.actions_panel__action} onClick={createSnapshot}>
                 <img src={'/plus-add.svg'} width={20} height={20} alt=""/>
                 Create snapshot
               </div>

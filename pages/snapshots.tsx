@@ -5,38 +5,22 @@ import { Header } from '../components/Header'
 import { AdminPanel } from '../components/AdminPanel'
 import { useStore } from 'effector-react'
 import { $snapshots, Snapshot } from '../models/nft'
-import { $myNft } from '../models/me'
 import { Column, useTable } from 'react-table'
 import { useMemo } from 'react'
-import { addSnapshot } from '../models/nft/snapshots'
+import { addSnapshotAtBlock } from '../models/nft/snapshots'
 import { format } from 'date-fns'
-import { sha256 } from '../lib/sha256'
 import { ProgressBar } from '../components/ProgressBar'
 import { ExternalLink } from 'react-external-link'
 import { BASE_URL } from '../data/constants'
 
 const Snapshots = () => {
   let snapshots = useStore($snapshots)
-  let myNft = useStore($myNft)
 
   async function onSnapshotCreate() {
     let blockNumber = Number(window.prompt('Enter the block number, we\'ll gather all holders'))
     if (!blockNumber) return
 
-    let id = snapshots.length + 1
-    let name = `${myNft.name} ${id}`
-    let nfts = [myNft.address]
-
-    addSnapshot({
-      id,
-      nfts,
-      created_at: new Date(),
-      title: name.slice(0, 1).toUpperCase() + name.slice(1),
-      filters: null,
-      block: blockNumber,
-      holders_count: null,
-      externalId: await sha256(nfts.join() + id.toString()),
-    })
+    addSnapshotAtBlock({ block: blockNumber })
 
     setTimeout(function () {
       let div = document.querySelector('[contenteditable=true]') as HTMLTextAreaElement
@@ -56,16 +40,14 @@ const Snapshots = () => {
   const columns = useMemo(
     (): Column<Snapshot>[] => [
       {
-        Header: '#',
-        accessor: (row) => `${row.id}.`,
-      },
-      {
         Header: 'Title',
         accessor: (row) => (
+          <div className={css.title_wrap}>
           <span className={css.title} onBlur={e => onTitleChange(e, row.id)} contentEditable={true} onClick={e => e.stopPropagation()} suppressContentEditableWarning={true}
             title="This title will be shown to NFT holders">
             {row.title}
           </span>
+          </div>
         ),
       },
       {
@@ -81,7 +63,7 @@ const Snapshots = () => {
       // },
       {
         Header: 'Holders',
-        accessor: (row) => row.holders_count ?? <ProgressBar size="21px"/>,
+        accessor: (row) => row.holders_count,
       },
       {
         Header: 'Block',
@@ -91,7 +73,9 @@ const Snapshots = () => {
         Header: 'Link',
         accessor: (row) => {
           let url = `${BASE_URL}/snapshots/get?id=${row.id}&format=txt`
-          return <a href={url} title="Copy link" target="_blank" rel="noopener noreferrer" className={css.link}/>
+          return row.loading
+            ? <ProgressBar size="21px"/>
+            : <a href={url} title="Copy link" target="_blank" rel="noopener noreferrer" className={css.link}/>
         }
       },
       {

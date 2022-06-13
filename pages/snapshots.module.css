@@ -93,6 +93,11 @@
   box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 5px;
 }
 
+.title_wrap {
+  min-width: 300px;
+  max-width: 380px;
+}
+
 .date {
   white-space: nowrap;
 }

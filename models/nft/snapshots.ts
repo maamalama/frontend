@@ -1,31 +1,34 @@
-import { merge, sample, createEffect, restore, createEvent } from 'effector'
+import { attach, createEffect, createEvent, merge, restore, sample } from 'effector'
 import { BASE_URL } from '../../data/constants'
-import { $isAuthor, $myNftAddress } from '../me'
+import { $isAuthor, $myNft, $myNftAddress } from '../me'
 import { initialized } from '../app'
-import { sha256 } from '../../lib/sha256'
+import { capitalize } from '../../lib/capitalize'
 
 export type Snapshot = {
   id: number
   nfts: string[]
-  created_at: Date
-  block: number | null
-  holders_count: number
+  created_at?: Date
+  block?: number | null
+  holders_count?: number
+  holders?: string[]
   title: string
-  filters: string[]
-  externalId?: string
+  filters?: string[]
+  loading?: boolean
 }
 
 export const addSnapshot = createEvent<Snapshot>('add-snapshot')
+export const addSnapshotAtBlock = createEvent<{ block: number }>('add-snapshot-at-block')
+export const addSnapshotWithFilters = createEvent<{ filters: string[], holders: string[] }>('add-snapshot-with-filters')
 
-export const addSnapshotFx = createEffect({
+export const newSnapshotFx = createEffect({
   name: 'add-snapshot',
-  async handler(s: Snapshot): Promise<void> {
+  async handler(s: { title: string, nfts: string[], block?: number | null, holders?: string[], filters?: string[] }): Promise<void> {
     await fetch(`${BASE_URL}/snapshots/new?nftAddress=${s.nfts[0]}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(s),
     })
   }
@@ -40,17 +43,22 @@ export const fetchSnapshotsFx = createEffect({
       ...s,
       created_at: new Date(s.created_at),
       filters: JSON.parse(s.filters || '[]'),
-      externalId: s.externalId ?? await sha256(s.nfts.join() + s.id.toString())
     })))
   }
 })
 
 export const $snapshots = restore<Snapshot[]>(fetchSnapshotsFx.doneData, [])
   .reset($myNftAddress.updates)
-  .on(addSnapshot, (state, payload) => [{ ...payload, filters: payload.filters ?? [] }, ...state])
+  .on(addSnapshot, (state, payload) => [{
+    ...payload,
+    holders_count: payload.holders?.length ?? 0,
+    created_at: payload.created_at ?? new Date(),
+    filters: payload.filters ?? [],
+    loading: true,
+  }, ...state])
 
 sample({
-  clock: merge([initialized, $myNftAddress.updates, addSnapshotFx.finally]),
+  clock: merge([initialized, $myNftAddress.updates, newSnapshotFx.finally]),
   source: $myNftAddress,
   filter: $isAuthor,
   fn: (address) => ({ address }),
@@ -59,8 +67,38 @@ sample({
 
 sample({
   source: addSnapshot,
-  target: addSnapshotFx,
+  target: newSnapshotFx,
+})
+
+sample({
+  clock: addSnapshotAtBlock,
+  source: { myNft: $myNft, snapshots: $snapshots },
+  fn: ({ myNft, snapshots }, { block }): Snapshot => {
+    let lastId = (snapshots[0]?.id ?? 0)
+
+    let id = lastId + 1
+    let title = `${capitalize(myNft.name)} ${id}`
+    let nfts = [myNft.address]
+
+    return { id, nfts, title, block }
+  },
+  target: addSnapshot,
+})
+
+sample({
+  clock: addSnapshotWithFilters,
+  source: { myNft: $myNft, snapshots: $snapshots },
+  fn: ({ myNft, snapshots }, { filters, holders }): Snapshot => {
+    let lastId = (snapshots[0]?.id ?? 0)
+
+    let id = lastId + 1
+    let title = `${capitalize(myNft.name)} ${id}`
+    let nfts = [myNft.address]
+
+    return { id, title, nfts, filters, holders }
+  },
+  target: addSnapshot,
 })
 
 fetchSnapshotsFx.fail.watch(console.error)
-addSnapshotFx.fail.watch(console.error)
+newSnapshotFx.fail.watch(console.error)
