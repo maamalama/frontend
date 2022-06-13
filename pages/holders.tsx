@@ -111,7 +111,7 @@ const Holders = () => {
         Cell: ({ value: { amount, tokens } }) => (
           <div className={css.tokens}>
             <div className={css.tokens_counter}>{amount}</div>
-            {tokens.slice(0, 3).map(tok => <div key={tok} className={css.token} style={{ backgroundImage: `url(${tok})` }}/>)}
+            {tokens.slice(0, 3).map((tok, idx) => <div key={`${idx}-${tok}`} className={css.token} style={{ backgroundImage: `url(${tok})` }}/>)}
           </div>
         )
       },
