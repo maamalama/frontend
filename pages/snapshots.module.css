@@ -91,6 +91,10 @@
   box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 5px;
 }
 
+.date {
+  white-space: nowrap;
+}
+
 a.link {
   text-decoration: unset !important;
   background-image: url('/link-attachment-circle.svg');

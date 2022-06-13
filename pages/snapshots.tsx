@@ -70,7 +70,7 @@ const Snapshots = () => {
       },
       {
         Header: 'Date',
-        accessor: (row) => <span title={row.created_at.toLocaleString()}>{format(row.created_at, 'dd MMM yyyy')}</span>,
+        accessor: (row) => <span className={css.date} title={row.created_at.toLocaleString()}>{format(row.created_at, 'dd MMM yyyy')}</span>,
       },
       // {
       //   Header: 'NFT',
@@ -121,7 +121,7 @@ const Snapshots = () => {
             </div>
           </div>
 
-          <div style={{ padding: '0 16px' }}>
+          <div style={{ padding: '0 16px', overflowX: 'scroll' }}>
             <table className={css.table} {...getTableProps()}>
               <thead className={css.thead}>
               {headerGroups.map((headerGroup) => (
